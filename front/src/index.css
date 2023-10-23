@@ -1,0 +1,19 @@
+
+:root, *, *::after, *::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html{
+  --color-blue: #0A365C;
+  --color-lightGreen: #9BBF0D;
+  --color-darkGreen: #81960F;
+  --color-orange: #E15E37;
+}
+
+body{
+  min-height: 100vh;
+  background-image: url('./assets/background.png');
+  background-size: cover;
+}

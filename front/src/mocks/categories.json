@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Canchas",
+    "image": "./cancha.svg",
+    "alt": "Categoria Canchas"
+  },
+  {
+    "title": "Accesorios",
+    "image": "./ball.svg",
+    "alt": "Categoria Accesorios"
+  },
+  {
+    "title": "Indumentaria",
+    "image": "./ropa.svg",
+    "alt": "Categoria Indumentaria"
+  },
+  {
+    "title": "Parrilleros",
+    "image": "./parrilla.svg",
+    "alt": "Categoria Parrilleros"
+  },
+  {
+    "title": "Personal",
+    "image": "./arbitro.svg",
+    "alt": "Categoria Personal"
+  }
+]
