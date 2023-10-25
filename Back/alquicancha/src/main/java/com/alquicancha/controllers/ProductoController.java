@@ -1,7 +1,7 @@
 package com.alquicancha.controllers;
 
+import com.alquicancha.Service.ProductoService;
 import com.alquicancha.models.Producto;
-import com.alquicancha.repositories.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +14,17 @@ import java.util.List;
 public class ProductoController {
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductoService productoService;
+    //private ProductoRepository productoRepository; cambie esto.
 
-    @GetMapping
-    public List<Producto> listarProductos(){
-        return productoRepository.findAll();
+    @GetMapping("/listar")
+    public ResponseEntity<List<Producto>> getAllProducto(){
+        return new ResponseEntity<List<Producto>>(productoService.allProductos(), HttpStatus.OK);
     }
 
-    @PostMapping("/registrar")
+    //cree el service y lo relacione, pero hay que revisar si esta bien
+    @PostMapping
     public ResponseEntity<Producto> registrarProducto(@RequestBody Producto producto){
-        return new ResponseEntity<>(productoRepository.save(producto),null, HttpStatus.CREATED);
+        return ResponseEntity.ok(productoService.guardarProducto(producto));
     }
 }
