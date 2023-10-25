@@ -33,4 +33,18 @@ export const CardWrapper = styled.div`
       height: auto;
     }
   }
+
+  @media (max-width: 500px) {
+    width: 40px;
+    height: 50px;
+    .imgContainer {
+      img {
+        width: 34px;
+        height: auto;
+      }
+    }
+    p {
+      display: none;
+    }
+  }
 `;
