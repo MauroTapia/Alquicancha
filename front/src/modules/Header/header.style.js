@@ -8,6 +8,8 @@ export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  margin-top: -150px;
 
   a {
     color: var(--colors-blue);
@@ -20,7 +22,11 @@ export const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+  
+  @media (max-width: 570px) {
+    padding: 0;
+  }`
+;
 
 export const Logo = styled.img`
   width: 80px;
@@ -46,4 +52,20 @@ export const LoginRegister = styled.div`
   display: flex;
   gap: 16px;
   margin-right: 32px;
-`;
+
+  @media (max-width: 570px) {
+    display: none;
+}
+`
+
+export const LoginRegistermMenu = styled.div`
+  display: none;
+
+  @media (max-width: 570px) {
+    display: flex;
+    height: 30px;
+    widht: 30px;
+    gap: 16px;
+    margin-right: 32px;
+}
+`
