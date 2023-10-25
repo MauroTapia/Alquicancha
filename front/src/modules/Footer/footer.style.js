@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const FooterWrapper = styled.div`
   position: absolute;
-  width: 100%;
   bottom: 0;
+  width: 100%;
   min-height: 80px;
   background: linear-gradient(180deg, rgba(74, 87, 0, 0) 0%, #4a5700 97.92%),
     linear-gradient(180deg, rgba(211, 244, 9, 0) 0%, #c5e324 100%),
@@ -12,6 +12,10 @@ export const FooterWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 16px 32px 0 32px;
+  
+  @media(max-width: 500px){
+    padding: 16px 12px 0 12px;
+  }
 `;
 
 export const TeamDiv = styled.div`
@@ -25,6 +29,16 @@ export const TeamDiv = styled.div`
 
   p{
     margin-left: 16px;
+    margin-left: 10px;
+  }
+
+  @media(max-width: 500px){
+    img{
+      width: 40px;
+    }
+    p{
+      font-size: 12px;
+    }
   }
 `; 
 
@@ -35,5 +49,11 @@ export const SocialMedia = styled.div`
   img{
     width: 32px;
     height: auto;
+  }
+
+  @media(max-width: 500px){
+    img{
+      width: 25px;
+    }
   }
 `;
