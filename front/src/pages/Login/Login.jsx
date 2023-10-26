@@ -1,4 +1,4 @@
-import { Label, LoginWrapper, Inputs, Remember,ImagenPerfil } from "./Login.style"
+import { Label, LoginWrapper, Inputs, Remember,ImagenPerfil, Button, Button1, InputCheckBox } from "./Login.style"
 
 
 const Login = () => {
@@ -10,18 +10,21 @@ const Login = () => {
         <img src="/src/assets/Male User.png" alt="user" />
       </ImagenPerfil>
       
-      <Label>Nombre</Label>
-      <Inputs type="text" required/>
+      <Label>Email</Label>
+      <Inputs type="email" required/>
       
-      <Label>Contraseña</Label>
+      <Label>Password</Label>
       <Inputs type="password" required/>
       
       <Remember>
-        <span>Remember Me </span>
-        <span>Frogot Password? </span>
+        <div>
+          <InputCheckBox type="checkbox"/>
+          <span>Remember me </span>
+        </div>
+        <Button1>Forgot Password? </Button1>
       </Remember>
       
-      <button>Iniciar Sesión</button>
+      <Button>Login</Button>
     
     </LoginWrapper>
     </>
