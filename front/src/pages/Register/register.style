@@ -36,15 +36,17 @@ export const Inputs = styled.input`
 
 export const ImagenPerfil = styled.div`
 align-self: center;
+margin-top: -30px;
+margin-bottom: -30px;
 display: flex;
-width: 137px;
-height: 100px;
+width: 150px;
+height: 150px;
 `;
 
 export const Remember = styled.div`
   font-size: 15px;
   font-family: Roboto;
-  margin-top:10px;
+  margin-top:5px;
   color: brown;
   display: flex;
   justify-content: space-between; 
