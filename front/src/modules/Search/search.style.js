@@ -16,6 +16,21 @@ export const SearchWrapper = styled.div`
   }
 `;
 
+export const Label = styled.label`
+  width: 45px;
+  height: 19px;
+  color: white;
+  margin-top: 10px;
+  margin-right: 5px;
+  font-family: Roboto;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.4px;
+  text-align: left;
+`;
+
 export const SearchInput = styled.input`
   width: 60%;
   padding: 8px;
@@ -27,19 +42,18 @@ export const SearchInput = styled.input`
     width: 100%;
   }
 `;
+export const Input = styled.input`
+  width: 75%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+;`
+
 
 export const DateForm = styled.div`
   display: flex;
   justify-content: start;
-  
-  label{
-    margin-right: 8px;
-    color: black;
-    font-weight: 500;
-    background-color: white;
-    padding: 8px;
-    border-radius: 8px;
-  }
 `;
 
 export const ButtonSearch = styled.button`
