@@ -14,6 +14,7 @@ export const HeaderWrapper = styled.div`
     color: var(--colors-blue);
     text-decoration: none;
   }
+  font-family: Roboto;
 `;
 
 export const LogoWrapper = styled.div`

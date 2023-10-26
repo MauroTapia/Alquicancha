@@ -5,6 +5,8 @@ import {
   LupaImg,
   SearchInput,
   SearchWrapper,
+  Label,
+  Input 
 } from "./search.style";
 import lupa from "../../assets/lupa1.svg";
 
@@ -22,12 +24,12 @@ const Search = () => {
         />
         <div style={{display:"flex", gap:5}}>
           <DateForm>
-            <label htmlFor="start">Desde:</label>
-            <input type="date" id="start" />
+            <Label htmlFor="start">Desde: </Label>
+            <Input type="date" id="start" />
           </DateForm>
           <DateForm>
-            <label htmlFor="end">Hasta:</label>
-            <input type="date" id="end" />
+            <Label htmlFor="end">Hasta:</Label>
+            <Input type="date" id="end" />
           </DateForm>
 
           <ButtonSearch type="submit">
