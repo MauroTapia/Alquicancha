@@ -1,9 +1,11 @@
 import ProductCard from "../ProductCard"
 import { RecommendedWrapper, TitleSeccion } from "./recommended.style"
-import products from '../../mocks/canchas.json'
 import { getRandomElements } from "../../utils/get-random-elements"
+import { getAllProducts } from "../../services/product"
 
 const Recommended = () => {
+
+  const products = getAllProducts();
   const productsToShow = getRandomElements(products, 10);
 
   return (

@@ -1,7 +1,8 @@
 [
   {
+    "id": 1,
     "title": "Cancha Futbol 7 Cesped",
-    "image": "./canchas/cancha7.webp",
+    "image": "/canchas/cancha7.webp",
     "alt": "Cancha 7 cesped",
     "description": "Cancha de futbol 7 exterior, pasto natural, totalmente cercada ",
     "dayPrice" : 20000,
@@ -12,8 +13,9 @@
     }
   },
   {
+    "id": 2,
     "title": "Cancha Futbol 7 sintetico",
-    "image": "./canchas/cancha7Sintetico.jpeg",
+    "image": "/canchas/cancha7Sintetico.jpeg",
     "alt": "Cancha 7 sintetico",
     "description": "Cancha de futbol 7 exterior, pasto sintetico, totalmente cercada ",
     "dayPrice" : 18000,
@@ -24,8 +26,9 @@
     }
   },
   {
+    "id": 3,
     "title": "Cancha Futbol 7 techada",
-    "image": "./canchas/cancha7Techada.jpeg",
+    "image": "/canchas/cancha7Techada.jpeg",
     "alt": "Cancha 7 techada",
     "description": "Cancha de futbol 7 techada, pasto sintetico",
     "dayPrice" : 28000,
@@ -36,8 +39,9 @@
     }
   },
   {
+    "id": 4,
     "title": "Cancha Futbol 11 exterior",
-    "image": "./canchas/cancha11.jpeg",
+    "image": "/canchas/cancha11.jpeg",
     "alt": "Cancha 11 exterior",
     "description": "Cancha de futbol 11, exterior, pasto natural, totalmente iluminada",
     "dayPrice" : 38000,
@@ -48,8 +52,9 @@
     }
   },
   {
+    "id": 5,
     "title": "Cancha Futbol 11 Sintetico",
-    "image": "./canchas/cancha11Sintetico.jpeg",
+    "image": "/canchas/cancha11Sintetico.jpeg",
     "alt": "Cancha 11 sintetico",
     "description": "Cancha de futbol 11, exterior, pasto sintetico, totalmente iluminada y cercada, cuenta con tribuna para 100 personas",
     "dayPrice" : 43000,
@@ -60,8 +65,9 @@
     }
   },
   {
+    "id": 6,
     "title": "Cancha Futbol 11 Techada",
-    "image": "./canchas/cancha11Techada.jpg",
+    "image": "/canchas/cancha11Techada.jpg",
     "alt": "Cancha 11 techada",
     "description": "Cancha de futbol 11, techada, pasto sintetico",
     "dayPrice" : 46000,
@@ -72,8 +78,9 @@
     }
   },
   {
+    "id": 7,
     "title": "Cancha Basketball Exterior",
-    "image": "./canchas/canchaBasketExterior.jpeg",
+    "image": "/canchas/canchaBasketExterior.jpeg",
     "alt": "Cancha basket exterior",
     "description": "Cancha de basketball exterior, cercada e iluminación",
     "dayPrice" : 36000,
@@ -84,8 +91,9 @@
     }
   },
   {
+    "id": 8,
     "title": "Cancha Basketball Techada c/palcos",
-    "image": "./canchas/canchaBasketTechadaPalcos.jpeg",
+    "image": "/canchas/canchaBasketTechadaPalcos.jpeg",
     "alt": "Cancha basket techada",
     "description": "Cancha de basketball techada, palcos para 300 personas",
     "dayPrice" : 56000,
@@ -96,8 +104,9 @@
     }
   },
   {
+    "id": 9,
     "title": "Cancha Boley Exterior",
-    "image": "./canchas/canchaBoleyExterior.jpeg",
+    "image": "/canchas/canchaBoleyExterior.jpeg",
     "alt": "Cancha boley exterior",
     "description": "Cancha de boley exterior",
     "dayPrice" : 23000,
@@ -108,8 +117,9 @@
     }
   },
   {
+    "id": 10,
     "title": "Cancha Boley Playa",
-    "image": "./canchas/canchaBoleyPlaya.jpeg",
+    "image": "/canchas/canchaBoleyPlaya.jpeg",
     "alt": "Cancha boley playa",
     "description": "Cancha de boley playa, arena 100% natural",
     "dayPrice" : 36000,
@@ -120,10 +130,11 @@
     }
   },
   {
+    "id": 11,
     "title": "Cancha Boley Techada",
-    "image": "./canchas/canchaBoleyTechada.jpeg",
+    "image": "/canchas/canchaBoleyTechada.jpeg",
     "alt": "Cancha boley techada",
-    "description": "Cancha de boley techada, palco para 500 personas. Ideal competencias internacionales",
+    "description": "Cancha de voley techada, palco para 500 personas. Ideal competencias internacionales",
     "dayPrice" : 66000,
     "availability":{
       "isAbalible": true,
@@ -132,8 +143,9 @@
     }
   },
   {
+    "id": 12,
     "title": "Cancha Multihuso Techada",
-    "image": "./canchas/canchaMultihusoTechada.png",
+    "image": "/canchas/canchaMultihusoTechada.png",
     "alt": "Cancha multihuso",
     "description": "Cancha de multihuso",
     "dayPrice" : 49000,
