@@ -39,7 +39,7 @@ align-self: center;
 margin-top: -30px;
 margin-bottom: -30px;
 display: flex;
-width: 150px;
+width: 130px;
 height: 150px;
 `;
 

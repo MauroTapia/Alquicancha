@@ -9,16 +9,16 @@ const Register = () => {
       </ImagenPerfil>
       
       <Label>Name</Label>
-      <Inputs type="text" required/>
+      <Inputs type="text" required placeholder="Ingresa tú nombre" />
 
       <Label>Email</Label>
-      <Inputs type="email" required/>
+      <Inputs type="email" required placeholder="Ingresa tú e-mail" />
       
       <Label>Password</Label>
-      <Inputs type="password" required/>
+      <Inputs type="password" required placeholder="Crea una contraseña" />
 
       <Label>Confirm password</Label>
-      <Inputs type="password" required/>
+      <Inputs type="password" required placeholder="Repite la contraseña" />
       
       <Remember>
         <div>

@@ -16,6 +16,7 @@ export const FooterWrapper = styled.div`
   @media(max-width: 500px){
     padding: 16px 12px 0 12px;
   }
+  font-family: Roboto;
 `;
 
 export const TeamDiv = styled.div`

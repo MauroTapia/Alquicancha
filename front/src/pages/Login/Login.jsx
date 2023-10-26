@@ -11,10 +11,10 @@ const Login = () => {
       </ImagenPerfil>
       
       <Label>Email</Label>
-      <Inputs type="email" required/>
+      <Inputs type="email" required placeholder="Ingresa tú correo electrónico"/>
       
       <Label>Password</Label>
-      <Inputs type="password" required/>
+      <Inputs type="password" required placeholder="Ingresa tú contraseña" />
       
       <Remember>
         <div>
