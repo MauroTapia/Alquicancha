@@ -22,7 +22,7 @@ export const Label = styled.label`
   font-family: Roboto;
   font-size: 20px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 `;
 
@@ -42,8 +42,8 @@ height: 171px;
 `;
 
 export const Remember = styled.div`
-  height: 40px;
-  width: 100%;
+  font-size: 15px;
+  font-family: Roboto;
   margin-top:10px;
   color: brown;
   display: flex;
@@ -53,6 +53,9 @@ export const Remember = styled.div`
 export const Button = styled.button`
   width: 280px;
   height: 34px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: bold;
   flex-shrink: 0;
   align-self: center;
   border-radius: 13px;
@@ -60,8 +63,9 @@ export const Button = styled.button`
 `;
 
 export const Button1 = styled.button`
-  width: 150px;
-  height: 22px;
+  width: 130px;
+  font-family: Roboto;
+  font-size: 15px;
   background: inherit;
   border: none;
   color: brown;
