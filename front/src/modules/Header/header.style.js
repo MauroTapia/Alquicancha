@@ -46,6 +46,30 @@ export const LogoTitle = styled.p`
 
 export const LoginRegister = styled.div`
   display: flex;
+`;
+
+export const Login = styled.div`
+  display: flex;
   gap: 16px;
   margin-right: 32px;
+  cursor: pointer;
+
+  &:hover{
+    transition: ease .7s;
+    font-weight: bold;
+    font-size: 20px;
+  }
+`;
+
+export const Register = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-right: 32px;
+  cursor: pointer;
+
+  &:hover{
+    transition: ease .7s;
+    font-weight: bold;
+    font-size: 20px;
+  }
 `;

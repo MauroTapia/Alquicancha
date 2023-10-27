@@ -1,5 +1,5 @@
 import React from "react";
-import { Detail, Header, Title, ProductDetailDiv } from "./ProdcutDetail.style";
+import { Detail, Header, Title, ProductDetailDiv, DetailProduct, Price, ImageBlock } from "./ProdcutDetail.style";
 import { useParams } from "react-router";
 import { getProductById } from "../../services/product";
 import flecha from "../../assets/flecha.png";
@@ -17,18 +17,18 @@ const ProductDetail = () => {
       <Header>
         <Title>{title}</Title>
         <Link to={"/"}>
-          <img src={flecha} alt="flecha"></img>
+          <img src={flecha} alt="flecha" />
         </Link>
       </Header>
 
       <ProductDetailDiv>
-        <div>
+        <ImageBlock>
           <img src={image} alt={alt} />
-        </div>
-        <div>
+        </ImageBlock>
+        <DetailProduct>
           <p>{description}</p>
-          <p>{dayPrice}</p>
-        </div>
+          <Price>${dayPrice}</Price>
+          </DetailProduct>
       </ProductDetailDiv>
     </Detail>
   );

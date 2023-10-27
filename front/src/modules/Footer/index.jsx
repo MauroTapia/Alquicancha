@@ -14,10 +14,10 @@ const Footer = () => {
         <p>Copyright ©2023 All rights reserved</p>
       </TeamDiv>
       <SocialMedia>
-        <img src={whatsapp} alt="whatsapp logo" />
-        <img src={instagram} alt="instagram logo" />
-        <img src={facebook} alt="facebook logo" />
-        <img src={x} alt="x logo" />
+        <a href=""><img src={whatsapp} alt="whatsapp logo" /></a>
+        <a href="https://www.instagram.com/_digitalhouse/"><img src={instagram} alt="instagram logo" /></a>
+        <a href="https://www.facebook.com/digitalhouseschool"><img src={facebook} alt="facebook logo" /></a>
+        <a href="https://twitter.com/_digitalhouse?lang=es"><img src={x} alt="x logo" /></a>
       </SocialMedia>
     </FooterWrapper>
   )
