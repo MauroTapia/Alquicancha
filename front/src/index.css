@@ -16,9 +16,9 @@ body{
   min-height: 100vh;
   background-image: url('./assets/grass04.jpg');
   overflow-x: hidden;
-   
-  #root{
-    min-height: 100vh;
-    position: relative;
-  }
 }
+#root{
+   min-height: 100vh;
+  position: relative;
+}
+
