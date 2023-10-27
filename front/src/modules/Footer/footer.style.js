@@ -16,6 +16,7 @@ export const FooterWrapper = styled.div`
   @media(max-width: 500px){
     padding: 16px 12px 0 12px;
   }
+  font-family: Roboto;
 `;
 
 export const TeamDiv = styled.div`
@@ -45,10 +46,17 @@ export const TeamDiv = styled.div`
 export const SocialMedia = styled.div`
   display: flex;
   gap: 16px;
+  cursor: pointer;
 
   img{
     width: 32px;
     height: auto;
+
+    &:hover{
+      transition: ease .5s;
+      transform: scale(1.2);
+    }
+
   }
 
   @media(max-width: 500px){

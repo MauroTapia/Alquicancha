@@ -7,9 +7,11 @@ import { HomeWrapper } from "./home.style";
 const Home = () => {
   return (
     <>
+    <HomeWrapper>
       <Search />
       <Categories />
       <Recommended />
+    </HomeWrapper>
     </>
   );
 };

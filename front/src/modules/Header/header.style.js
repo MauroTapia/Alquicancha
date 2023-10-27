@@ -16,6 +16,7 @@ export const HeaderWrapper = styled.div`
     color: var(--colors-blue);
     text-decoration: none;
   }
+  font-family: Roboto;
 `;
 
 export const LogoWrapper = styled.div`
@@ -51,13 +52,37 @@ export const LogoTitle = styled.p`
 
 export const LoginRegister = styled.div`
   display: flex;
+`;
+
+export const Login = styled.div`
+  display: flex;
   gap: 16px;
   margin-right: 32px;
+  cursor: pointer;
+
+  &:hover{
+    transition: ease .7s;
+    font-weight: bold;
+    font-size: 20px;
+  }
+`;
+
+export const Register = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-right: 32px;
+  cursor: pointer;
+
+  &:hover{
+    transition: ease .7s;
+    font-weight: bold;
+    font-size: 20px;
+  }
 
   @media (max-width: 570px) {
     display: none;
-}
-`
+  }
+`;
 
 export const LoginRegistermMenu = styled.div`
   display: none;
@@ -69,4 +94,4 @@ export const LoginRegistermMenu = styled.div`
     gap: 16px;
     margin-right: 32px;
 }
-`
+`;

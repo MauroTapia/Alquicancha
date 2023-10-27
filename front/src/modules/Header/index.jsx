@@ -1,5 +1,6 @@
 import React from 'react'
 import { HeaderWrapper, LoginRegister, LoginRegistermMenu, Logo, LogoTitle, LogoWrapper, TitleWrapper } from './header.style'
+
 import logo from '../../assets/alquicancha.png'
 import burguerLogo from '../../assets/logoBurguer.png'
 import { Link } from 'react-router-dom'
@@ -17,9 +18,12 @@ const Header = () => {
         </LogoWrapper>
       </Link>
       <LoginRegister>
+        <Login>
         <Link to={'/register'}>
           Crear Cuenta
         </Link>
+        </Login>
+        <Register>
         <Link to={'/login'}>
           Iniciar sesión
         </Link>

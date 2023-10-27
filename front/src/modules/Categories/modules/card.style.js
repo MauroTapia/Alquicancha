@@ -13,6 +13,7 @@ export const CardWrapper = styled.div`
   color: white;
   font-size: 12px;
   padding: 8px;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
