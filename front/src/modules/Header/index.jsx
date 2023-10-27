@@ -1,14 +1,24 @@
-import React from 'react'
-import { HeaderWrapper, LoginRegister, LoginRegistermMenu, Logo, LogoTitle, LogoWrapper, TitleWrapper } from './header.style'
+import React from "react";
+import {
+  HeaderWrapper,
+  Login,
+  Register,
+  LoginRegister,
+  LoginRegisterMenu,
+  Logo,
+  LogoTitle,
+  LogoWrapper,
+  TitleWrapper,
+} from "./header.style";
 
-import logo from '../../assets/alquicancha.png'
-import burguerLogo from '../../assets/logoBurguer.png'
-import { Link } from 'react-router-dom'
+import logo from "../../assets/alquicancha.png";
+import burguerLogo from "../../assets/logoBurguer.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <HeaderWrapper>
-      <Link to={'/'}>
+      <Link to={"/"}>
         <LogoWrapper>
           <Logo src={logo} alt="" />
           <TitleWrapper>
@@ -19,20 +29,16 @@ const Header = () => {
       </Link>
       <LoginRegister>
         <Login>
-        <Link to={'/register'}>
-          Crear Cuenta
-        </Link>
+          <Link to={"/register"}>Crear Cuenta</Link>
         </Login>
-        <Register>
-        <Link to={'/login'}>
-          Iniciar sesión
-        </Link>
+        <Register />
+        <Link to={"/login"}>Iniciar sesión</Link>
       </LoginRegister>
-      <LoginRegistermMenu>
-        <img src={burguerLogo} alt='logoBurguer'/>
-      </LoginRegistermMenu>
+      <LoginRegisterMenu>
+        <img src={burguerLogo} alt="logoBurguer" />
+      </LoginRegisterMenu>
     </HeaderWrapper>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
