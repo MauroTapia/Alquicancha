@@ -37,7 +37,8 @@ export const Inputs = styled.input`
 export const ImagenPerfil = styled.div`
 align-self: center;
 display: flex;
-width: 137px;
+width: 100%;
+
 height: 171px;
 `;
 
@@ -60,6 +61,7 @@ export const Button = styled.button`
   align-self: center;
   border-radius: 13px;
   background: linear-gradient(0deg, #5FBE6F 28.38%, rgba(0, 254, 41, 0.00) 113.51%);
+  
 `;
 
 export const Button1 = styled.button`

@@ -1,4 +1,4 @@
-import { Label, LoginWrapper, Inputs, Remember,ImagenPerfil, Button, Button1, InputCheckBox } from "./Login.style"
+import { Label, LoginWrapper, Inputs, Remember, ImagenPerfil, Button, Button1, InputCheckBox } from "./Login.style"
 
 
 const Login = () => {
