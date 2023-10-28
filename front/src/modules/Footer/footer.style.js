@@ -12,11 +12,6 @@ export const FooterWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 16px 32px 0 32px;
-  
-  @media(max-width: 500px){
-    padding: 16px 12px 0 12px;
-  }
-  font-family: Roboto;
 `;
 
 export const TeamDiv = styled.div`

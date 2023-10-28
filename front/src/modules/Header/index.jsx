@@ -14,10 +14,14 @@ import {
 import logo from "../../assets/alquicancha.png";
 import burguerLogo from "../../assets/logoBurguer.png";
 import { Link } from "react-router-dom";
+import useScrollDetector from "../../hooks/useScrollDetector";
 
 const Header = () => {
+
+  const scrolledDown = useScrollDetector();
+
   return (
-    <HeaderWrapper>
+    <HeaderWrapper style={{backgroundColor: scrolledDown ? 'rgb(155, 191, 13)' : ''}}>
       <Link to={"/"}>
         <LogoWrapper>
           <Logo src={logo} alt="" />
@@ -28,11 +32,12 @@ const Header = () => {
         </LogoWrapper>
       </Link>
       <LoginRegister>
-        <Login>
+        <Register>
           <Link to={"/register"}>Crear Cuenta</Link>
+        </Register>
+        <Login>
+          <Link to={"/login"}>Iniciar sesión</Link>
         </Login>
-        <Register />
-        <Link to={"/login"}>Iniciar sesión</Link>
       </LoginRegister>
       <LoginRegisterMenu>
         <img src={burguerLogo} alt="logoBurguer" />

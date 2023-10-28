@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   background-color: var(--color-lightGreen);
   min-height: 100px;
   height: 100px;
@@ -10,7 +10,9 @@ export const HeaderWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  margin-top: -150px;
+  z-index: 100;
+  top: 0;
+  left: 0;
 
   a {
     color: var(--colors-blue);
@@ -23,11 +25,11 @@ export const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   @media (max-width: 600px) {
     padding: 0;
-  }`
-;
+  }
+`;
 
 export const Logo = styled.img`
   width: 80px;
@@ -36,10 +38,6 @@ export const Logo = styled.img`
 `;
 
 export const TitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-left: 1rem;
 `;
 
@@ -47,6 +45,11 @@ export const LogoTitle = styled.p`
   font-size: 1rem;
   color: var(--colors-blue);
   font-weight: bold;
+  line-height: 0.5;
+
+  @media (max-width: 600px) {
+    font-size: .8rem;
+  }
 `;
 
 export const LoginRegister = styled.div`
@@ -64,10 +67,8 @@ export const Login = styled.div`
   margin-right: 32px;
   cursor: pointer;
 
-  &:hover{
-    transition: ease .7s;
-    font-weight: bold;
-    font-size: 20px;
+  &:hover {
+    color: white;
   }
 `;
 
@@ -77,10 +78,8 @@ export const Register = styled.div`
   margin-right: 32px;
   cursor: pointer;
 
-  &:hover{
-    transition: ease .7s;
-    font-weight: bold;
-    font-size: 20px;
+  &:hover {
+    color: white;
   }
 `;
 
@@ -90,8 +89,14 @@ export const LoginRegisterMenu = styled.div`
   @media (max-width: 600px) {
     display: flex;
     height: 30px;
-    widht: 30px;
+    width: 30px;
     gap: 16px;
     margin-right: 32px;
-}
+    cursor: pointer;
+  }
+  &:hover {
+    img {
+      filter: invert(1) sepia(0) hue-rotate(20deg) saturate(1000%);
+    }
+  }
 `;
