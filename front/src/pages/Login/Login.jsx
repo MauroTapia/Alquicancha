@@ -12,6 +12,7 @@ import {
 const Login = () => {
   return (
     <>
+    <form action="">
       <LoginWrapper>
         <ImagenPerfil>
           <img src="/src/assets/Male User.png" alt="user" />
@@ -25,7 +26,7 @@ const Login = () => {
         />
 
         <Label>Password</Label>
-        <Inputs type="password" required placeholder="Ingresa tú contraseña" />
+        <Inputs type="password" required placeholder="Ingresa tú contraseña" autoComplete="on"/>
 
         <Remember>
           <div>
@@ -37,6 +38,7 @@ const Login = () => {
 
         <Button>Login</Button>
       </LoginWrapper>
+    </form>
     </>
   );
 };

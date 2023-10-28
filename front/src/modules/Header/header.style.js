@@ -12,6 +12,7 @@ export const HeaderWrapper = styled.div`
   position: fixed;
   z-index: 100;
   top: 0;
+  left: 0;
 
   a {
     color: var(--colors-blue);
