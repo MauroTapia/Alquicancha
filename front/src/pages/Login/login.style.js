@@ -5,7 +5,7 @@ export const LoginWrapper = styled.div`
   margin-top: 150px;
   width: 80%;
   max-width: 500px;
-  height: 470px;
+  height: 100%;
   color: red;
   background: linear-gradient(
     45deg,

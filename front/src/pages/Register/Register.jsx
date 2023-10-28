@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Label,
   LoginWrapper,
@@ -8,6 +9,11 @@ import {
   InputCheckBox,
 } from "./register.style";
 const Register = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <form action="">

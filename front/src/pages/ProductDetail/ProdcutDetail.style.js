@@ -22,7 +22,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 15px;
+  margin-bottom: 32px;
 
   a {
     display: flex;
@@ -32,9 +32,17 @@ export const Header = styled.div`
     font-weight: 700;
     font-size: 18px;
 
+    @media (max-width: 750px) {
+      font-size: 14px;
+    }
+
     img {
       width: 32px;
       cursor: pointer;
+
+      @media (max-width: 750px) {
+        width: 20px;
+      }
     }
     &:hover {
       transform: scale(1.1);
@@ -49,11 +57,19 @@ export const Header = styled.div`
 
 export const Title = styled.h2`
   font-size: 40px;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
 `;
 
 export const Body = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 
 export const Images = styled.div`
@@ -62,8 +78,15 @@ export const Images = styled.div`
   background-color: rgba(255, 255, 255, 0.6);
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+
   border-radius: 8px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 32px;
+  }
 `;
 
 export const ImagePrincipal = styled.div`
@@ -77,6 +100,10 @@ export const ImagePrincipal = styled.div`
     width: 100%;
     height: auto;
     border-radius: 8px;
+  }
+
+  @media (max-width: 1024px) {
+    width: 90%;
   }
 `;
 
@@ -96,6 +123,12 @@ export const ImagesSecondaries = styled.div`
   .selected {
     border: 2px solid black;
   }
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 export const ProductDetails = styled.div`
@@ -105,12 +138,22 @@ export const ProductDetails = styled.div`
   min-height: 100%;
   width: 50%;
   padding: 0 14px;
+
+  @media(max-width: 1024px){
+    width: 100%;
+  }
+
 `;
 
 export const TextDetails = styled.p`
   font-size: 24px;
   margin: 0;
   padding-bottom: 12px;
+
+  @media(max-width: 1024px){
+    font-size: 18px;
+  }
+
 `;
 
 export const Caracteristicas = styled.div`
@@ -118,11 +161,16 @@ export const Caracteristicas = styled.div`
   background-color: white;
   border-radius: 8px;
   padding: 8px;
+  margin-top: 20px;
 
   p {
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 700;
+    
+    @media(max-width: 1024px){
+    font-size: 16px;
+  }
   }
 `;
 
@@ -153,6 +201,8 @@ export const Included = styled.div`
   flex-direction: column;
   width: 100%;
   flex-wrap: wrap;
+  margin-left: 30px;
+  margin-top: 20px;
 
   li {
     padding: 12px;
