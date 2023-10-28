@@ -27,7 +27,7 @@ export const CardWrapper = styled.div`
   }
 
   .imgContainer {
-    min-height: 90%;
+    min-height: 70%;
 
     img {
       width: 64px;
@@ -35,13 +35,13 @@ export const CardWrapper = styled.div`
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     width: 40px;
     height: 50px;
     .imgContainer {
       img {
         width: 34px;
-        height: auto;
+        height: 50px;
       }
     }
     p {

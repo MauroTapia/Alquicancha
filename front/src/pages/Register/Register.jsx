@@ -1,4 +1,4 @@
-import { Label, LoginWrapper, Inputs, Remember,ImagenPerfil, Button, Button1, InputCheckBox } from "./register.style"
+import { Label, LoginWrapper, Inputs, Remember,ImagenPerfil, Button, InputCheckBox } from "./register.style"
 const Register = () => {
   return (
     <>
@@ -8,7 +8,7 @@ const Register = () => {
         <img src="/src/assets/Male User.png" alt="user" />
       </ImagenPerfil>
       
-      <Label>Name</Label>
+      <Label>Nombre</Label>
       <Inputs type="text" required placeholder="Ingresa tú nombre" />
 
       <Label>Email</Label>
@@ -17,17 +17,17 @@ const Register = () => {
       <Label>Password</Label>
       <Inputs type="password" required placeholder="Crea una contraseña" />
 
-      <Label>Confirm password</Label>
+      <Label>Confirmar password</Label>
       <Inputs type="password" required placeholder="Repite la contraseña" />
       
       <Remember>
         <div>
           <InputCheckBox type="checkbox"/>
-          <span>Remember me </span>
+          <span>Recordarme </span>
         </div>
       </Remember>
       
-      <Button>Register</Button>
+      <Button>Registrarme</Button>
     
     </LoginWrapper>
     </>
