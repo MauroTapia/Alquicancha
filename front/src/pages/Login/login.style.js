@@ -62,7 +62,6 @@ export const Remember = styled.div`
 
 export const Button = styled.button`
   width: 100%;
-  max-width: 280px;
   height: 34px;
   font-size: 18px;
   font-weight: bold;

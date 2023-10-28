@@ -9,11 +9,11 @@ export const CardContainer = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(180, 180, 180, 0.62);
   padding: 16px;
   cursor: pointer;
+  box-sizing: border-box;
 
-  &:hover{
-    transition: ease .2s;
-    transform: scale(1.05);
-    border: 4px solid rgba(255, 255, 255, 1);
+  &:hover {
+    transform: scale(1.03);
+    border: 2px solid rgba(255, 255, 255, 1);
   }
 `;
 
@@ -28,26 +28,28 @@ export const ProductImage = styled.img`
   object-fit: cover;
 `;
 
-export const TitlePrice = styled.div`
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  gap: 8px;
-`;
-
 export const Title = styled.p`
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+  color: white;
 `;
 
 export const Price = styled.p`
-  font-size: 15px;
-  color: red;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: brown;
   font-weight: bold;
+  margin: 10px 0;
+
   span {
+    font-size: 14px;
     text-decoration: underline;
     color: black;
-  font-weight: normal;
+    font-weight: normal;
+    margin-right: 10px;
   }
 `;

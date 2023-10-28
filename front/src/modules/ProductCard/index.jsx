@@ -1,23 +1,31 @@
-import React from 'react'
-import { CardContainer, ImageWrapper, ProductImage, Title, Price, TitlePrice} from './productCard.style'
-import { Link } from 'react-router-dom';
+import React from "react";
+import {
+  CardContainer,
+  ImageWrapper,
+  ProductImage,
+  Title,
+  Price,
+} from "./productCard.style";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({product} ) => {
-  const {image, alt, title, dayPrice, id} = product;
+const ProductCard = ({ product }) => {
+  const { image, alt, title, dayPrice, id } = product;
 
   return (
-    <Link to={`/product/${id}`} >
-    <CardContainer>
-      <ImageWrapper>
-      <ProductImage src={image} alt={alt} />
-      </ImageWrapper>
-      <TitlePrice>
+    <Link to={`/product/${id}`} style={{textDecoration:'none'}}>
+      <CardContainer>
         <Title>{title}</Title>
-        <Price><span>Precio por dia:</span> ${dayPrice}</Price>
-      </TitlePrice>
-    </CardContainer>
-    </Link>
-  )
-}
+        <ImageWrapper>
+          <ProductImage src={image} alt={alt} />
+        </ImageWrapper>
 
-export default ProductCard
+          <Price>
+            <span>Precio por dia:</span> ${dayPrice}
+          </Price>
+
+      </CardContainer>
+    </Link>
+  );
+};
+
+export default ProductCard;
