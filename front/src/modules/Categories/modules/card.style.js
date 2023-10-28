@@ -41,7 +41,7 @@ export const CardWrapper = styled.div`
     .imgContainer {
       img {
         width: 34px;
-        height: 50px;
+        height: 35px;
       }
     }
     p {

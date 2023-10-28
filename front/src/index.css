@@ -1,4 +1,5 @@
-:root{
+:root,
+*{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -12,10 +13,7 @@ html{
 }
 
 body{
-  min-width: 380px;
   min-height: 100vh;
-  padding: 0;
-  margin: 0;
   background-image: url('./assets/grass04.jpg');
   font-family: 'Roboto', sans-serif;
 }

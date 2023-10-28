@@ -45,7 +45,7 @@ export const LogoTitle = styled.p`
   font-size: 1rem;
   color: var(--colors-blue);
   font-weight: bold;
-  line-height: 0.5;
+  line-height: 1;
 
   @media (max-width: 600px) {
     font-size: .8rem;

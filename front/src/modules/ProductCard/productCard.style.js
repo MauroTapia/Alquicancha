@@ -10,17 +10,25 @@ export const CardContainer = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(180, 180, 180, 0.62);
   padding: 16px;
   box-sizing: border-box;
-  transition: all ease-in-out .2s;
+  transition: all ease-in-out 0.2s;
 
   &:hover {
-    border: 1px solid rgba(255, 255, 255, .6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     transform: scale(1.02);
+  }
+
+  @media (max-width: 500px) {
+    width: 90%;
   }
 `;
 
 export const ImageWrapper = styled.div`
   width: 100%;
   height: 200px;
+
+  @media (max-width: 600px) {
+    height: 150px;
+  }
 `;
 
 export const ProductImage = styled.img`
@@ -36,6 +44,10 @@ export const Title = styled.p`
   padding: 0;
   margin-bottom: 10px;
   color: white;
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
 `;
 
 export const Price = styled.div`
@@ -54,6 +66,9 @@ export const Price = styled.div`
     font-weight: normal;
     margin-right: 10px;
   }
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 export const ButtonDetails = styled(Link)`
@@ -69,8 +84,13 @@ export const ButtonDetails = styled(Link)`
   height: 28px;
   border-radius: 8px;
 
-  &:hover{
+  &:hover {
     background-color: white;
     color: black;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    margin-top: 16px;
   }
 `;
