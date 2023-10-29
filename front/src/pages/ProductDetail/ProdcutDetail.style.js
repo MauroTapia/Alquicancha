@@ -95,6 +95,7 @@ export const ImagePrincipal = styled.div`
   justify-content: center;
   width: 350px;
   padding: 8px;
+  cursor: zoom-in;
 
   img {
     width: 100%;
@@ -139,10 +140,9 @@ export const ProductDetails = styled.div`
   width: 50%;
   padding: 0 14px;
 
-  @media(max-width: 1024px){
+  @media (max-width: 1024px) {
     width: 100%;
   }
-
 `;
 
 export const TextDetails = styled.p`
@@ -150,10 +150,15 @@ export const TextDetails = styled.p`
   margin: 0;
   padding-bottom: 12px;
 
-  @media(max-width: 1024px){
+  @media (max-width: 1024px) {
     font-size: 18px;
   }
+`;
 
+export const Price = styled.p`
+  font-size: 20px;
+  color: brown;
+  font-weight: bold;
 `;
 
 export const Caracteristicas = styled.div`
@@ -167,10 +172,10 @@ export const Caracteristicas = styled.div`
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 700;
-    
-    @media(max-width: 1024px){
-    font-size: 16px;
-  }
+
+    @media (max-width: 1024px) {
+      font-size: 16px;
+    }
   }
 `;
 

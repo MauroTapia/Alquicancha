@@ -13,30 +13,71 @@ import {
   Caracteristicas,
   ButtonReserva,
   Included,
+  Price,
 } from "./ProdcutDetail.style";
 import { useParams } from "react-router";
 import { getProductById } from "../../services/product";
 import flecha from "../../assets/flecha.png";
 import { Link } from "react-router-dom";
+import Modal from 'react-modal';
+import ImageModal from "./modules/ImageModal";
+
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    width: '100vw',
+    height: '100vh',
+  },
+};
+
 
 const ProductDetail = () => {
   const { id } = useParams();
 
-  const product = getProductById(id);
-
-  const { images, title, dayPrice, description, details } = product;
-
-  const [imagePrincipal, setImagePrincipal] = useState(images[0].img);
+  const [product, setProduct] = useState(null);
+  const [imagePrincipal, setImagePrincipal] = useState(null);
   const [selected, setSelected] = useState(0);
 
-  const handleSecondaryImageClick = (index) => {
-    setImagePrincipal(images[index].img);
-    setSelected(index);
-  };
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    getProductById(id).then((result) => {
+      setProduct(result);
+      if (result && result.images.length > 0) {
+        setImagePrincipal(result.images[0].img);
+      }
+    });
   }, []);
+
+  if (!product) {
+    return <p>Cargando...</p>;
+  }
+
+  const { images, title, dayPrice, description, details } = product;
+
+  const handleSecondaryImageClick = (index) => {
+    if (selected !== index) {
+      setImagePrincipal(images[index].img);
+      setSelected(index);
+    }
+  };
+
+  const handleImageClick = ()=> {
+    console.log('click en la imagen');
+    setModalOpen(true);
+  }
+
+  const closeModal = ()=> {
+    setModalOpen(false);
+  }
 
   return (
     <Detail>
@@ -63,12 +104,13 @@ const ProductDetail = () => {
             </ImagesSecondaries>
 
             <ImagePrincipal>
-              <img src={imagePrincipal} alt={images[0].alt} />
+              <img src={imagePrincipal} alt={images[0].alt} onClick={handleImageClick}/>
             </ImagePrincipal>
           </Images>
 
           <ProductDetails>
             <TextDetails>{description}</TextDetails>
+            <Price>$ {dayPrice} x día</Price>
             {details.length ? (
               <Caracteristicas>
                 <p>Que incluye:</p>
@@ -85,6 +127,16 @@ const ProductDetail = () => {
           </ProductDetails>
         </Body>
       </CardDetail>
+      
+      <Modal
+        isOpen={modalOpen}
+        style={customStyles}
+        ariaHideApp={false}
+      >
+
+        <ImageModal images={images} closeModal={closeModal}/>
+
+      </Modal>
     </Detail>
   );
 };
