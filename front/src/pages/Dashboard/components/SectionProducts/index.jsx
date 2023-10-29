@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllProducts } from "../../../services/product";
+import { getAllProducts } from "../../../../services/product";
 import {
   Buttons,
   Header,
@@ -7,17 +7,25 @@ import {
   ProductItem,
   Wrapper,
 } from "./sectionProducts.style";
-import { getAllCategories } from "../../../services/categories";
+import { getAllCategories } from "../../../../services/categories";
+import Paginator from "./modules/Paginator";
 
 const SectionProducts = () => {
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
+
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
     getAllProducts().then((result) => {
       setProducts(result);
+
+      const total = Math.ceil(result.length / productsPerPage);
+      setTotalPages(total);
     });
 
     getAllCategories().then((result) => {
@@ -32,12 +40,34 @@ const SectionProducts = () => {
     return category.title;
   };
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products?.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const paginate = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
+
   if (!products) {
     return <p>Cargando...</p>;
   }
 
   return (
     <Wrapper>
+      <Paginator
+        paginate={paginate}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        indexOfFirstProduct={indexOfFirstProduct}
+        indexOfLastProduct={indexOfLastProduct}
+        products={products}
+      />
+
       <Header>
         <p>Id</p>
         <p>Nombre</p>
@@ -46,7 +76,7 @@ const SectionProducts = () => {
         <p>Acciones</p>
       </Header>
 
-      {products.map((product, index) => (
+      {currentProducts.map((product, index) => (
         <ProductItem key={index}>
           <p># {product.id}</p>
           <ItemTitle>{product.title}</ItemTitle>

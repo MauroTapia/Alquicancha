@@ -6,7 +6,7 @@ export const CardWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 80px;
-  height: 90px;
+  height: 95px;
   background-color: var(--color-orange);
   box-shadow: -2px 4px 8px 1px rgba(0, 0, 0, 0.62);
   border-radius: 8px;
