@@ -83,7 +83,6 @@ export const Button = styled.button`
 `;
 
 export const Button1 = styled.button`
-  font-family: Roboto;
   font-size: 15px;
   background: inherit;
   border: none;
@@ -98,4 +97,15 @@ export const Button1 = styled.button`
 export const InputCheckBox = styled.input`
   margin-left: 5px;
   margin-right: 10px;
+`;
+
+export const ErrorMsg = styled.p`
+  height: 24px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: white;
+  font-size: 14px;
 `;
