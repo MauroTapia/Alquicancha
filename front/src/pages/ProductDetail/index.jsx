@@ -31,8 +31,9 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    maxWidth: '1000px',
+    height: '80vh',
   },
 };
 

@@ -67,7 +67,6 @@ export const Button = styled.button`
   font-weight: bold;
   align-self: center;
   border-radius: 12px;
-  margin-top: 32px;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   background: linear-gradient(
     0deg,
@@ -108,4 +107,11 @@ export const ErrorMsg = styled.p`
   background-color: red;
   color: white;
   font-size: 14px;
+`;
+
+export const ButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
 `;

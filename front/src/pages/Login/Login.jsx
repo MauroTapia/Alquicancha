@@ -9,14 +9,18 @@ import {
   Button1,
   InputCheckBox,
   ErrorMsg,
+  ButtonsContainer,
 } from "./login.style";
-import { getUserByEmail } from "../../services/users";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import { getUserByEmail, loginUser } from "../../services/users";
 
 const Login = () => {
+  const navigate = useNavigate();
+  
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [errors, setErrors] = useState([]);
-  const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,23 +30,19 @@ const Login = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
-      setErrors((prevErrors) => [...prevErrors, ['user']]);
-    } 
+      setErrors((prevErrors) => [...prevErrors, ["user"]]);
+    }
   };
 
   const checkPass = () => {
     if (password.length < 6) {
-      setErrors((prevErrors) => [
-        ...prevErrors,
-        ['password'],
-      ]);
+      setErrors((prevErrors) => [...prevErrors, ["password"]]);
     } else {
-
     }
   };
 
-  const existPassword = errors.some(([campo]) => campo === 'password');
-  const existUser = errors.some(([campo]) => campo === 'user');
+  const existPassword = errors.some(([campo]) => campo === "password");
+  const existUser = errors.some(([campo]) => campo === "user");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -54,6 +54,39 @@ const Login = () => {
     setErrors([]);
   };
 
+  const CheckUserExist = async (user, pass) => {
+
+    const loggin = await loginUser(user, pass);
+    const userData = await getUserByEmail(user);
+    const userName = userData.data.name;
+    const admin = userData.admin;
+
+    loggin 
+      ? 
+        Swal.fire({
+          title: 'Ingreso correcto!',
+          text: `Hola ${userName}, bienvenido!`,
+          icon: 'success',
+          confirmButtonText: `Ir a ${admin ? 'Dashboard' : 'Home'}`
+        }).then((result) =>{
+          if (result.isConfirmed){
+            if(admin){
+              navigate('/administracion')
+            }else{
+              navigate('/')
+            }
+          }
+        })
+      :
+      Swal.fire({
+        title: 'Error!',
+        text: `Usuario o contraseña incorrectos`,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,9 +96,14 @@ const Login = () => {
 
     setErrors((prevErrors) => {
       if (prevErrors.length === 0) {
-        console.log('init');
+        CheckUserExist(email, password);
       } else {
-        console.log(prevErrors);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Verifica los datos ingresados',
+          icon: 'error',
+          confirmButtonText: 'Volver'
+        })
       }
       return prevErrors;
     });
@@ -86,7 +124,9 @@ const Login = () => {
             placeholder="Ingresa tú correo electrónico"
             onChange={handleEmailChange}
           />
-          {existUser === true ? <ErrorMsg>Debes ingresar un correo valido</ErrorMsg> : null}
+          {existUser === true ? (
+            <ErrorMsg>Debes ingresar un correo valido</ErrorMsg>
+          ) : null}
 
           <Label>Password</Label>
           <Inputs
@@ -96,17 +136,27 @@ const Login = () => {
             autoComplete="on"
             onChange={handlePassChange}
           />
-          {existPassword === true ? <ErrorMsg>Contraseña incorrecta o menos de 6 caractéres</ErrorMsg> : null}
+          {existPassword === true ? (
+            <ErrorMsg>Contraseña incorrecta o menos de 6 caractéres</ErrorMsg>
+          ) : null}
 
           <Remember>
             <div>
               <InputCheckBox type="checkbox" />
               <span>Recordarme </span>
             </div>
-            <Button1>Olvide mi contraseña</Button1>
           </Remember>
 
           <Button type="submit">Login</Button>
+
+          <ButtonsContainer>
+            <Link to={"/register"}>
+              <Button1>Crear una nueva cuenta</Button1>
+            </Link>
+            <Link to={"/"}>
+              <Button1>Olvide mi contraseña</Button1>
+            </Link>
+          </ButtonsContainer>
         </LoginWrapper>
       </form>
     </>

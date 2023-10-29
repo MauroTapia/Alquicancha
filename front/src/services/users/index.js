@@ -21,3 +21,24 @@ export const getUserByEmail = async (email) =>{
   return users.find(user => user.data.email === email);
 }
 
+export const loginUser = async (email, pass )=>{
+  let logged = false;
+  const users = await getAllUsers()
+    .then((result) =>{
+      const existEmail = result.find(user => user.data.email === email);
+
+      if( existEmail ){
+        if(existEmail.data.password === pass){
+          logged = true;
+        }else{
+          logged = false;
+        }
+      }else{
+        logged = false;
+      }
+
+    })
+  
+    return logged;
+  
+}
