@@ -58,32 +58,32 @@ const Login = () => {
 
     const loggin = await loginUser(user, pass);
     const userData = await getUserByEmail(user);
-    const userName = userData.data.name;
-    const admin = userData.admin;
-
-    loggin 
-      ? 
-        Swal.fire({
-          title: 'Ingreso correcto!',
-          text: `Hola ${userName}, bienvenido!`,
-          icon: 'success',
-          confirmButtonText: `Ir a ${admin ? 'Dashboard' : 'Home'}`
-        }).then((result) =>{
-          if (result.isConfirmed){
-            if(admin){
-              navigate('/administracion')
-            }else{
-              navigate('/')
-            }
+    
+    if(loggin){
+      const userName = userData.data.name;
+      const admin = userData.admin;
+      Swal.fire({
+        title: 'Ingreso correcto!',
+        text: `Hola ${userName}, bienvenido!`,
+        icon: 'success',
+        confirmButtonText: `Ir a ${admin ? 'Dashboard' : 'Home'}`
+      }).then((result) =>{
+        if (result.isConfirmed){
+          if(admin){
+            navigate('/administracion')
+          }else{
+            navigate('/')
           }
-        })
-      :
+        }
+      })
+    } else{
       Swal.fire({
         title: 'Error!',
         text: `Usuario o contraseña incorrectos`,
         icon: 'error',
         confirmButtonText: 'Ok'
       })
+    }
 
   }
 

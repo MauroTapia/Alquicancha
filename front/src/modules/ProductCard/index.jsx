@@ -13,15 +13,12 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { Link } from "react-router-dom";
-
 import { Navigation } from "swiper/modules";
 
 const ProductCard = ({ product }) => {
   const { images, title, dayPrice, id } = product;
 
   return (
-    // <Link to={`/product/${id}`} style={{textDecoration:'none'}}>
     <CardContainer>
       <Title>{title}</Title>
 
@@ -43,7 +40,6 @@ const ProductCard = ({ product }) => {
         <ButtonDetails to={`/product/${id}`}>Ver más</ButtonDetails>
       </Price>
     </CardContainer>
-    // </Link>
   );
 };
 
