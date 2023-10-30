@@ -4,6 +4,10 @@ export const initialState = {
   theme: "light",
   logged: false,
   isAdmin: false,
+  user: {
+    name: "",
+    surname: ""
+  },
 };
 
 export const ContextGlobal = createContext();
@@ -12,6 +16,7 @@ export const ContextProvider = ({ children }) => {
   const [theme, setTheme] = useState(initialState.theme);
   const [logged, setLogged] = useState(initialState.logged);
   const [isAdmin, setIsAdmin] = useState(initialState.isAdmin);
+  const [user, setUser] = useState(initialState.user);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -33,6 +38,10 @@ export const ContextProvider = ({ children }) => {
     setIsAdmin(false);
   }
 
+  const setUserData = (data) => {
+    setUser(data);
+  }
+
   const contextValue = useMemo(() => {
     return {
       theme,
@@ -42,9 +51,11 @@ export const ContextProvider = ({ children }) => {
       logout,
       isAdmin, 
       loginAdmin,
-      logoutAdmin
+      logoutAdmin,
+      user,
+      setUserData
     };
-  }, [theme, logged, isAdmin]);
+  }, [theme, logged, isAdmin, user]);
 
   return (
     <ContextGlobal.Provider value={{ contextValue }}>

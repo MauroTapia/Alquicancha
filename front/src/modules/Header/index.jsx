@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   HeaderWrapper,
   Login,
@@ -9,6 +9,9 @@ import {
   LogoTitle,
   LogoWrapper,
   TitleWrapper,
+  LetterAvatar,
+  LetterContainer,
+  ButtonLoggout,
 } from "./header.style";
 
 import logo from "../../assets/alquicancha.png";
@@ -18,9 +21,26 @@ import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
-  const { isAdmin } = useContext(ContextGlobal).contextValue;
+  const { isAdmin, logged, user, logout } = useContext(ContextGlobal).contextValue;
 
   const scrolledDown = useScrollDetector();
+  const [initials, setInitials] = useState("");
+  
+  useEffect(()=>{
+    if(user){
+      const primerasLetras = Object.values(user).map(valor => valor[0]);
+      const resultado = primerasLetras.join('');
+      setInitials(resultado);
+    }
+  },[user])
+
+  const handleLogoClick = ()=>{
+    console.log('Aqui debe mostrarse menu para cerrar sesión o ir a conf');
+  }
+
+  const handleExit = ()=>{
+    logout();
+  }
 
   return (
     <HeaderWrapper
@@ -36,23 +56,29 @@ const Header = () => {
         </LogoWrapper>
       </Link>
 
-      {isAdmin ? (
-        <p>Hola Admin</p>
-      ) : (
-        <div>
-          <LoginRegister>
-            <Register>
-              <Link to={"/register"}>Crear Cuenta</Link>
-            </Register>
-            <Login>
-              <Link to={"/login"}>Iniciar sesión</Link>
-            </Login>
-          </LoginRegister>
-          <LoginRegisterMenu>
-            <img src={burguerLogo} alt="logoBurguer" />
-          </LoginRegisterMenu>
-        </div>
-      )}
+      <div>
+        {logged ? (
+          <LetterContainer onClick={handleLogoClick}>
+            <LetterAvatar>{initials}</LetterAvatar>
+            {isAdmin && <p>Administrador</p>}
+            <ButtonLoggout onClick={handleExit}>Salir</ButtonLoggout>
+          </LetterContainer>
+        ) : (
+          <>
+            <LoginRegister>
+              <Register>
+                <Link to={"/register"}>Crear Cuenta</Link>
+              </Register>
+              <Login>
+                <Link to={"/login"}>Iniciar sesión</Link>
+              </Login>
+            </LoginRegister>
+            <LoginRegisterMenu>
+              <img src={burguerLogo} alt="logoBurguer" />
+            </LoginRegisterMenu>
+          </>
+        )}
+      </div>
     </HeaderWrapper>
   );
 };
