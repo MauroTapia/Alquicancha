@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { DashboardSection, DashboardWrapper, Title } from "./dashboard.style";
 import DashboardMenu from "./components/DashboardMenu";
 import SectionProducts from "./components/SectionProducts";
-import NewProduct from "./components/NewProduct";
 import ListUsers from "./components/ListUsers";
 import ListCategories from "./components/ListCategories";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import NewProduct from "./components/NewProduct";
 
 const Dashboard = () => {
-
   const navigate = useNavigate();
   const [selection, setSelection] = useState(null);
 
@@ -17,28 +16,28 @@ const Dashboard = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleExit = ()=>{
+  const handleExit = () => {
     Swal.fire({
-      title: 'Salir?',
+      title: "Salir?",
       text: `Desea salir del Dashboard de administración?`,
-      icon: 'question',
+      icon: "question",
       confirmButtonText: `Salir`,
       showCancelButton: true,
-      reverseButtons: true
-    }).then((result) =>{
-      if (result.isConfirmed){
-        navigate('/');
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
       }
-    })
-  }
+    });
+  };
 
-  const handleClick = (selectedComponent) => {
+  const handleClick = (selectedComponent, data = null) => {
     switch (selectedComponent) {
       case "SectionProducts":
-        setSelection(<SectionProducts />);
+        setSelection(<SectionProducts changeSection={handleClick} />);
         break;
-      case "NewProduct":
-        setSelection(<NewProduct />);
+      case "Edit":
+        setSelection(<NewProduct data={data} changeSection={handleClick} />);
         break;
       case "ListBookings":
         setSelection(<ListBookings />);

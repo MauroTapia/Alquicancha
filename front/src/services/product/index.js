@@ -10,3 +10,32 @@ export const getProductById = async (id) => {
   const products = await getAllProducts();
   return products.find((producto) => producto.id === parseInt(id));
 };
+
+export const editProductById = async (id, data)=>{
+  const products = await getAllProducts();
+  const deleteData = products.filter((product) => product.id !== id);
+  const newData = [...deleteData, data];
+  localStorage.setItem('products', JSON.stringify(newData));
+}
+
+export const newProduct = async (data)=>{
+  const products = await getAllProducts();
+  const maxId = Math.max(...products.map(item => item.id));
+  data.id = maxId + 1;
+  data.images = [{}];
+  data.availability ={
+    "isAbalible": true,
+    "dateStart": "",
+    "dateEnd": ""
+  };
+  data.details = {};
+  data.category = parseInt(data.category);
+  const newData = [...products, data];
+  localStorage.setItem('products', JSON.stringify(newData));
+}
+
+export const deleteProductById = async (id)=>{
+  const products = await getAllProducts();
+  const newData = products.filter((product) => product.id !== id);
+  localStorage.setItem('products', JSON.stringify(newData));
+}

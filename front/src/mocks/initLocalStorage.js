@@ -4,6 +4,7 @@ import categories from "../mocks/categories.json";
 
 export const getFromLocalStorage = (name) => {
   const localStorageData = localStorage.getItem(name);
+  let jsonData;
 
   if (localStorageData) {
     // Si hay datos en localStorage, los retornamos
@@ -20,12 +21,15 @@ export const getFromLocalStorage = (name) => {
       switch (name) {
         case "categories":
           localStorage.setItem(name, JSON.stringify(categories));
+          jsonData = categories;
           break;
         case "users":
           localStorage.setItem(name, JSON.stringify(users));
+          jsonData = users;
           break;
         case "products":
           localStorage.setItem(name, JSON.stringify(products));
+          jsonData = products;
           break;
 
         default:

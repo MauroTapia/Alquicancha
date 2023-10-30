@@ -7,7 +7,6 @@ const DashboardMenu = (props) => {
 
   return (
     <Wrapper>
-      <MenuButton onClick={()=> handleClick('NewProduct')}>Agregar Producto</MenuButton>
       <MenuButton onClick={()=> handleClick('SectionProducts')}>Listar Productos</MenuButton>
       <MenuButton onClick={()=> handleClick('ListUsers')}>Listar Usuarios</MenuButton>
       <MenuButton onClick={()=> handleClick('SectionCategories')}>Categorías</MenuButton>

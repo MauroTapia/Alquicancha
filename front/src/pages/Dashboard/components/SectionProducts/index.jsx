@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getAllProducts } from "../../../../services/product";
 import {
+  deleteProductById,
+  getAllProducts,
+} from "../../../../services/product";
+import {
+  ButtonNew,
+  ButtonNewContainer,
   Buttons,
   Header,
   ItemTitle,
@@ -9,8 +14,16 @@ import {
 } from "./sectionProducts.style";
 import { getAllCategories } from "../../../../services/categories";
 import Paginator from "./modules/Paginator";
+import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
-const SectionProducts = () => {
+import "react-toastify/dist/ReactToastify.css";
+
+import { HiMiniDocumentPlus } from "react-icons/hi2";
+import NewProduct from "../NewProduct";
+
+const SectionProducts = ( {changeSection} ) => {
+
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
 
@@ -23,6 +36,8 @@ const SectionProducts = () => {
 
     getAllProducts().then((result) => {
       setProducts(result);
+
+      result.sort((a,b) => parseInt(a.id) - parseInt(b.id));
 
       const total = Math.ceil(result.length / productsPerPage);
       setTotalPages(total);
@@ -57,38 +72,84 @@ const SectionProducts = () => {
     return <p>Cargando...</p>;
   }
 
+  const notify = (msj) => {
+    toast.success(msj, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      style: {
+        background: "#b7e4c7",
+      },
+    });
+  };
+
+  const handleDelete = (id, name) => {
+    Swal.fire({
+      title: "Eliminar?",
+      text: `Desea eliminar el producto: "${name}"?`,
+      icon: "warning",
+      confirmButtonText: `Eliminar`,
+      showCancelButton: true,
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteProductById(id);
+        getAllProducts().then((result) => {
+          setProducts(result);
+
+          const total = Math.ceil(result.length / productsPerPage);
+          setTotalPages(total);
+        });
+        notify("Producto eliminado correctamente!");
+      }
+    });
+  };
+
   return (
-    <Wrapper>
-      <Paginator
-        paginate={paginate}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        indexOfFirstProduct={indexOfFirstProduct}
-        indexOfLastProduct={indexOfLastProduct}
-        products={products}
-      />
+        <Wrapper>
+          <ButtonNewContainer>
+            <ButtonNew
+              onClick={()=>changeSection('Edit')}
+            >
+              Agregar nuevo
+              <HiMiniDocumentPlus />
+            </ButtonNew>
+          </ButtonNewContainer>
 
-      <Header>
-        <p>Id</p>
-        <p>Nombre</p>
-        <p>Categoria</p>
-        <p>Precio</p>
-        <p>Acciones</p>
-      </Header>
+          <Paginator
+            paginate={paginate}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            indexOfFirstProduct={indexOfFirstProduct}
+            indexOfLastProduct={indexOfLastProduct}
+            products={products}
+          />
 
-      {currentProducts.map((product, index) => (
-        <ProductItem key={index}>
-          <p># {product.id}</p>
-          <ItemTitle>{product.title}</ItemTitle>
-          <p>{getCatName(product.category)}</p>
-          <p>{product.dayPrice}</p>
-          <Buttons>
-            <button>Editar</button>
-            <button>Eliminar</button>
-          </Buttons>
-        </ProductItem>
-      ))}
-    </Wrapper>
+          <Header>
+            <p>Id</p>
+            <p>Nombre</p>
+            <p>Categoria</p>
+            <p>Precio</p>
+            <p>Acciones</p>
+          </Header>
+
+          {currentProducts.map((product, index) => (
+            <ProductItem key={index}>
+              <p># {product.id}</p>
+              <ItemTitle>{product.title}</ItemTitle>
+              <p>{getCatName(product.category)}</p>
+              <p>{product.dayPrice}</p>
+              <Buttons>
+                <button onClick={() => changeSection('Edit', product)}>Editar</button>
+                <button onClick={() => handleDelete(product.id, product.title)}>
+                  Eliminar
+                </button>
+              </Buttons>
+            </ProductItem>
+          ))}
+          <ToastContainer />
+        </Wrapper>
+
   );
 };
 
