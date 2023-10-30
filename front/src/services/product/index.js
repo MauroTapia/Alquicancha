@@ -11,6 +11,11 @@ export const getProductById = async (id) => {
   return products.find((producto) => producto.id === parseInt(id));
 };
 
+export const findProductTitle = async (title) => {
+  const products = await getAllProducts();
+  return products.find((producto) => producto.title === title);
+};
+
 export const editProductById = async (id, data)=>{
   const products = await getAllProducts();
   const deleteData = products.filter((product) => product.id !== id);
@@ -22,14 +27,13 @@ export const newProduct = async (data)=>{
   const products = await getAllProducts();
   const maxId = Math.max(...products.map(item => item.id));
   data.id = maxId + 1;
-  data.images = [{}];
   data.availability ={
     "isAbalible": true,
     "dateStart": "",
     "dateEnd": ""
   };
   data.details = {};
-  data.category = parseInt(data.category);
+  data.category = parseInt(data.category) - 1 | 1;
   const newData = [...products, data];
   localStorage.setItem('products', JSON.stringify(newData));
 }
