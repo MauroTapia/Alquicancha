@@ -1,11 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import App from "../App"
-import Home from '../pages/Home/'
-import NotFound from '../pages/NotFound/'
-import Register from "../pages/Register/Register/"
-import Login from "../pages/Login/Login/"
-import ProductDetail from "../pages/ProductDetail"
-import Dashboard from "../pages/Dashboard"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import App from "../App";
+import Home from "../pages/Home/";
+import NotFound from "../pages/NotFound/";
+import Register from "../pages/Register/Register/";
+import Login from "../pages/Login/Login/";
+import ProductDetail from "../pages/ProductDetail";
+import Dashboard from "../pages/Dashboard";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const AppRoutes = () => {
   return (
@@ -16,12 +17,14 @@ const AppRoutes = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/administracion" element={<Dashboard />} />
+          <Route path="/" element={<ProtectedRoutes />}>
+            <Route path="administracion" element={<Dashboard />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default AppRoutes
+export default AppRoutes;

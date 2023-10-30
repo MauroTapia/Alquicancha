@@ -12,18 +12,18 @@ import {
   ButtonsContainer,
 } from "./login.style";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { getUserByEmail, loginUser } from "../../services/users";
 import { ContextGlobal } from "../../context/context";
 
 const Login = () => {
   const navigate = useNavigate();
-  
+
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [errors, setErrors] = useState([]);
 
-  const  {loginAdmin}  = useContext(ContextGlobal).contextValue;
+  const { loginAdmin, login, setUserData } = useContext(ContextGlobal).contextValue;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -58,39 +58,42 @@ const Login = () => {
   };
 
   const CheckUserExist = async (user, pass) => {
-
     const loggin = await loginUser(user, pass);
     const userData = await getUserByEmail(user);
-    
-    if(loggin){
+
+    if (loggin) {
+      login();
       const userName = userData.data.name;
       const admin = userData.admin;
+      setUserData({
+        name: userData.data.name,
+        surname: userData.data.surname
+      })
       admin && loginAdmin();
 
       Swal.fire({
-        title: 'Ingreso correcto!',
+        title: "Ingreso correcto!",
         text: `Hola ${userName}, bienvenido!`,
-        icon: 'success',
-        confirmButtonText: `Ir a ${admin ? 'Dashboard' : 'Home'}`
-      }).then((result) =>{
-        if (result.isConfirmed){
-          if(admin){
-            navigate('/administracion')
-          }else{
-            navigate('/')
+        icon: "success",
+        confirmButtonText: `Ir a ${admin ? "Dashboard" : "Home"}`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          if (admin) {
+            navigate("/administracion");
+          } else {
+            navigate("/");
           }
         }
-      })
-    } else{
+      });
+    } else {
       Swal.fire({
-        title: 'Error!',
+        title: "Error!",
         text: `Usuario o contraseña incorrectos`,
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
-
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,11 +107,11 @@ const Login = () => {
         CheckUserExist(email, password);
       } else {
         Swal.fire({
-          title: 'Error!',
-          text: 'Verifica los datos ingresados',
-          icon: 'error',
-          confirmButtonText: 'Volver'
-        })
+          title: "Error!",
+          text: "Verifica los datos ingresados",
+          icon: "error",
+          confirmButtonText: "Volver",
+        });
       }
       return prevErrors;
     });

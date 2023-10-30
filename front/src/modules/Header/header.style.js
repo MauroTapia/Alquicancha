@@ -48,7 +48,7 @@ export const LogoTitle = styled.p`
   line-height: 1;
 
   @media (max-width: 600px) {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -98,5 +98,49 @@ export const LoginRegisterMenu = styled.div`
     img {
       filter: invert(1) sepia(0) hue-rotate(20deg) saturate(1000%);
     }
+  }
+`;
+
+export const LetterContainer = styled.div`
+  margin-right: 32px;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const LetterAvatar = styled.div`
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #006400;
+  font-size: 32px;
+  border-radius: 50%;
+  color: white;
+  align-self: center;
+`;
+
+export const ButtonLoggout = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  background-color: #999;
+  font-size: 14px;
+  width: 100px;
+  height: 2opx;
+  border-radius: 8px;
+  border: none;
+  margin-top: 4px;
+
+  &:hover {
+    background-color: white;
+    color: black;
   }
 `;

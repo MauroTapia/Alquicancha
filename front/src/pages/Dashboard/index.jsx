@@ -13,7 +13,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [selection, setSelection] = useState(null);
 
-  const  {logoutAdmin}  = useContext(ContextGlobal).contextValue;
+  const  {logoutAdmin, logout}  = useContext(ContextGlobal).contextValue;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,6 +30,7 @@ const Dashboard = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         logoutAdmin();
+        logout();
         navigate("/");
       }
     });
