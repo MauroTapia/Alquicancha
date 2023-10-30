@@ -22,7 +22,7 @@ export const Header = styled.div`
   border-radius: 8px;
   margin-bottom: 10px;
 
-  :nth-child(2){
+  :nth-child(2) {
     width: 300px;
   }
 `;
@@ -31,7 +31,7 @@ export const ProductItem = styled.div`
   display: flex;
   justify-content: space-between;
   height: 40px;
-  :first-child{
+  :first-child {
     margin-left: 14px;
     width: 50px;
   }
@@ -47,27 +47,59 @@ export const Buttons = styled.div`
   justify-content: space-between;
   gap: 5px;
 
-  :first-child{
+  :first-child {
     background-color: #80b918;
 
-    &:hover{
+    &:hover {
       color: white;
     }
   }
 
-  :last-child{
+  :last-child {
     background-color: #d80032;
 
-    &:hover{
+    &:hover {
       color: white;
     }
   }
 
-  button{
+  button {
     width: 70px;
     height: 32px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
+  }
+`;
+
+export const ButtonNewContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+`;
+
+export const ButtonNew = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 16px;
+  font-size: 16px;
+  background-color: #d8f3dc;
+  border: 1px solid green;
+  color: green;
+  cursor: pointer;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: green;
+  }
+
+  &:hover {
+    border: 1px solid white;
+    color: black;
+    background-color: white;
   }
 `;
