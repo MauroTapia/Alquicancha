@@ -10,11 +10,12 @@ import {
   TextAreas,
 } from "./newProduct.style";
 import { getAllCategories } from "../../../../services/categories";
-import { editProductById, newProduct } from "../../../../services/product";
+import { editProductById, findProductTitle, newProduct } from "../../../../services/product";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import MultipleImageUploader from "./MultipleImageUpload";
 
 const NewProduct = ({ data, changeSection }) => {
   const { category, dayPrice, description, details, images, title, id } =
@@ -25,12 +26,14 @@ const NewProduct = ({ data, changeSection }) => {
     description: description || "",
     details: details || "",
     dayPrice: dayPrice || "",
-    images: images || "",
+    images: images || [],
     category: category || "",
   });
 
   const [isEdit, setIsEdit] = useState(data ? true : false);
   const [categories, setCategories] = useState(null);
+
+  const [uploadedFiles, setUploadedFiles] = useState(product.images);
 
   useEffect(() => {
     getAllCategories().then((result) => {
@@ -38,7 +41,35 @@ const NewProduct = ({ data, changeSection }) => {
     });
   }, []);
 
-  const validateForm = () => {
+  const imagePath = (image)=>{
+    if(image.path){
+      if(image.name.includes('/canchas/')){
+        return image
+      }
+      return `/canchas/${image.name}`;
+    }
+    return image.img
+  }
+
+  const validateForm = async () => {
+    console.log(uploadedFiles);
+    product.images.length = 0;
+    uploadedFiles.forEach((image) =>{
+      console.log(image);
+      const img = {
+        img: imagePath(image),
+        alt: product.title
+      }
+      product.images.push(img);
+    });
+    console.log(product);
+    if(!isEdit){
+      const existProduct = await findProductTitle(product.title);
+  
+      if(existProduct) return false
+
+    }
+
     return true;
   };
 
@@ -53,10 +84,10 @@ const NewProduct = ({ data, changeSection }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
+    if ( await validateForm()) {
       Swal.fire({
         title: "Guardar cambios",
         text: `Desea guardar los cambios?`,
@@ -80,6 +111,13 @@ const NewProduct = ({ data, changeSection }) => {
               }, 2000),
               notify("Nuevo producto creado con éxito!"));
         }
+      });
+    }else{
+      Swal.fire({
+        title: "Atención",
+        text: `El producto ya existe en la BD`,
+        icon: "warning",
+        confirmButtonText: `Ok`,
       });
     }
   };
@@ -153,6 +191,11 @@ const NewProduct = ({ data, changeSection }) => {
                 </option>
               ))}
           </Selects>
+        </InputContainer>
+        
+        <InputContainer>
+          <Labels>Imagenes</Labels>
+          <MultipleImageUploader uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles}/>
         </InputContainer>
 
         <ButtonsContainer>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Label,
   LoginWrapper,
@@ -14,6 +14,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { getUserByEmail, loginUser } from "../../services/users";
+import { ContextGlobal } from "../../context/context";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const Login = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [errors, setErrors] = useState([]);
+
+  const  {loginAdmin}  = useContext(ContextGlobal).contextValue;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -62,6 +65,8 @@ const Login = () => {
     if(loggin){
       const userName = userData.data.name;
       const admin = userData.admin;
+      admin && loginAdmin();
+
       Swal.fire({
         title: 'Ingreso correcto!',
         text: `Hola ${userName}, bienvenido!`,

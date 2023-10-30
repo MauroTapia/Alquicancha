@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DashboardSection, DashboardWrapper, Title } from "./dashboard.style";
 import DashboardMenu from "./components/DashboardMenu";
 import SectionProducts from "./components/SectionProducts";
@@ -7,10 +7,13 @@ import ListCategories from "./components/ListCategories";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import NewProduct from "./components/NewProduct";
+import { ContextGlobal } from "../../context/context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [selection, setSelection] = useState(null);
+
+  const  {logoutAdmin}  = useContext(ContextGlobal).contextValue;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,6 +29,7 @@ const Dashboard = () => {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
+        logoutAdmin();
         navigate("/");
       }
     });

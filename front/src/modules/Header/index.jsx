@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   HeaderWrapper,
   Login,
@@ -15,13 +15,17 @@ import logo from "../../assets/alquicancha.png";
 import burguerLogo from "../../assets/logoBurguer.png";
 import { Link } from "react-router-dom";
 import useScrollDetector from "../../hooks/useScrollDetector";
+import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
+  const { isAdmin } = useContext(ContextGlobal).contextValue;
 
   const scrolledDown = useScrollDetector();
 
   return (
-    <HeaderWrapper style={{backgroundColor: scrolledDown ? 'rgb(155, 191, 13)' : ''}}>
+    <HeaderWrapper
+      style={{ backgroundColor: scrolledDown ? "rgb(155, 191, 13)" : "" }}
+    >
       <Link to={"/"}>
         <LogoWrapper>
           <Logo src={logo} alt="" />
@@ -31,17 +35,24 @@ const Header = () => {
           </TitleWrapper>
         </LogoWrapper>
       </Link>
-      <LoginRegister>
-        <Register>
-          <Link to={"/register"}>Crear Cuenta</Link>
-        </Register>
-        <Login>
-          <Link to={"/login"}>Iniciar sesión</Link>
-        </Login>
-      </LoginRegister>
-      <LoginRegisterMenu>
-        <img src={burguerLogo} alt="logoBurguer" />
-      </LoginRegisterMenu>
+
+      {isAdmin ? (
+        <p>Hola Admin</p>
+      ) : (
+        <div>
+          <LoginRegister>
+            <Register>
+              <Link to={"/register"}>Crear Cuenta</Link>
+            </Register>
+            <Login>
+              <Link to={"/login"}>Iniciar sesión</Link>
+            </Login>
+          </LoginRegister>
+          <LoginRegisterMenu>
+            <img src={burguerLogo} alt="logoBurguer" />
+          </LoginRegisterMenu>
+        </div>
+      )}
     </HeaderWrapper>
   );
 };

@@ -8,6 +8,7 @@ export const FormWrapper = styled.div`
   align-items: center;
   background-color: #5fa8d3;
   padding: 32px;
+  margin-bottom: 100px;
 `;
 
 export const InputContainer = styled.div`
