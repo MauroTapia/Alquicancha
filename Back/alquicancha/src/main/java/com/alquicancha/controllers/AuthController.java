@@ -1,22 +1,24 @@
 package com.alquicancha.controllers;
 
-import com.alquicancha.dto.UserDto;
+import com.alquicancha.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AuthController {
-    @GetMapping("/index")
-    public String home(){
-        return "index";
+    @Autowired
+    private UserService servicio;
+
+    @GetMapping("/login")
+    public String iniciarSesion() {
+        return "login";
     }
 
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model){
-        // create model object to store form data
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "register";
+    @GetMapping("/")
+    public String verPaginaDeInicio(Model modelo) {
+        modelo.addAttribute("usuarios", servicio.listarUsuarios());
+        return "index";
     }
 }

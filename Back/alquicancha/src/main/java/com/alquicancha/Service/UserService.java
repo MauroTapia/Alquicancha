@@ -1,14 +1,13 @@
 package com.alquicancha.Service;
 
-import com.alquicancha.dto.UserDto;
-import com.alquicancha.entity.User;
+import com.alquicancha.controllers.dto.UsuarioRegistroDTO;
+import com.alquicancha.entity.Usuario;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
-    void saveUser(UserDto userDto);
+public interface UserService extends UserDetailsService {
+    public Usuario guardar(UsuarioRegistroDTO registroDTO);
 
-    User findByEmail(String email);
-
-    List<UserDto> findAllUsers();
+    public List<Usuario> listarUsuarios();
 }
