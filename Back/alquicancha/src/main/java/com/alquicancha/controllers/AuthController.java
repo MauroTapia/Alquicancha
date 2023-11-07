@@ -1,24 +1,30 @@
 package com.alquicancha.controllers;
 
-import com.alquicancha.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AuthController {
-    @Autowired
-    private UserService servicio;
+    @GetMapping("/")
+    public String root(){
+        return "index";
+    }
 
     @GetMapping("/login")
-    public String iniciarSesion() {
+    public String login(Model model){
         return "login";
     }
 
-    @GetMapping("/")
-    public String verPaginaDeInicio(Model modelo) {
-        modelo.addAttribute("usuarios", servicio.listarUsuarios());
-        return "index";
+    @GetMapping("/user")
+    public String userIndex(){
+        return "user/index";
     }
+
+    @GetMapping("/productos")
+    public String productos(){
+        return "/productos";
+    }
+
 }

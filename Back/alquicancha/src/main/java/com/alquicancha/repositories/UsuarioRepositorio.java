@@ -1,8 +1,11 @@
 package com.alquicancha.repositories;
 
-import com.alquicancha.entity.Usuario;
+import com.alquicancha.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
-    Usuario findByEmail(String email);
+@Repository
+public interface UsuarioRepositorio extends JpaRepository<User,Long> {
+    User findByEmail(String email);
+
 }
