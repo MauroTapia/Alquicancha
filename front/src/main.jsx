@@ -1,10 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import AppRoutes from './routes/AppRoutes.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import AppRoutes from "./routes/AppRoutes.jsx";
+import { ContextProvider } from "./context/context";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AppRoutes />
-  </React.StrictMode>,
-)
+    <ContextProvider>
+      <AppRoutes />
+    </ContextProvider>
+  </React.StrictMode>
+);

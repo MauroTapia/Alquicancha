@@ -6,7 +6,7 @@ export const CardWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 80px;
-  height: 90px;
+  height: 95px;
   background-color: var(--color-orange);
   box-shadow: -2px 4px 8px 1px rgba(0, 0, 0, 0.62);
   border-radius: 8px;
@@ -27,7 +27,7 @@ export const CardWrapper = styled.div`
   }
 
   .imgContainer {
-    min-height: 90%;
+    min-height: 70%;
 
     img {
       width: 64px;
@@ -35,13 +35,13 @@ export const CardWrapper = styled.div`
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     width: 40px;
     height: 50px;
     .imgContainer {
       img {
         width: 34px;
-        height: auto;
+        height: 35px;
       }
     }
     p {
