@@ -30,7 +30,7 @@ const Header = () => {
     if(user){
       const primerasLetras = Object.values(user).map(valor => valor[0]);
       const resultado = primerasLetras.join('');
-      setInitials(resultado);
+      setInitials(resultado.toUpperCase());
     }
   },[user])
 
