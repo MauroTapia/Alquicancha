@@ -11,108 +11,96 @@ import {
 } from "./register.style";
 import { newUser, getUserByEmail } from "../../services/users";
 import Swal from "sweetalert2";
-const Register = () => {
+import { useNavigate } from "react-router-dom";
 
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
+const Register = () => {
+  const navigate = useNavigate();
+
+  const [userData, setUserData] = useState({
+    name: null,
+    surname: null,
+    email: null,
+    password: null,
+    confirmPassword: null,
+  });
+
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const existName = errors.some(([campo]) => campo === "name");
+  const existSurname = errors.some(([campo]) => campo === "surname");
+  const existEmail = errors.some(([campo]) => campo === "email");
+  const existPassword = errors.some(([campo]) => campo === "password");
+  const existConfirm = errors.some(([campo]) => campo === "confirm");
+
   const CheckUserExist = async (email) => {
     const userData = await getUserByEmail(email);
     if (userData) {
       console.log("entre al malnacido error");
-      setErrors((prevErrors) => [...prevErrors, ["exist"]])
+      setErrors((prevErrors) => [...prevErrors, ["exist"]]);
     }
-      };
+  };
 
   const checkName = () => {
-    if(name.length < 4){
-      setErrors((prevErrors) => [...prevErrors, ["name"]])
+    if (userData.name.length < 4) {
+      setErrors((prevErrors) => [...prevErrors, ["name"]]);
+    }
+  };
+
+  const checkSurname = () => {
+    if (userData.surname.length < 4) {
+      setErrors((prevErrors) => [...prevErrors, ["surname"]]);
     }
   };
 
   const checkEmail = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(userData.email)) {
       setErrors((prevErrors) => [...prevErrors, ["email"]]);
     }
   };
 
   const checkPass = () => {
-    if (password.length < 6) {
+    if (userData.password.length < 6) {
       setErrors((prevErrors) => [...prevErrors, ["password"]]);
-    } else if (password !== confirmPassword) {
-      setErrors((prevErrors) => [...prevErrors, ["password"]])
+    } else if (userData.password !== userData.confirmPassword) {
+      setErrors((prevErrors) => [...prevErrors, ["confirm"]]);
     }
   };
 
-  const existName = errors.some(([campo]) => campo === "name");
-  const existEmail = errors.some(([campo]) => campo === "email");
-  const existPassword = errors.some(([campo]) => campo === "password");
-
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    console.log(name);
+  const handleChange = (e, field) =>{
+    setUserData((prevUserData) => ({ ...prevUserData, [field]: e.target.value }));
     setErrors([]);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    console.log(email);
-    setErrors([]);
-  };
-
-  const handlePassChange = (e) => {
-    setPassword(e.target.value);
-    console.log(password);
-    setErrors([]);
-  };
-
-  const handleConfirmPassChange = (e) => {
-    setConfirmPassword(e.target.value);
-    console.log(confirmPassword);
-    setErrors([]);
-  };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     setErrors([]);
-    await CheckUserExist(email);
+    await CheckUserExist(userData.email);
     checkEmail();
     checkPass();
     checkName();
-
-
+    checkSurname();
 
     setErrors((prevErrors) => {
       if (prevErrors.length === 0) {
-        const user =  
-        {
-          data: {
-            name: name,
-            email: email,
-            password: password,
-          }
-        }
+        const user = { ...userData}
+        newUser(user);
         Swal.fire({
-          title: "Ingreso correcto!",
-          text: `Hola ${user.data.name}, bienvenido!`,
+          title: "Usuario creado!",
+          text: `El usuario a sido creado correctamente!`,
           icon: "success",
-          confirmButtonText: `Ir a "Home"`,
+          confirmButtonText: `Iniciar sesión`,
         }).then((result) => {
           if (result.isConfirmed) {
-              navigate("/");
+            navigate("/login");
           }
         });
-        newUser (user);
       } else {
         Swal.fire({
           title: "Error!",
@@ -123,8 +111,7 @@ const Register = () => {
       }
       return prevErrors;
     });
-  }
-
+  };
 
   return (
     <>
@@ -135,29 +122,61 @@ const Register = () => {
           </ImagenPerfil>
 
           <Label>Nombre</Label>
-          <Inputs type="text" required placeholder="Ingresa tú nombre"
-          onChange={handleNameChange} />
+          <Inputs
+            type="text"
+            required
+            placeholder="Ingresa tú nombre"
+            onChange={(e) => handleChange(e, "name")}
+          />
           {existName === true ? (
             <ErrorMsg>El nombre debe tener minimo 4 letras</ErrorMsg>
           ) : null}
 
+          <Label>Apellido</Label>
+          <Inputs
+            type="text"
+            required
+            placeholder="Ingresa tú apellido"
+            onChange={(e) => handleChange(e, "surname")}
+          />
+          {existSurname === true ? (
+            <ErrorMsg>El apellido debe tener minimo 4 letras</ErrorMsg>
+          ) : null}
+
           <Label>Email</Label>
-          <Inputs type="email" required placeholder="Ingresa tú e-mail" 
-          onChange={handleEmailChange}/>
+          <Inputs
+            type="email"
+            required
+            placeholder="Ingresa tú e-mail"
+            onChange={(e) => handleChange(e, "email")}
+          />
           {existEmail === true ? (
             <ErrorMsg>Debes ingresar un correo valido</ErrorMsg>
           ) : null}
 
           <Label>Password</Label>
-          <Inputs type="password" required placeholder="Crea una contraseña" autoComplete="on" 
-          onChange={handlePassChange}/>
+          <Inputs
+            type="password"
+            required
+            placeholder="Crea una contraseña"
+            autoComplete="on"
+            onChange={(e) => handleChange(e, "password")}
+          />
           {existPassword === true ? (
-            <ErrorMsg>Asegurate que tenga mas de 6 letras y que este igual que el confirm</ErrorMsg>
+            <ErrorMsg>Asegurate que tenga mas de 6 letras</ErrorMsg>
           ) : null}
 
           <Label>Confirmar password</Label>
-          <Inputs type="password" required placeholder="Repite la contraseña" autoComplete="on"
-          onChange={handleConfirmPassChange}/>
+          <Inputs
+            type="password"
+            required
+            placeholder="Repite la contraseña"
+            autoComplete="on"
+            onChange={(e) => handleChange(e, "confirmPassword")}
+          />
+          {existConfirm === true ? (
+            <ErrorMsg>Las contraseñas no coinciden</ErrorMsg>
+          ) : null}
 
           <Remember>
             <div>
