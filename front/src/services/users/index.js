@@ -42,3 +42,14 @@ export const loginUser = async (email, pass )=>{
     return logged;
   
 }
+
+export const newUser = async (data)=>{
+  const users = await getAllUsers();
+  const maxId = Math.max(...users.map(item => item.id));
+  data.id = maxId + 1;
+
+  const newData = [...users, data];
+  localStorage.setItem('users', JSON.stringify(newData));
+}
+
+// ------------------vvv-- Registro de usuario --vvvv-----------------

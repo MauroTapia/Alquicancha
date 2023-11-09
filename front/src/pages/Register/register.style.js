@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const LoginWrapper = styled.div`
   margin: 0 auto;
   margin-top: 150px;
@@ -39,6 +40,17 @@ export const Inputs = styled.input`
   font-size: 16px;
   margin-bottom: 12px;
 
+`;
+
+export const ErrorMsg = styled.p`
+  height: 24px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: white;
+  font-size: 14px;
 `;
 
 export const ImagenPerfil = styled.div`
