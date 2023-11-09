@@ -84,11 +84,11 @@ const ProductDetail = () => {
     <Detail>
       <CardDetail>
         <Header>
-          <Title>{title}</Title>
           <Link to={"/"}>
             <img src={flecha} alt="flecha" />
             Volver
           </Link>
+          <Title>{title}</Title>
         </Header>
         <Body>
           <Images>
