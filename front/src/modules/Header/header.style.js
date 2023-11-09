@@ -52,7 +52,12 @@ export const LogoTitle = styled.p`
 
 export const LoginRegister = styled.div`
   display: flex;
-`;
+
+  @media (max-width: 570px) {
+    display: none;
+}
+`
+;
 
 export const Login = styled.div`
   display: flex;
@@ -79,3 +84,15 @@ export const Register = styled.div`
     font-size: 20px;
   }
 `;
+
+export const LoginRegistermMenu = styled.div`
+  display: none;
+
+  @media (max-width: 570px) {
+    display: flex;
+    height: 30px;
+    widht: 30px;
+    gap: 16px;
+    margin-right: 32px;
+}
+`

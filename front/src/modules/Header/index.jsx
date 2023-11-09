@@ -1,6 +1,7 @@
 import React from 'react'
-import { HeaderWrapper, Login, Register, LoginRegister, Logo, LogoTitle, LogoWrapper, TitleWrapper } from './header.style'
+import { HeaderWrapper, Login, Register, LoginRegister,LoginRegistermMenu, Logo, LogoTitle, LogoWrapper, TitleWrapper } from './header.style'
 import logo from '../../assets/alquicancha.png'
+import burguerLogo from '../../assets/logoBurguer.png'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
@@ -27,6 +28,9 @@ const Header = () => {
         </Link>
         </Register>
         </LoginRegister>
+        <LoginRegistermMenu>
+        <img src={burguerLogo} alt='logoBurguer'/>
+      </LoginRegistermMenu>
     </HeaderWrapper>
   )
 }
