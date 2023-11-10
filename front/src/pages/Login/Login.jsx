@@ -13,7 +13,7 @@ import {
 } from "./login.style";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { getUserByEmail, loginUser } from "../../services/users";
+import { loginUser } from "../../services/users";
 import { ContextGlobal } from "../../context/context";
 
 const Login = () => {
@@ -58,25 +58,25 @@ const Login = () => {
   };
 
   const CheckUserExist = async (user, pass) => {
-    const loggin = await loginUser(user, pass);
-    const userData = await getUserByEmail(user);
+    const userLogged = await loginUser(user, pass);
 
-    if (loggin) {
+    if (userLogged) {
       login();
-      const userName = userData.data.name;
-      const admin = userData.admin;
+      const userName = userLogged.nombre;
+      const admin = userLogged.admin;
       setUserData({
-        name: userData.data.name,
-        surname: userData.data.surname
+        name: userLogged.nombre,
+        surname: userLogged.apellido,
       })
       admin && loginAdmin();
 
       Swal.fire({
         title: "Ingreso correcto!",
-        text: `Hola ${userName}, bienvenido!`,
+        text: `Hola, ${userName} bienvenido!`,
         icon: "success",
         confirmButtonText: `Ir a ${admin ? "Dashboard" : "Home"}`,
-      }).then((result) => {
+      })
+      .then((result) => {
         if (result.isConfirmed) {
           if (admin) {
             navigate("/administracion");

@@ -1,13 +1,37 @@
+import { API_URL } from '../../utils/urls';
+const url = API_URL;
+
 //Cambiar por el back
 export const getAllUsers = async () => {
-  const data = localStorage.getItem("users");
-  const users = data ? JSON.parse(data) : null;
-  return users;
+
+  try {
+    const response = await fetch(`${url}/usuarios`);
+    if(!response.ok){
+      throw new Error('Error response was no ok');
+    }
+
+    const jsonData = await response.json();
+    return jsonData;
+
+  } catch (error) {
+    console.log('Error obteniendo usuarios', error);
+  }
 };
 
 export const getUserById = async (id) => {
-  const users = await getAllUsers();
-  return users.find((user) => user.id === parseInt(id));
+
+  try {
+    const response = await fetch(`${url}/usuarios/${id}`);
+    if(!response.ok){
+      throw new Error('Error response was no ok');
+    }
+
+    const jsonData = await response.json();
+    return jsonData;
+
+  } catch (error) {
+    console.log('Error obteniendo usuario', error);
+  }
 };
 
 export const getUserByName = async (name) => {
@@ -16,37 +40,55 @@ export const getUserByName = async (name) => {
 };
 
 export const getUserByEmail = async (email) => {
-  const users = await getAllUsers();
-  return users.find((user) => user.data.email === email);
+  try {
+    const response = await fetch(`${url}/usuarios/${email}`);
+    if(!response.ok){
+      throw new Error('Error response was no ok');
+    }
+
+    const jsonData = await response.json();
+    return jsonData;
+
+  } catch (error) {
+    console.log('Error obteniendo mail de usuario', error);
+  }
 };
 
 export const loginUser = async (email, pass) => {
-  let logged = false;
-  const users = await getAllUsers().then((result) => {
-    const existEmail = result.find((user) => user.data.email === email);
-
-    if (existEmail) {
-      if (existEmail.data.password === pass) {
-        logged = true;
-      } else {
-        logged = false;
-      }
-    } else {
-      logged = false;
+  try {
+    const response = await fetch(`${url}/usuarios/login/${email}:${pass}`);
+    if(!response.ok){
+      throw new Error('Error response was no ok');
     }
-  });
 
-  return logged;
+    const jsonData = await response.json();
+    return jsonData;
+
+  } catch (error) {
+    console.log('Error obteniendo mail de usuario', error);
+  }
 };
 
 export const newUser = async (data) => {
-  const user = {};
-  const users = await getAllUsers();
-  const maxId = Math.max(...users.map((item) => item.id));
-  user.id = maxId + 1;
-  user.admin = false;
-  user.data = data;
+  const opciones = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json', 
+    },
+    body: JSON.stringify(data), 
+  }; 
 
-  const newData = [...users, user];
-  localStorage.setItem("users", JSON.stringify(newData));
+  fetch(`${url}/usuarios/registrar`, opciones)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+    }
+    return response.json(); 
+  })
+  .then(data => {
+    console.log('Usuario creado exitosamente:', data);
+  })
+  .catch(error => {
+    console.error('Error al crear el usuario:', error);
+  });
 };
