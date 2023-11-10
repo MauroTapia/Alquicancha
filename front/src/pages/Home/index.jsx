@@ -4,27 +4,27 @@ import Recommended from "../../modules/Recommended";
 import Search from "../../modules/Search";
 import { HomeWrapper } from "./home.style";
 import { getFromLocalStorage } from "../../mocks/initLocalStorage";
+import Footer from "../../modules/Footer/index";
 
 const Home = () => {
-  
-  useEffect(()=>{
+  useEffect(() => {
     // ******************************
     // Traer datos del localStorage si existen
     // Si no existe guarda los datos del json en mock
     // Eliminar luego al utilizar backend
     // ******************************
-    getFromLocalStorage('categories')
-    getFromLocalStorage('products')
-  },[])
-
+    getFromLocalStorage("categories");
+    getFromLocalStorage("products");
+  }, []);
 
   return (
     <>
-    <HomeWrapper>
-      <Search />
-      <Categories />
-      <Recommended />
-    </HomeWrapper>
+      <HomeWrapper>
+        <Search />
+        <Categories />
+        <Recommended />
+      </HomeWrapper>
+      <Footer />
     </>
   );
 };

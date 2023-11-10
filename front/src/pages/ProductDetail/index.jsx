@@ -21,6 +21,7 @@ import flecha from "../../assets/flecha.png";
 import { Link } from "react-router-dom";
 import Modal from 'react-modal';
 import ImageModal from "./modules/ImageModal";
+import Footer from "../../modules/Footer/index";
 
 
 const customStyles = {
@@ -81,6 +82,7 @@ const ProductDetail = () => {
   }
 
   return (
+    <>
     <Detail>
       <CardDetail>
         <Header>
@@ -139,6 +141,8 @@ const ProductDetail = () => {
 
       </Modal>
     </Detail>
+    <Footer />
+    </>
   );
 };
 

@@ -1,8 +1,6 @@
 package com.backend.alquicancha.service.impl;
 
-import com.backend.alquicancha.dto.DomicilioDto;
 import com.backend.alquicancha.dto.UsuarioDto;
-import com.backend.alquicancha.entity.Domicilio;
 import com.backend.alquicancha.entity.Usuario;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
@@ -33,9 +31,8 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public UsuarioDto guardarUsuario(Usuario usuario) throws BadRequestException {
         Usuario usuarioNuevo = usuarioRepository.save(usuario);
-        DomicilioDto domicilioDto = objectMapper.convertValue(usuarioNuevo.getDomicilio(), DomicilioDto.class);
         UsuarioDto usuarioDtoNuevo = objectMapper.convertValue(usuarioNuevo, UsuarioDto.class);
-        usuarioDtoNuevo.setDomicilioDto(domicilioDto);
+
         usuarioDtoNuevo.setAdmin(false);
 
         if (usuarioNuevo == null) {
@@ -52,9 +49,7 @@ public class UsuarioService implements IUsuarioService {
         Usuario usuarioBuscado = usuarioRepository.findById(id).orElse(null);
         UsuarioDto usuarioDto = null;
         if (usuarioBuscado != null) {
-            DomicilioDto domicilioDto = objectMapper.convertValue(usuarioBuscado.getDomicilio(), DomicilioDto.class);
             usuarioDto = objectMapper.convertValue(usuarioBuscado, UsuarioDto.class);
-            usuarioDto.setDomicilioDto(domicilioDto);
             LOGGER.info("Usuario encontrado: {}", JsonPrinter.toString(usuarioDto));
         } else {
             LOGGER.info("El id no se encuentra registrado en la base de datos");
@@ -74,9 +69,7 @@ public class UsuarioService implements IUsuarioService {
             //if(usuarioAActualizar.getDomicilio().getId() == usuario.getDomicilio().getId()){
             usuarioAActualizar = usuario;
             usuarioRepository.save(usuarioAActualizar);
-            DomicilioDto domicilioDto = objectMapper.convertValue(usuarioAActualizar.getDomicilio(), DomicilioDto.class);
             usuarioActualizadoDto = objectMapper.convertValue(usuarioAActualizar, UsuarioDto.class);
-            usuarioActualizadoDto.setDomicilioDto(domicilioDto);
             LOGGER.info("Usuario actualizado con exito: {}", JsonPrinter.toString(usuarioActualizadoDto));
            // }else{
              //   LOGGER.error("No fue posible actualizar los datos ya que el id de la direccion del usuario usuario no se encuentra registrado");
@@ -101,9 +94,7 @@ public class UsuarioService implements IUsuarioService {
 
         if (usuarioEncontrado.isPresent()) {
             Usuario usuario = usuarioEncontrado.get();
-            DomicilioDto domicilioDto = objectMapper.convertValue(usuario.getDomicilio(), DomicilioDto.class);
             UsuarioDto usuarioDto = objectMapper.convertValue(usuario, UsuarioDto.class);
-            usuarioDto.setDomicilioDto(domicilioDto);
             LOGGER.info("Usuario encontrado: {}", JsonPrinter.toString(usuarioDto));
             return usuarioDto;
         } else {
@@ -135,9 +126,7 @@ public class UsuarioService implements IUsuarioService {
         List<Usuario> usuarios = usuarioRepository.findAll();
         List<UsuarioDto> usuarioDtos = usuarios.stream()
                 .map(usuario -> {
-                    Domicilio dom = usuario.getDomicilio();
-                    DomicilioDto domicilioDto = objectMapper.convertValue(dom, DomicilioDto.class);
-                    return new UsuarioDto(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getPassword(), usuario.getPhone(), usuario.getDni(), usuario.isAdmin(), usuario.getFechaIngreso(), domicilioDto);
+                    return new UsuarioDto(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getPassword(), usuario.getTelefono(), usuario.getDni(), usuario.isAdmin(), usuario.getFechaIngreso(), usuario.getCalle(), usuario.getNumero(), usuario.getLocalidad());
                 })
                 .toList();
 

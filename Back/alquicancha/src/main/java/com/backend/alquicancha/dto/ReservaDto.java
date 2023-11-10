@@ -1,13 +1,13 @@
 package com.backend.alquicancha.dto;
 
-import com.backend.alquicancha.entity.Turno;
+import com.backend.alquicancha.entity.Reserva;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TurnoDto {
+public class ReservaDto {
 
     private Long id;
     private Long idPaciente;
@@ -15,10 +15,10 @@ public class TurnoDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime fecha;
 
-    public TurnoDto() {
+    public ReservaDto() {
     }
 
-    public TurnoDto(Long id, Long idPaciente, Long idOdontologo, LocalDateTime fecha) {
+    public ReservaDto(Long id, Long idPaciente, Long idOdontologo, LocalDateTime fecha) {
 
         this.id = id;
         this.idPaciente = idPaciente;
@@ -27,7 +27,7 @@ public class TurnoDto {
         this.fecha = fecha;
     }
 
-    public TurnoDto(UsuarioDto pacienteTurno, ProductDto odontologoTurno, LocalDateTime fecha) {
+    public ReservaDto(UsuarioDto pacienteTurno, ProductDto odontologoTurno, LocalDateTime fecha) {
     }
 
     public Long getId() {
@@ -62,9 +62,9 @@ public class TurnoDto {
         this.fecha = fecha;
     }
 
-    public static TurnoDto fromTurno(Turno turno) {
-        Long paciente = turno.getPaciente().getId();
-        Long odontologo = turno.getOdontologo().getId();
-        return new TurnoDto(turno.getId(), paciente, odontologo, turno.getFecha());
+    public static ReservaDto fromTurno(Reserva reserva) {
+        Long paciente = reserva.getUsuario().getId();
+        Long odontologo = reserva.getProducto().getId();
+        return new ReservaDto(reserva.getId(), paciente, odontologo, reserva.getFecha());
     }
 }

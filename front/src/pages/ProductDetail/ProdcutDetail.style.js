@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Detail = styled.div`
   width: 100%;
-  min-height: 130vh;
+  min-height: 100vh;
   margin-top: 132px;
 
   @media (max-width: 1024px) {
