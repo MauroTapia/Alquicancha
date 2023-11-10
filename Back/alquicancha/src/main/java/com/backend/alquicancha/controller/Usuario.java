@@ -65,6 +65,40 @@ public class Usuario {
         return new ResponseEntity<>(usuarioService.buscarUsuarioPorId(id), null, HttpStatus.OK);
     }
 
+    @Operation(summary = "Login de usuario")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario logueado correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProductDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Datos invalidos",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Loggin no correcto",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Unexpected server error",
+                    content = @Content)
+    })
+    @GetMapping("/login/{mail}:{pass}")
+    public ResponseEntity<UsuarioDto> loginUsuario(@PathVariable String mail, @PathVariable String pass) {
+        return new ResponseEntity<>(usuarioService.loginUsuario(mail, pass), null, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Busqueda de un mail si es existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "mail encontrado correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))}),
+            @ApiResponse(responseCode = "400", description = "Mail invalido",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Mail no encontrado",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Unexpected server error",
+                    content = @Content)
+    })
+    @GetMapping("/email/{mail}")
+    public ResponseEntity<Boolean> buscarUsuarioPorMail(@PathVariable String mail) {
+        return new ResponseEntity<>(usuarioService.buscarUsuarioPorMail(mail), null, HttpStatus.OK);
+    }
+
     // CREATE
     @Operation(summary = "Creación de un usuario")
     @ApiResponses(value = {

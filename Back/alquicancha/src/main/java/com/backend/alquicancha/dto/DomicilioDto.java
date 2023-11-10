@@ -9,14 +9,13 @@ public class DomicilioDto {
     private String calle;
     private int numero;
     private String localidad;
-    private String provincia;
 
-    public DomicilioDto(Long id, String calle, int numero, String localidad, String provincia) {
+
+    public DomicilioDto(Long id, String calle, int numero, String localidad) {
         this.id = id;
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
-        this.provincia = provincia;
     }
 
     public DomicilioDto() {
@@ -54,11 +53,4 @@ public class DomicilioDto {
         this.localidad = localidad;
     }
 
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
 }

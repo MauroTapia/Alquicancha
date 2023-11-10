@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService implements IUsuarioService {
@@ -35,6 +36,7 @@ public class UsuarioService implements IUsuarioService {
         DomicilioDto domicilioDto = objectMapper.convertValue(usuarioNuevo.getDomicilio(), DomicilioDto.class);
         UsuarioDto usuarioDtoNuevo = objectMapper.convertValue(usuarioNuevo, UsuarioDto.class);
         usuarioDtoNuevo.setDomicilioDto(domicilioDto);
+        usuarioDtoNuevo.setAdmin(false);
 
         if (usuarioNuevo == null) {
             LOGGER.error("Error al registrar el usuario");
@@ -61,6 +63,7 @@ public class UsuarioService implements IUsuarioService {
 
         return usuarioDto;
     }
+
 
     @Override
     public UsuarioDto actualizarUsuario(Usuario usuario) throws ResourceNotFoundException {
@@ -89,6 +92,44 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
+    public UsuarioDto loginUsuario(String mail, String pass) {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+        Optional<Usuario> usuarioEncontrado = usuarios.stream()
+                .filter(usuario -> usuario.getEmail().equalsIgnoreCase(mail) && usuario.getPassword().equals(pass))
+                .findFirst();
+
+        if (usuarioEncontrado.isPresent()) {
+            Usuario usuario = usuarioEncontrado.get();
+            DomicilioDto domicilioDto = objectMapper.convertValue(usuario.getDomicilio(), DomicilioDto.class);
+            UsuarioDto usuarioDto = objectMapper.convertValue(usuario, UsuarioDto.class);
+            usuarioDto.setDomicilioDto(domicilioDto);
+            LOGGER.info("Usuario encontrado: {}", JsonPrinter.toString(usuarioDto));
+            return usuarioDto;
+        } else {
+            LOGGER.info("Login erroneo, no coinciden los datos");
+            return null;
+        }
+    }
+
+    @Override
+    public boolean buscarUsuarioPorMail(String email) {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+        // Utilizando el método equalsIgnoreCase para comparar correos electrónicos sin importar mayúsculas o minúsculas
+        boolean existe = usuarios.stream().anyMatch(usuario -> usuario.getEmail().equalsIgnoreCase(email));
+
+        if (existe) {
+            System.out.println("Existe");
+        } else {
+            System.out.println("No existe");
+        }
+
+        return existe;
+    }
+
+
+    @Override
     public List<UsuarioDto> listarUsuarios() {
 
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -96,11 +137,9 @@ public class UsuarioService implements IUsuarioService {
                 .map(usuario -> {
                     Domicilio dom = usuario.getDomicilio();
                     DomicilioDto domicilioDto = objectMapper.convertValue(dom, DomicilioDto.class);
-                    return new UsuarioDto(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getPhone(), usuario.getDni(), usuario.isAdmin(), usuario.getFechaIngreso(), domicilioDto);
+                    return new UsuarioDto(usuario.getId(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getPassword(), usuario.getPhone(), usuario.getDni(), usuario.isAdmin(), usuario.getFechaIngreso(), domicilioDto);
                 })
                 .toList();
-
-        LOGGER.info("Lista de todos los usuarios: {}", JsonPrinter.toString(usuarioDtos));
 
         return usuarioDtos;
     }
