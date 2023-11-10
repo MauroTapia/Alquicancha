@@ -16,12 +16,14 @@ import {
 
 import logo from "../../assets/alquicancha.png";
 import burguerLogo from "../../assets/logoBurguer.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
   const { isAdmin, logged, user, logout } = useContext(ContextGlobal).contextValue;
+  
+  const navigate = useNavigate();
 
   const scrolledDown = useScrollDetector();
   const [initials, setInitials] = useState("");
@@ -40,6 +42,7 @@ const Header = () => {
 
   const handleExit = ()=>{
     logout();
+    navigate("/");
   }
 
   return (

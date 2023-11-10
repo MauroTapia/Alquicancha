@@ -23,27 +23,21 @@ public class Domicilio {
     @NotBlank(message = "Debe especificarse el nombre de la localidad")
     private String localidad;
 
-    @Size(max = 50, message = "El nombre de la provincia debe tener hasta 50 caracteres")
-    @NotNull(message = "El nombre de la provincia no puede ser nula")
-    @NotBlank(message = "Debe especificarse el nombre de la provincia")
-    private String provincia;
 
     public Domicilio() {
     }
 
-    public Domicilio(Long id, String calle, int numero, String localidad, String provincia) {
+    public Domicilio(Long id, String calle, int numero, String localidad) {
         this.id = id;
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
-        this.provincia = provincia;
     }
 
-    public Domicilio(String calle, int numero, String localidad, String provincia) {
+    public Domicilio(String calle, int numero, String localidad) {
         this.calle = calle;
         this.numero = numero;
         this.localidad = localidad;
-        this.provincia = provincia;
     }
 
     public Long getId() {
@@ -75,16 +69,9 @@ public class Domicilio {
         this.localidad = localidad;
     }
 
-    public String getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(String provincia) {
-        this.provincia = provincia;
-    }
 
     @Override
     public String toString() {
-        return "Id: " + id + " - Calle: " + calle + " - Numero: " + numero + " - Localidad: " + localidad + " - Provincia: " + provincia;
+        return "Id: " + id + " - Calle: " + calle + " - Numero: " + numero + " - Localidad: " + localidad ;
     }
 }

@@ -12,6 +12,7 @@ public class UsuarioDto {
     private String nombre;
     private String apellido;
     private String email;
+    private String password;
     private String phone;
     private int dni;
 
@@ -23,10 +24,11 @@ public class UsuarioDto {
     public UsuarioDto() {
     }
 
-    public UsuarioDto(Long id, String nombre, String apellido, String email, String phone, int dni, boolean isAdmin, LocalDate fechaIngreso, DomicilioDto domicilio) {
+    public UsuarioDto(Long id, String nombre, String apellido, String email, String password, String phone, int dni, boolean isAdmin, LocalDate fechaIngreso, DomicilioDto domicilio) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
+        this.password = password;
         this.phone = phone;
         this.apellido = apellido;
         this.dni = dni;
@@ -70,12 +72,21 @@ public class UsuarioDto {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {

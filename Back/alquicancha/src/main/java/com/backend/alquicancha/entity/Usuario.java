@@ -33,7 +33,11 @@ public class Usuario {
     @NotBlank(message = "Debe especificarse el email del usuario")
     private String email;
 
-    @Pattern(regexp = "^\\d{14}$", message = "El campo solo debe contener números")
+    @Size(max = 16, message = "El password debe tener hasta 16 caracteres")
+    @NotNull(message = "El password del usuario no puede ser nulo")
+    @NotBlank(message = "Debe especificarse el password del usuario")
+    private String password;
+
     @Size(max = 14, message = "El numero debe tener hasta 14 caracteres")
     @NotNull(message = "El telefono del usuario no puede ser nulo")
     @NotBlank(message = "Debe especificarse el telefono del usuario")
@@ -58,22 +62,6 @@ public class Usuario {
 
 
     public Usuario() {
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public Usuario(String nombre, String apellido, String email, String phone, int dni, LocalDate fechaIngreso, boolean isAdmin, Domicilio domicilio) {
@@ -105,6 +93,26 @@ public class Usuario {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {this.password = password ;}
+
+    public String getPassword() { return password; }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getDni() {

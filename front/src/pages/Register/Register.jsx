@@ -17,11 +17,19 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
-    name: null,
-    surname: null,
+    nombre: null,
+    apellido: null,
     email: null,
     password: null,
-    confirmPassword: null,
+    phone: 12345566,
+    dni: 1,
+    fechaIngreso: "2023-11-10",
+    domicilio: {
+      calle: "Calle",
+      numero: 10,
+      localidad: "Localidad"
+    },
+    admin: false
   });
 
   const [errors, setErrors] = useState([]);
@@ -37,21 +45,20 @@ const Register = () => {
   const existConfirm = errors.some(([campo]) => campo === "confirm");
 
   const CheckUserExist = async (email) => {
-    const userData = await getUserByEmail(email);
-    if (userData) {
-      console.log("entre al malnacido error");
+    const user = await getUserByEmail(email);
+    if (user) {
       setErrors((prevErrors) => [...prevErrors, ["exist"]]);
     }
   };
 
   const checkName = () => {
-    if (userData.name.length < 4) {
+    if (userData.nombre.length < 4) {
       setErrors((prevErrors) => [...prevErrors, ["name"]]);
     }
   };
 
   const checkSurname = () => {
-    if (userData.surname.length < 4) {
+    if (userData.apellido.length < 4) {
       setErrors((prevErrors) => [...prevErrors, ["surname"]]);
     }
   };
@@ -90,7 +97,10 @@ const Register = () => {
     setErrors((prevErrors) => {
       if (prevErrors.length === 0) {
         const user = { ...userData}
+        console.log(user);
         newUser(user);
+
+
         Swal.fire({
           title: "Usuario creado!",
           text: `El usuario a sido creado correctamente!`,
@@ -126,7 +136,7 @@ const Register = () => {
             type="text"
             required
             placeholder="Ingresa tú nombre"
-            onChange={(e) => handleChange(e, "name")}
+            onChange={(e) => handleChange(e, "nombre")}
           />
           {existName === true ? (
             <ErrorMsg>El nombre debe tener minimo 4 letras</ErrorMsg>
@@ -137,7 +147,7 @@ const Register = () => {
             type="text"
             required
             placeholder="Ingresa tú apellido"
-            onChange={(e) => handleChange(e, "surname")}
+            onChange={(e) => handleChange(e, "apellido")}
           />
           {existSurname === true ? (
             <ErrorMsg>El apellido debe tener minimo 4 letras</ErrorMsg>
