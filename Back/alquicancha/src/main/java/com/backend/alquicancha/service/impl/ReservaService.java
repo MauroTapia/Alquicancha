@@ -2,12 +2,12 @@ package com.backend.alquicancha.service.impl;
 
 import com.backend.alquicancha.dto.ProductDto;
 import com.backend.alquicancha.dto.UsuarioDto;
-import com.backend.alquicancha.dto.TurnoDto;
-import com.backend.alquicancha.entity.Turno;
+import com.backend.alquicancha.dto.ReservaDto;
+import com.backend.alquicancha.entity.Reserva;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
-import com.backend.alquicancha.repository.ITurnoRepository;
-import com.backend.alquicancha.service.ITurnoService;
+import com.backend.alquicancha.repository.IReservaRepository;
+import com.backend.alquicancha.service.IReservaService;
 import com.backend.alquicancha.utils.JsonPrinter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,15 +17,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TurnoService implements ITurnoService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TurnoService.class);
-    private final ITurnoRepository turnoRepository;
+public class ReservaService implements IReservaService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReservaService.class);
+    private final IReservaRepository turnoRepository;
     private final UsuarioService pacienteService;
     private final ProductService odontologoService;
 
 
     @Autowired
-    public TurnoService(ITurnoRepository turnoRepository, UsuarioService pacienteService, ProductService odontologoService) {
+    public ReservaService(IReservaRepository turnoRepository, UsuarioService pacienteService, ProductService odontologoService) {
         this.turnoRepository = turnoRepository;
         this.pacienteService = pacienteService;
         this.odontologoService = odontologoService;
@@ -33,11 +33,11 @@ public class TurnoService implements ITurnoService {
     }
 
     @Override
-    public TurnoDto guardarTurno(Turno turno) throws BadRequestException {//para que funcione el BadRequest use los repository y no los service funciona pero es una mala practia me parece
-        TurnoDto turnoDto = null;
+    public ReservaDto guardarTurno(Reserva reserva) throws BadRequestException {//para que funcione el BadRequest use los repository y no los service funciona pero es una mala practia me parece
+        ReservaDto reservaDto = null;
 
-        UsuarioDto paciente = pacienteService.buscarUsuarioPorId(turno.getPaciente().getId());
-        ProductDto odontologo = odontologoService.buscarProducto(turno.getOdontologo().getId());
+        UsuarioDto paciente = pacienteService.buscarUsuarioPorId(reserva.getUsuario().getId());
+        ProductDto odontologo = odontologoService.buscarProducto(reserva.getProducto().getId());
 
         if (paciente == null || odontologo == null) {
             if (paciente == null && odontologo == null) {
@@ -51,50 +51,50 @@ public class TurnoService implements ITurnoService {
                 throw new BadRequestException("El odontologo no se encuentra en nuestra base de datos");
             }
         } else {
-            turnoDto = TurnoDto.fromTurno(turnoRepository.save(turno));
-            LOGGER.info("Nuevo turno registrado con exito: {}", JsonPrinter.toString(turnoDto));
+            reservaDto = ReservaDto.fromTurno(turnoRepository.save(reserva));
+            LOGGER.info("Nuevo turno registrado con exito: {}", JsonPrinter.toString(reservaDto));
         }
-        return turnoDto;
+        return reservaDto;
     }
 
     @Override
-    public List<TurnoDto> listarTodos() {
-        List<Turno> turnoList = turnoRepository.findAll();
-        List<TurnoDto> turnoDtoList = turnoList.stream().map(TurnoDto::fromTurno).toList();
-        if (turnoList != null) {
-            LOGGER.info("Listado de turnos: {}", JsonPrinter.toString(turnoDtoList));
+    public List<ReservaDto> listarTodos() {
+        List<Reserva> reservaList = turnoRepository.findAll();
+        List<ReservaDto> reservaDtoList = reservaList.stream().map(ReservaDto::fromTurno).toList();
+        if (reservaList != null) {
+            LOGGER.info("Listado de turnos: {}", JsonPrinter.toString(reservaDtoList));
         } else {
             LOGGER.warn("No hay turnos creados");
         }
-        return turnoDtoList;
+        return reservaDtoList;
     }
 
     @Override
-    public TurnoDto buscarTurnoPorId(Long id) throws ResourceNotFoundException {
+    public ReservaDto buscarTurnoPorId(Long id) throws ResourceNotFoundException {
 
-        Turno turnoBuscado = turnoRepository.findById(id).orElse(null);
-        TurnoDto turnoDto = null;
-        if (turnoBuscado != null) {
-            turnoDto = TurnoDto.fromTurno(turnoBuscado);
-            LOGGER.info("Turno encontrado: {}", JsonPrinter.toString(turnoDto));
+        Reserva reservaBuscado = turnoRepository.findById(id).orElse(null);
+        ReservaDto reservaDto = null;
+        if (reservaBuscado != null) {
+            reservaDto = ReservaDto.fromTurno(reservaBuscado);
+            LOGGER.info("Turno encontrado: {}", JsonPrinter.toString(reservaDto));
         } else {
             LOGGER.info("EL turno no se encuentra registado en la base de datos.");
             throw new ResourceNotFoundException("EL turno no se encuentra registado en la base de datos.");
         }
 
-        return turnoDto;
+        return reservaDto;
     }
 
     @Override
-    public TurnoDto actualizarTurno(Turno turno) throws ResourceNotFoundException, BadRequestException {
+    public ReservaDto actualizarTurno(Reserva reserva) throws ResourceNotFoundException, BadRequestException {
 
-        Turno turnoActualizar = turnoRepository.findById(turno.getId()).orElse(null);
-        UsuarioDto paciente = pacienteService.buscarUsuarioPorId(turno.getPaciente().getId());
-        ProductDto odontologo = odontologoService.buscarProducto(turno.getOdontologo().getId());
+        Reserva reservaActualizar = turnoRepository.findById(reserva.getId()).orElse(null);
+        UsuarioDto paciente = pacienteService.buscarUsuarioPorId(reserva.getUsuario().getId());
+        ProductDto odontologo = odontologoService.buscarProducto(reserva.getProducto().getId());
 
-        TurnoDto turnoDtoActualiazado = null;
+        ReservaDto reservaDtoActualiazado = null;
 
-        if (turnoActualizar != null) {
+        if (reservaActualizar != null) {
             if (paciente == null || odontologo == null) {
                 if (paciente == null && odontologo == null) {
                     LOGGER.error("El paciente y el odontologo no se encuentran en nuestra base de datos");
@@ -107,16 +107,16 @@ public class TurnoService implements ITurnoService {
                     throw new BadRequestException("El odontologo no se encuentra en nuestra base de datos");
                 }
             } else {
-            turnoActualizar = turno;
-            turnoRepository.save(turnoActualizar);
-            turnoDtoActualiazado = TurnoDto.fromTurno(turno);
-            LOGGER.info("Turno actualizado con exito: {}", JsonPrinter.toString(turnoDtoActualiazado));}
+            reservaActualizar = reserva;
+            turnoRepository.save(reservaActualizar);
+            reservaDtoActualiazado = ReservaDto.fromTurno(reserva);
+            LOGGER.info("Turno actualizado con exito: {}", JsonPrinter.toString(reservaDtoActualiazado));}
         } else {
             LOGGER.info("No se pudo actualizar, el turno no se encuentra registrado.");
             throw new ResourceNotFoundException("No se pudo actualizar, el turno no se encuentra registrado.");
         }
 
-        return turnoDtoActualiazado;
+        return reservaDtoActualiazado;
     }
 
     @Override

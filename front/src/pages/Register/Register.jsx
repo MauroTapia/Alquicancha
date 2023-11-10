@@ -12,24 +12,37 @@ import {
 import { newUser, getUserByEmail } from "../../services/users";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../modules/Footer/index";
 
 const Register = () => {
   const navigate = useNavigate();
+
+  const fechaActual = () => {
+    // Obtener la fecha de hoy
+    let fechaActual = new Date();
+
+    // Obtener el año, mes y día
+    let año = fechaActual.getFullYear();
+    let mes = (fechaActual.getMonth() + 1).toString().padStart(2, "0"); // Se suma 1 al mes ya que los meses van de 0 a 11
+    let dia = fechaActual.getDate().toString().padStart(2, "0");
+
+    // Formatear la fecha en el formato deseado
+    let fechaFormateada = `${año}-${mes}-${dia}`;
+    return fechaFormateada;
+  };
 
   const [userData, setUserData] = useState({
     nombre: null,
     apellido: null,
     email: null,
     password: null,
-    phone: 12345566,
+    telefono: null,
     dni: 1,
-    fechaIngreso: "2023-11-10",
-    domicilio: {
-      calle: "Calle",
-      numero: 10,
-      localidad: "Localidad"
-    },
-    admin: false
+    fechaIngreso: fechaActual(),
+    calle: null,
+    numero: null,
+    localidad: null,
+    admin: false,
   });
 
   const [errors, setErrors] = useState([]);
@@ -43,6 +56,11 @@ const Register = () => {
   const existEmail = errors.some(([campo]) => campo === "email");
   const existPassword = errors.some(([campo]) => campo === "password");
   const existConfirm = errors.some(([campo]) => campo === "confirm");
+  const existUser = errors.some(([campo]) => campo === "exist");
+  const existTelefono = errors.some(([campo]) => campo === "telefono");
+  const existCalle = errors.some(([campo]) => campo === "calle");
+  const existNumero = errors.some(([campo]) => campo === "numero");
+  const existLocalidad = errors.some(([campo]) => campo === "localidad");
 
   const CheckUserExist = async (email) => {
     const user = await getUserByEmail(email);
@@ -79,10 +97,13 @@ const Register = () => {
     }
   };
 
-  const handleChange = (e, field) =>{
-    setUserData((prevUserData) => ({ ...prevUserData, [field]: e.target.value }));
+  const handleChange = (e, field) => {
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      [field]: e.target.value,
+    }));
     setErrors([]);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,10 +117,9 @@ const Register = () => {
 
     setErrors((prevErrors) => {
       if (prevErrors.length === 0) {
-        const user = { ...userData}
+        const user = { ...userData };
         console.log(user);
         newUser(user);
-
 
         Swal.fire({
           title: "Usuario creado!",
@@ -160,7 +180,9 @@ const Register = () => {
             placeholder="Ingresa tú e-mail"
             onChange={(e) => handleChange(e, "email")}
           />
-          {existEmail === true ? (
+          {existUser === true ? (
+            <ErrorMsg>El correo ya esta registrado a una cuenta</ErrorMsg>
+          ) : existEmail === true ? (
             <ErrorMsg>Debes ingresar un correo valido</ErrorMsg>
           ) : null}
 
@@ -188,6 +210,50 @@ const Register = () => {
             <ErrorMsg>Las contraseñas no coinciden</ErrorMsg>
           ) : null}
 
+          <Label>Teléfono</Label>
+          <Inputs
+            type="number"
+            required
+            placeholder="Ingresa tú telefono"
+            onChange={(e) => handleChange(e, "telefono")}
+          />
+          {existTelefono === true ? (
+            <ErrorMsg>El telefono debe tener minimo 4 letras</ErrorMsg>
+          ) : null}
+
+          <Label>Dirección</Label>
+          <Inputs
+            type="text"
+            required
+            placeholder="Ingresa tú dirección"
+            onChange={(e) => handleChange(e, "calle")}
+          />
+          {existCalle === true ? (
+            <ErrorMsg>La dirección debe tener minimo 4 letras</ErrorMsg>
+          ) : null}
+
+          <Label>Número de Puerta</Label>
+          <Inputs
+            type="number"
+            required
+            placeholder="Ingresa tú número de puerta"
+            onChange={(e) => handleChange(e, "numero")}
+          />
+          {existNumero === true ? (
+            <ErrorMsg>El número debe tener minimo 4</ErrorMsg>
+          ) : null}
+
+          <Label>Localidad</Label>
+          <Inputs
+            type="text"
+            required
+            placeholder="Ingresa tú Localidad"
+            onChange={(e) => handleChange(e, "localidad")}
+          />
+          {existLocalidad === true ? (
+            <ErrorMsg>La localidad debe tener minimo 4 letras</ErrorMsg>
+          ) : null}
+
           <Remember>
             <div>
               <InputCheckBox type="checkbox" />
@@ -198,6 +264,7 @@ const Register = () => {
           <Button>Registrarme</Button>
         </LoginWrapper>
       </form>
+      <Footer />
     </>
   );
 };

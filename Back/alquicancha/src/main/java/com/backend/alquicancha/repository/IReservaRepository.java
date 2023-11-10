@@ -1,9 +1,9 @@
 package com.backend.alquicancha.repository;
 
-import com.backend.alquicancha.entity.Turno;
+import com.backend.alquicancha.entity.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ITurnoRepository extends JpaRepository<Turno, Long> {
+public interface IReservaRepository extends JpaRepository<Reserva, Long> {
 }

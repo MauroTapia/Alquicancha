@@ -5,9 +5,9 @@ import AppRoutes from "./routes/AppRoutes.jsx";
 import { ContextProvider } from "./context/context";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+
     <ContextProvider>
       <AppRoutes />
     </ContextProvider>
-  </React.StrictMode>
+
 );

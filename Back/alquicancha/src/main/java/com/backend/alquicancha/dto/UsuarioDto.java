@@ -13,28 +13,32 @@ public class UsuarioDto {
     private String apellido;
     private String email;
     private String password;
-    private String phone;
+    private String telefono;
     private int dni;
 
     private boolean isAdmin;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaIngreso;
-    private DomicilioDto domicilio;
+    private String calle;
+    private int numero;
+    private String localidad;
 
     public UsuarioDto() {
     }
 
-    public UsuarioDto(Long id, String nombre, String apellido, String email, String password, String phone, int dni, boolean isAdmin, LocalDate fechaIngreso, DomicilioDto domicilio) {
+    public UsuarioDto(Long id, String nombre, String apellido, String email, String password, String telefono, int dni, boolean isAdmin, LocalDate fechaIngreso, String calle, int numero, String localidad) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.telefono = telefono;
         this.apellido = apellido;
         this.dni = dni;
         this.isAdmin = isAdmin;
         this.fechaIngreso = fechaIngreso;
-        this.domicilio = domicilio;
+        this.calle = calle;
+        this.numero = numero;
+        this.localidad = localidad;
     }
 
     public Long getId() {
@@ -89,12 +93,12 @@ public class UsuarioDto {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public LocalDate getFechaIngreso() {
@@ -105,11 +109,28 @@ public class UsuarioDto {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public DomicilioDto getDomicilioDto() {
-        return domicilio;
+    public String getCalle() {
+        return calle;
     }
 
-    public void setDomicilioDto(DomicilioDto domicilioDto) {
-        this.domicilio = domicilioDto;
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
 }

@@ -104,7 +104,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Usuario creado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = UsuarioDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",

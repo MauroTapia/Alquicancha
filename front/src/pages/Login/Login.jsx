@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { loginUser } from "../../services/users";
 import { ContextGlobal } from "../../context/context";
+import Footer from "../../modules/Footer/index";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -167,6 +168,7 @@ const Login = () => {
           </ButtonsContainer>
         </LoginWrapper>
       </form>
+      <Footer />
     </>
   );
 };

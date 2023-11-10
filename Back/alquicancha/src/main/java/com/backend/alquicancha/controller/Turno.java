@@ -1,10 +1,11 @@
 package com.backend.alquicancha.controller;
 
 import com.backend.alquicancha.dto.ProductDto;
-import com.backend.alquicancha.dto.TurnoDto;
+import com.backend.alquicancha.dto.ReservaDto;
+import com.backend.alquicancha.entity.Reserva;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
-import com.backend.alquicancha.service.ITurnoService;
+import com.backend.alquicancha.service.IReservaService;
 import com.backend.alquicancha.service.impl.ProductService;
 import com.backend.alquicancha.service.impl.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,12 +26,12 @@ import java.util.List;
 @RequestMapping("/turnos")
 @CrossOrigin
 public class Turno {
-    private ITurnoService turnoService;
+    private IReservaService turnoService;
     private UsuarioService pacienteService;
     private ProductService odontologoService;
 
     @Autowired
-    public Turno(ITurnoService turnoService) {
+    public Turno(IReservaService turnoService) {
         this.turnoService = turnoService;
     }
 
@@ -45,7 +46,7 @@ public class Turno {
                     content = @Content)
     })
     @GetMapping()
-    public List<TurnoDto> listarTurnos() {
+    public List<ReservaDto> listarTurnos() {
         return turnoService.listarTodos();
     }
 
@@ -61,9 +62,9 @@ public class Turno {
                     content = @Content)
     })
     @PostMapping("/registrar")
-    public ResponseEntity<TurnoDto> guardarTurno(@Valid @RequestBody com.backend.alquicancha.entity.Turno turno) throws BadRequestException {
+    public ResponseEntity<ReservaDto> guardarTurno(@Valid @RequestBody Reserva reserva) throws BadRequestException {
 
-        return new ResponseEntity<>(turnoService.guardarTurno(turno), null, HttpStatus.CREATED);
+        return new ResponseEntity<>(turnoService.guardarTurno(reserva), null, HttpStatus.CREATED);
     }
 
     // READ
@@ -80,7 +81,7 @@ public class Turno {
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<TurnoDto> buscarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<ReservaDto> buscarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
         return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), null, HttpStatus.OK);
     }
 
@@ -113,7 +114,7 @@ public class Turno {
                     content = @Content)
     })
     @PutMapping("/actualizar")
-    public ResponseEntity<TurnoDto> actualizarTurno(@Valid @RequestBody com.backend.alquicancha.entity.Turno turno) throws ResourceNotFoundException, BadRequestException {
-        return new ResponseEntity<>(turnoService.actualizarTurno(turno), null, HttpStatus.OK);
+    public ResponseEntity<ReservaDto> actualizarTurno(@Valid @RequestBody Reserva reserva) throws ResourceNotFoundException, BadRequestException {
+        return new ResponseEntity<>(turnoService.actualizarTurno(reserva), null, HttpStatus.OK);
     }
 }

@@ -41,7 +41,7 @@ export const getUserByName = async (name) => {
 
 export const getUserByEmail = async (email) => {
   try {
-    const response = await fetch(`${url}/usuarios/${email}`);
+    const response = await fetch(`${url}/usuarios/email/${email}`);
     if(!response.ok){
       throw new Error('Error response was no ok');
     }
