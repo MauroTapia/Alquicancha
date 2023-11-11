@@ -61,21 +61,26 @@ public class UsuarioService implements IUsuarioService {
 
 
     @Override
-    public UsuarioDto actualizarUsuario(Usuario usuario) throws ResourceNotFoundException {
-        Usuario usuarioAActualizar = usuarioRepository.findById(usuario.getId()).orElse(null);
+    public UsuarioDto actualizarUsuario(Usuario usuario, long id) throws ResourceNotFoundException {
+        Usuario usuarioAActualizar = usuarioRepository.findById(id).orElse(null);
         UsuarioDto usuarioActualizadoDto = null;
 
         if (usuarioAActualizar != null) {
-            //if(usuarioAActualizar.getDomicilio().getId() == usuario.getDomicilio().getId()){
-            usuarioAActualizar = usuario;
+            usuarioAActualizar.setNombre(usuario.getNombre());
+            usuarioAActualizar.setApellido(usuario.getApellido());
+            usuarioAActualizar.setEmail(usuario.getEmail());
+            usuarioAActualizar.setPassword(usuario.getPassword());
+            usuarioAActualizar.setTelefono(usuario.getTelefono());
+            usuarioAActualizar.setDni(usuario.getDni());
+            usuarioAActualizar.setAdmin(usuario.isAdmin());
+            usuarioAActualizar.setFechaIngreso(usuario.getFechaIngreso());
+            usuarioAActualizar.setCalle(usuario.getCalle());
+            usuarioAActualizar.setNumero(usuario.getNumero());
+            usuarioAActualizar.setLocalidad(usuario.getLocalidad());
+
             usuarioRepository.save(usuarioAActualizar);
             usuarioActualizadoDto = objectMapper.convertValue(usuarioAActualizar, UsuarioDto.class);
             LOGGER.info("Usuario actualizado con exito: {}", JsonPrinter.toString(usuarioActualizadoDto));
-           // }else{
-             //   LOGGER.error("No fue posible actualizar los datos ya que el id de la direccion del usuario usuario no se encuentra registrado");
-               // throw new ResourceNotFoundException("No fue posible actualizar los datos ya que el id de la direccion del usuario usuario no se encuentra registrado");
-            //}
-
         } else {
             LOGGER.error("No fue posible actualizar los datos ya que el usuario no se encuentra registrado");
             throw new ResourceNotFoundException("No fue posible actualizar los datos ya que el usuario no se encuentra registrado");
@@ -119,6 +124,10 @@ public class UsuarioService implements IUsuarioService {
         return existe;
     }
 
+    @Override
+    public UsuarioDto actualizarUsuario(Usuario usuario) throws ResourceNotFoundException {
+        return null;
+    }
 
     @Override
     public List<UsuarioDto> listarUsuarios() {

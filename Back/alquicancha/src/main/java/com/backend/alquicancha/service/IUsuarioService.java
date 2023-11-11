@@ -17,6 +17,8 @@ public interface IUsuarioService {
 
     UsuarioDto buscarUsuarioPorId(Long id);
 
+    UsuarioDto actualizarUsuario(Usuario usuario, long id) throws ResourceNotFoundException;
+
     UsuarioDto loginUsuario(String mail, String pass);
 
     boolean buscarUsuarioPorMail(String email);
