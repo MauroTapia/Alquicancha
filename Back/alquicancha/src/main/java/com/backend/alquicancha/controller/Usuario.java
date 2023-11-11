@@ -120,15 +120,16 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuario modificado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = UsuarioDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
                     content = @Content)
     })
-    @PutMapping("/actualizar")
-    public ResponseEntity<UsuarioDto> actualizarUsuario(@Valid @RequestBody com.backend.alquicancha.entity.Usuario usuario) throws ResourceNotFoundException {
-        return new ResponseEntity<>(usuarioService.actualizarUsuario(usuario), null, HttpStatus.OK);
+    @CrossOrigin
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<UsuarioDto> actualizarUsuario(@Valid @RequestBody com.backend.alquicancha.entity.Usuario usuario, @PathVariable long id) throws ResourceNotFoundException {
+        return new ResponseEntity<>(usuarioService.actualizarUsuario(usuario, id), null, HttpStatus.OK);
     }
 
     // DELETE

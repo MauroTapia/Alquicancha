@@ -11,9 +11,14 @@ export const Wrapper = styled.div`
 `;
 
 export const MenuButton = styled.button`
-  width: 100px;
-  height: 34px;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 150px;
+  height: 80px;
+  font-size: 24px;
   align-self: center;
   border-radius: 12px;
   border: none;
@@ -23,6 +28,7 @@ export const MenuButton = styled.button`
     rgba(0, 254, 41, 0.4) 113.51%
   );
   cursor: pointer;
+  box-shadow: -2px 6px 4px 1px rgba(100, 100, 100, 0.62);
 
   &:hover {
     background: rgba(0, 0, 0, 0.7);
