@@ -15,7 +15,6 @@ public class UsuarioDto {
     private String password;
     private String telefono;
     private int dni;
-
     private boolean isAdmin;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaIngreso;

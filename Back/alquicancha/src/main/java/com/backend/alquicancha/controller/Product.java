@@ -1,6 +1,7 @@
 package com.backend.alquicancha.controller;
 
 import com.backend.alquicancha.dto.ProductDto;
+import com.backend.alquicancha.dto.UsuarioDto;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
 import com.backend.alquicancha.service.IProductService;
@@ -93,9 +94,10 @@ public class Product {
                     content = @Content)
     })
     @PostMapping("/registrar")
-    public ResponseEntity<ProductDto> registrarProducto(@Valid @RequestBody com.backend.alquicancha.entity.Product product) throws BadRequestException {
-        return new ResponseEntity<>(productService.guardarProducto(product), null, HttpStatus.CREATED);
+    public ResponseEntity<ProductDto> registrarProducto(@Valid @RequestBody ProductDto productDto) throws BadRequestException {
+        return new ResponseEntity<>(productService.guardarProducto(productDto), null, HttpStatus.CREATED);
     }
+
 
     // UPDATE
     @Operation(summary = "Modificación de un producto por ID")
@@ -108,9 +110,9 @@ public class Product {
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
                     content = @Content)
     })
-    @PutMapping("/actualizar")
-    public ResponseEntity<ProductDto> actualizarOdontologo(@Valid @RequestBody com.backend.alquicancha.entity.Product product) throws ResourceNotFoundException {
-        return new ResponseEntity<>(productService.actualizarProducto(product), null, HttpStatus.CREATED);
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<ProductDto> actualizarProducto(@Valid @RequestBody com.backend.alquicancha.entity.Product product, @PathVariable long id) throws ResourceNotFoundException {
+        return new ResponseEntity<>(productService.actualizarProducto(product, id), null, HttpStatus.OK);
     }
 
 }

@@ -2,7 +2,9 @@ package com.backend.alquicancha.service.impl;
 
 
 import com.backend.alquicancha.dto.ProductDto;
+import com.backend.alquicancha.dto.UsuarioDto;
 import com.backend.alquicancha.entity.Product;
+import com.backend.alquicancha.entity.Usuario;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
 import com.backend.alquicancha.repository.IProductRepository;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -30,16 +33,17 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ProductDto guardarProducto(Product product) throws BadRequestException {
-        ProductDto productDto = mapper.convertValue(productRepository.save(product), ProductDto.class);
+    public ProductDto guardarProducto(@Valid ProductDto productDto) throws BadRequestException {
+        Product product = mapper.convertValue(productDto, Product.class);
+        ProductDto savedProductDto = mapper.convertValue(productRepository.save(product), ProductDto.class);
 
-        if (productDto == null) {
+        if (savedProductDto == null) {
             LOGGER.error("Error al registrar el product");
             throw new BadRequestException("Error al registrar el product");
         }
 
-        LOGGER.info("Nuevo product registrado con exito: {}", JsonPrinter.toString(productDto));
-        return productDto;
+        LOGGER.info("Nuevo product registrado con exito: {}", JsonPrinter.toString(savedProductDto));
+        return savedProductDto;
     }
 
     @Override
@@ -76,14 +80,37 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ProductDto actualizarProducto(Product product) throws ResourceNotFoundException {
-        Product productoActualizar = productRepository.findById(product.getId()).orElse(null);
+    public ProductDto actualizarProducto(Product product, Long id) throws ResourceNotFoundException {
+        Product productAActualizar = productRepository.findById(id).orElse(null);
+        ProductDto productoActualizadoDto = null;
+
+        if(productAActualizar != null){
+            productAActualizar.setTitle(product.getTitle());
+            productAActualizar.setDescription(product.getDescription());
+            productAActualizar.setPrice(product.getPrice());
+            productAActualizar.setImagenes(product.getImagenes());
+
+            productRepository.save(productAActualizar);
+            productoActualizadoDto = mapper.convertValue(productAActualizar, ProductDto.class);
+            LOGGER.info("Producto actualizado con exito: {}", JsonPrinter.toString(productoActualizadoDto));
+
+        } else {
+            LOGGER.info("No se pudo actualizar, el producto no se encuentra registrado.");
+            throw new ResourceNotFoundException("No fue posible encontrar el producto");
+        }
+
+        return productoActualizadoDto;
+    }
+
+  /*  @Override
+    public ProductDto actualizarProducto(@Valid ProductDto product, long id) throws ResourceNotFoundException {
+        Product productoActualizar = productRepository.findById(id).orElse(null);
         ProductDto productoDtoActualizado = null;
 
         if (productoActualizar != null) {
-            productoActualizar = product;
-            productRepository.save(productoActualizar);
-            productoDtoActualizado = mapper.convertValue(productoActualizar, ProductDto.class);
+            //productoActualizar = product;
+            //productRepository.save(productoActualizar);
+            //productoDtoActualizado = mapper.convertValue(productoActualizar, ProductDto.class);
             LOGGER.info("Producto actualizado con exito: {}", JsonPrinter.toString(productoDtoActualizado));
         } else {
             LOGGER.info("No se pudo actualizar, el producto no se encuentra registrado.");
@@ -91,4 +118,6 @@ public class ProductService implements IProductService {
         }
         return productoDtoActualizado;
     }
+
+   */
 }

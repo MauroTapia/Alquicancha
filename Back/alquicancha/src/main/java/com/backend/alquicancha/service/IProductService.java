@@ -5,11 +5,12 @@ import com.backend.alquicancha.entity.Product;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface IProductService {
 
-    ProductDto guardarProducto(Product product) throws BadRequestException;
+    ProductDto guardarProducto(@Valid ProductDto productDto) throws BadRequestException;
 
     List<ProductDto> listarProductos();
 
@@ -17,5 +18,5 @@ public interface IProductService {
 
     ProductDto buscarProducto(Long id) ;
 
-    ProductDto actualizarProducto(Product product) throws ResourceNotFoundException;
+    ProductDto actualizarProducto(Product product, Long id) throws ResourceNotFoundException;
 }
