@@ -5,6 +5,7 @@ import {
   Register,
   LoginRegister,
   LoginRegisterMenu,
+  LoginRegisterMenuInit,
   Logo,
   LogoTitle,
   LogoWrapper,
@@ -75,9 +76,9 @@ const Header = () => {
             <LetterAvatar>{initials}</LetterAvatar>
             {isAdmin && <p>Administrador</p>}
             <ButtonLoggout onClick={handleExit}>Salir</ButtonLoggout>
-            <LoginRegisterMenu  >
+            <LoginRegisterMenuInit  >
             <NavBarUser open={open}/>                                                  
-          </LoginRegisterMenu>
+          </LoginRegisterMenuInit>
           </LetterContainer>
         ) : (
           <>

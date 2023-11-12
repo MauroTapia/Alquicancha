@@ -1,5 +1,5 @@
 import React from "react";
-import { NavBarWrapper } from "./navBar.style";
+import { NavBarWrapper } from "./navbarInit.style";
 import { Link } from "react-router-dom";
 
 

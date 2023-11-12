@@ -101,6 +101,22 @@ export const LoginRegisterMenu = styled.div`
   }
 `;
 
+export const LoginRegisterMenuInit = styled.div`
+  
+  display: flex;
+  height: 30px;
+  width: 40%;
+  gap: 16px;
+  margin-right: 32px;
+  cursor: pointer;
+  
+  &:hover {
+    img {
+      filter: invert(1) sepia(0) hue-rotate(20deg) saturate(1000%);
+    }
+  }
+`;
+
 export const LetterContainer = styled.div`
   margin-right: 32px;
   display: flex;
