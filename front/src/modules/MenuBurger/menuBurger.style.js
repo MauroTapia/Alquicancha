@@ -8,10 +8,3 @@ export const MenuButtonWrapper = styled.button`
   }
 `;
 
-export const ButtonClose = styled.div`
-  svg{
-    padding-right: 10px;
-    width: 50px;
-    height: 50px;
-  }
-`;
