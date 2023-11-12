@@ -16,6 +16,7 @@ import {
 
 import MenuButton from "../MenuBurger/menuBurger"
 import NavBar from "../MenuBurger/navbar"
+import NavBarUser from "../MenuBurger/NavBarUser";
 import logo from "../../assets/alquicancha.png";
 import { Link, useNavigate } from "react-router-dom";
 import useScrollDetector from "../../hooks/useScrollDetector";
@@ -39,6 +40,7 @@ const Header = () => {
   },[user])
 
   const handleLogoClick = ()=>{
+    setOpen(!open);
     console.log('Aqui debe mostrarse menu para cerrar sesión o ir a conf');
   }
 
@@ -51,7 +53,6 @@ const Header = () => {
 
   const handleClick = () => {
     setOpen(!open);
-  
   }
 
   return (
@@ -67,34 +68,35 @@ const Header = () => {
           </TitleWrapper>
         </LogoWrapper>
       </Link>
-      
-         
 
       <div>
         {logged ? (
-          <LetterContainer onClick={handleLogoClick}>
+          <LetterContainer onClick={handleClick}>
             <LetterAvatar>{initials}</LetterAvatar>
             {isAdmin && <p>Administrador</p>}
             <ButtonLoggout onClick={handleExit}>Salir</ButtonLoggout>
-            <NavBar open = {open}></NavBar>
+            <LoginRegisterMenu  >
+            <NavBarUser open={open}/>                                                  
+          </LoginRegisterMenu>
           </LetterContainer>
         ) : (
-          <>                
-          <LoginRegister logged = {!open}>
-            <Register>
-              <Link to={"/register"}>Crear Cuenta</Link>
-            </Register>
-            <Login>
-              <Link to={"/login"}>Iniciar sesión</Link>
-            </Login>
-          </LoginRegister>
-          <LoginRegisterMenu logged = {!open}>
+          <>
+            <LoginRegister logged = {!open}>
+              <Register>
+                <Link to={"/register"}>Crear Cuenta</Link>
+              </Register>
+              <Login>
+                <Link to={"/login"}>Iniciar sesión</Link>
+              </Login>
+            </LoginRegister>
+            <LoginRegisterMenu >
             <NavBar open={open} />
             <MenuButton open={open} handleClick={handleClick} />                            
-          </LoginRegisterMenu>               
-      </>    
+          </LoginRegisterMenu>
+          </>
         )}
       </div>
+
     </HeaderWrapper>
   );
 };

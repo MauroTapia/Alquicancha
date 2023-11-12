@@ -1,6 +1,6 @@
 import React from "react";
 import burguerLogo from "../../assets/logoBurguer.png";
-import { MenuButtonWrapper, ButtonClose } from "./menuBurger.style"
+import { MenuButtonWrapper } from "./menuBurger.style"
 
 function MenuButton({ open, handleClick }) {
   return !open ? (

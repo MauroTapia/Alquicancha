@@ -3,7 +3,7 @@ import { NavBarWrapper } from "./navBar.style";
 import { Link } from "react-router-dom";
 
 
-function NavBarUser({open}) {
+function NavBarAdmin({open}) {
   
   return (
     <NavBarWrapper open={!open} >
@@ -13,4 +13,4 @@ function NavBarUser({open}) {
   );
 }
 
-export default NavBarUser;
+export default NavBarAdmin;
