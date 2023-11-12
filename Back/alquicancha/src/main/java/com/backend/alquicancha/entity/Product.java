@@ -4,6 +4,7 @@ import com.backend.alquicancha.exceptions.ValidarNumero;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCTOS")
@@ -27,20 +28,27 @@ public class Product {
     @NotNull(message = "El precio no puede ser nula")
     private double price;
 
+    @ElementCollection
+    @CollectionTable(name = "PRODUCT_IMAGES", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "image_name")
+    private List<String> imagenes;
+
     public Product() {
     }
 
-    public Product(String title, String description, double price) {
+    public Product(String title, String description, double price, List<String> imagenes) {
         this.title = title;
         this.description = description;
         this.price = price;
+        this.imagenes = imagenes;
     }
 
-    public Product(Long id, String title, String description, double price) {
+    public Product(Long id, String title, String description, double price, List<String> imagenes) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
+        this.imagenes = imagenes;
     }
 
     public Long getId() {
@@ -70,6 +78,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public List<String> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<String> imageNames) {
+        this.imagenes = imageNames;
     }
 
     @Override

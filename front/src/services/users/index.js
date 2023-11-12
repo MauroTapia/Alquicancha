@@ -92,3 +92,27 @@ export const newUser = async (data) => {
     console.error('Error al crear el usuario:', error);
   });
 };
+
+export const editUser = async (data, id) => {
+  const opciones = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json', 
+    },
+    body: JSON.stringify(data), 
+  }; 
+
+  fetch(`${url}/usuarios/actualizar/${id}`, opciones)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
+    }
+    return response.json(); 
+  })
+  .then(data => {
+    console.log('Usuario editado exitosamente:', data);
+  })
+  .catch(error => {
+    console.error('Error al editar el usuario:', error);
+  });
+};

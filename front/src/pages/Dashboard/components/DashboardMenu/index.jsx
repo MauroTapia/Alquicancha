@@ -1,5 +1,9 @@
 import React from 'react'
 import { MenuButton, Wrapper } from './dashboardMenu.style'
+import { BsFillBoxSeamFill } from "react-icons/bs";
+import { FaUserGroup } from "react-icons/fa6";
+import { FaListAlt } from "react-icons/fa";
+import { ImExit } from "react-icons/im";
 
 const DashboardMenu = (props) => {
 
@@ -7,10 +11,22 @@ const DashboardMenu = (props) => {
 
   return (
     <Wrapper>
-      <MenuButton onClick={()=> handleClick('SectionProducts')}>Listar Productos</MenuButton>
-      <MenuButton onClick={()=> handleClick('ListUsers')}>Listar Usuarios</MenuButton>
-      <MenuButton onClick={()=> handleClick('SectionCategories')}>Categorías</MenuButton>
-      <MenuButton onClick={()=> handleClick('Exit')}>Salir</MenuButton>
+      <MenuButton onClick={()=> handleClick('SectionProducts')}>
+        <BsFillBoxSeamFill />
+        Productos
+      </MenuButton>
+      <MenuButton onClick={()=> handleClick('ListUsers')}>
+        <FaUserGroup />
+        Usuarios
+      </MenuButton>
+      <MenuButton onClick={()=> handleClick('SectionCategories')}>
+        <FaListAlt />
+        Categorías
+      </MenuButton>
+      <MenuButton onClick={()=> handleClick('Exit')}>
+        <ImExit />
+        Salir
+      </MenuButton>
     </Wrapper>
   )
 }
