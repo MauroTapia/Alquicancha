@@ -14,13 +14,15 @@ import {
   ButtonLoggout,
 } from "./header.style";
 
+import MenuButton from "../MenuBurger/menuBurger"
+import NavBar from "../MenuBurger/navbar"
 import logo from "../../assets/alquicancha.png";
-import burguerLogo from "../../assets/logoBurguer.png";
 import { Link, useNavigate } from "react-router-dom";
 import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
+
   const { isAdmin, logged, user, logout } = useContext(ContextGlobal).contextValue;
   
   const navigate = useNavigate();
@@ -45,6 +47,13 @@ const Header = () => {
     navigate("/");
   }
 
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  
+  }
+
   return (
     <HeaderWrapper
       style={{ backgroundColor: scrolledDown ? "rgb(155, 191, 13)" : "" }}
@@ -58,6 +67,8 @@ const Header = () => {
           </TitleWrapper>
         </LogoWrapper>
       </Link>
+      
+         
 
       <div>
         {logged ? (
@@ -65,21 +76,23 @@ const Header = () => {
             <LetterAvatar>{initials}</LetterAvatar>
             {isAdmin && <p>Administrador</p>}
             <ButtonLoggout onClick={handleExit}>Salir</ButtonLoggout>
+            <NavBar open = {open}></NavBar>
           </LetterContainer>
         ) : (
-          <>
-            <LoginRegister>
-              <Register>
-                <Link to={"/register"}>Crear Cuenta</Link>
-              </Register>
-              <Login>
-                <Link to={"/login"}>Iniciar sesión</Link>
-              </Login>
-            </LoginRegister>
-            <LoginRegisterMenu>
-              <img src={burguerLogo} alt="logoBurguer" />
-            </LoginRegisterMenu>
-          </>
+          <>                
+          <LoginRegister logged = {!open}>
+            <Register>
+              <Link to={"/register"}>Crear Cuenta</Link>
+            </Register>
+            <Login>
+              <Link to={"/login"}>Iniciar sesión</Link>
+            </Login>
+          </LoginRegister>
+          <LoginRegisterMenu logged = {!open}>
+            <NavBar open={open} />
+            <MenuButton open={open} handleClick={handleClick} />                            
+          </LoginRegisterMenu>               
+      </>    
         )}
       </div>
     </HeaderWrapper>
@@ -87,3 +100,4 @@ const Header = () => {
 };
 
 export default Header;
+         
