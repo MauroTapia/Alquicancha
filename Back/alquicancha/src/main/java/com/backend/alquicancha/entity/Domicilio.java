@@ -72,6 +72,6 @@ public class Domicilio {
 
     @Override
     public String toString() {
-        return "Id: " + id + " - Calle: " + calle + " - Numero: " + numero + " - Localidad: " + localidad ;
+        return "Id: " + id + " - Calle: " + calle + " - Numero: " + numero + " - Localidad: " + localidad;
     }
 }

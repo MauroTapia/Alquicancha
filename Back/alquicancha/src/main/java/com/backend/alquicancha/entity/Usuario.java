@@ -76,7 +76,7 @@ public class Usuario {
     }
 
 
-    public Usuario(String nombre, String apellido, String email, String phone, int dni, LocalDate fechaIngreso, boolean isAdmin, String calle, int numero, String localidad ) {
+    public Usuario(String nombre, String apellido, String email, String phone, int dni, LocalDate fechaIngreso, boolean isAdmin, String calle, int numero, String localidad) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -117,9 +117,13 @@ public class Usuario {
         this.email = email;
     }
 
-    public void setPassword(String password) {this.password = password ;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
     public String getTelefono() {
         return telefono;
@@ -179,6 +183,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Id: " + id + " - Nombre: " + nombre + " - Apellido: " + apellido + " - DNI: " + dni + " - Email: " + email + " - Telefono: " + telefono + " - Fechas de ingreso: " + fechaIngreso + " - Es administrador: " + isAdmin ;
+        return "Id: " + id + " - Nombre: " + nombre + " - Apellido: " + apellido + " - DNI: " + dni + " - Email: " + email + " - Telefono: " + telefono + " - Fechas de ingreso: " + fechaIngreso + " - Es administrador: " + isAdmin;
     }
 }

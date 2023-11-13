@@ -36,7 +36,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listado correcto",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = UsuarioDto.class))}),
             @ApiResponse(responseCode = "404", description = "Usuarios no encontrados",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -52,7 +52,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuario encontrado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = UsuarioDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Usuario no encontrado",
@@ -69,7 +69,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuario logueado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = UsuarioDto.class))}),
             @ApiResponse(responseCode = "400", description = "Datos invalidos",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Loggin no correcto",
@@ -137,7 +137,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Usuario eliminado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = UsuarioDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",

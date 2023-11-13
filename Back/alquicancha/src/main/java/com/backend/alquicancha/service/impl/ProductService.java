@@ -2,11 +2,11 @@ package com.backend.alquicancha.service.impl;
 
 
 import com.backend.alquicancha.dto.ProductDto;
-import com.backend.alquicancha.dto.UsuarioDto;
+import com.backend.alquicancha.entity.Categoria;
 import com.backend.alquicancha.entity.Product;
-import com.backend.alquicancha.entity.Usuario;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
+import com.backend.alquicancha.repository.ICategoriaRepository;
 import com.backend.alquicancha.repository.IProductRepository;
 import com.backend.alquicancha.service.IProductService;
 import com.backend.alquicancha.utils.JsonPrinter;
@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -24,17 +25,23 @@ public class ProductService implements IProductService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
     private final IProductRepository productRepository;
+    private final ICategoriaRepository categoriaRepository;
+
     private final ObjectMapper mapper;
 
+
     @Autowired
-    public ProductService(IProductRepository productRepository, ObjectMapper mapper) {
+    public ProductService(IProductRepository productRepository, ICategoriaRepository categoriaRepository, ObjectMapper mapper) {
         this.productRepository = productRepository;
+        this.categoriaRepository = categoriaRepository;
         this.mapper = mapper;
     }
 
     @Override
     public ProductDto guardarProducto(@Valid ProductDto productDto) throws BadRequestException {
+
         Product product = mapper.convertValue(productDto, Product.class);
+
         ProductDto savedProductDto = mapper.convertValue(productRepository.save(product), ProductDto.class);
 
         if (savedProductDto == null) {
@@ -66,7 +73,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ProductDto buscarProducto(Long id)   {
+    public ProductDto buscarProducto(Long id) {
         Product productoBuscado = productRepository.findById(id).orElse(null);
         ProductDto productDto = null;
         if (productoBuscado != null) {
@@ -84,7 +91,7 @@ public class ProductService implements IProductService {
         Product productAActualizar = productRepository.findById(id).orElse(null);
         ProductDto productoActualizadoDto = null;
 
-        if(productAActualizar != null){
+        if (productAActualizar != null) {
             productAActualizar.setTitle(product.getTitle());
             productAActualizar.setDescription(product.getDescription());
             productAActualizar.setPrice(product.getPrice());
@@ -101,23 +108,4 @@ public class ProductService implements IProductService {
 
         return productoActualizadoDto;
     }
-
-  /*  @Override
-    public ProductDto actualizarProducto(@Valid ProductDto product, long id) throws ResourceNotFoundException {
-        Product productoActualizar = productRepository.findById(id).orElse(null);
-        ProductDto productoDtoActualizado = null;
-
-        if (productoActualizar != null) {
-            //productoActualizar = product;
-            //productRepository.save(productoActualizar);
-            //productoDtoActualizado = mapper.convertValue(productoActualizar, ProductDto.class);
-            LOGGER.info("Producto actualizado con exito: {}", JsonPrinter.toString(productoDtoActualizado));
-        } else {
-            LOGGER.info("No se pudo actualizar, el producto no se encuentra registrado.");
-            throw new ResourceNotFoundException("No fue posible encontrar el producto");
-        }
-        return productoDtoActualizado;
-    }
-
-   */
 }

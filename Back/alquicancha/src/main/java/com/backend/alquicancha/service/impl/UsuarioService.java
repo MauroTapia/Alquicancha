@@ -45,7 +45,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public UsuarioDto buscarUsuarioPorId(Long id)  {
+    public UsuarioDto buscarUsuarioPorId(Long id) {
         Usuario usuarioBuscado = usuarioRepository.findById(id).orElse(null);
         UsuarioDto usuarioDto = null;
         if (usuarioBuscado != null) {

@@ -3,8 +3,13 @@ package com.backend.alquicancha.entity;
 import com.backend.alquicancha.exceptions.ValidarNumero;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCTOS")
@@ -33,22 +38,29 @@ public class Product {
     @Column(name = "image_name")
     private List<String> imagenes;
 
+    @ElementCollection
+    @CollectionTable(name = "PRODUCT_CATEGORIES", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "categoria_name")
+    private List<Long> categorias;
+
     public Product() {
     }
 
-    public Product(String title, String description, double price, List<String> imagenes) {
+    public Product(String title, String description, double price, List<String> imagenes, List<Long> categorias) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.imagenes = imagenes;
+        this.categorias = categorias;
     }
 
-    public Product(Long id, String title, String description, double price, List<String> imagenes) {
+    public Product(Long id, String title, String description, double price, List<String> imagenes, List<Long> categorias) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
         this.imagenes = imagenes;
+        this.categorias = categorias;
     }
 
     public Long getId() {
@@ -86,6 +98,13 @@ public class Product {
 
     public void setImagenes(List<String> imageNames) {
         this.imagenes = imageNames;
+    }
+    public List<Long> getCategorias() {
+        return (List<Long>) categorias;
+    }
+
+    public void setCategorias(List<Long> categorias) {
+        this.categorias = categorias;
     }
 
     @Override

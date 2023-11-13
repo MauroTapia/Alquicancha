@@ -1,9 +1,9 @@
 package com.backend.alquicancha.controller;
 
-import com.backend.alquicancha.dto.ProductDto;
+import com.backend.alquicancha.dto.CategoriaDto;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
-import com.backend.alquicancha.service.IProductService;
+import com.backend.alquicancha.service.ICategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,102 +18,100 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/categorias")
 @CrossOrigin
 
-public class Product {
+public class Categoria {
 
-    private IProductService productService;
+    private ICategoriaService categoriaService;
 
     @Autowired
-    public Product(IProductService productService) {
-        this.productService = productService;
+    public Categoria(ICategoriaService categoriaService) {
+        this.categoriaService = categoriaService;
     }
 
     // LIST
-    @Operation(summary = "Listado de todos los productos")
+    @Operation(summary = "Listado de todos las categorias")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listado correcto",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
-            @ApiResponse(responseCode = "404", description = "Productos no encontrados",
+                            schema = @Schema(implementation = CategoriaDto.class))}),
+            @ApiResponse(responseCode = "404", description = "Categorias no encontradas",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
                     content = @Content)
     })
     @GetMapping()
-    public List<ProductDto> listarProductos() {
-        return productService.listarProductos();
+    public List<CategoriaDto> listarCategorias() {
+        return categoriaService.listarCategorias();
     }
 
     // READ
-    @Operation(summary = "Busqueda de un producto por ID")
+    @Operation(summary = "Busqueda de una categoria por ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Producto encontrado correctamente",
+            @ApiResponse(responseCode = "200", description = "Categoria encontrada correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = CategoriaDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
-            @ApiResponse(responseCode = "404", description = "Producto no encontrado",
+            @ApiResponse(responseCode = "404", description = "Categoria no encontrada",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> buscarProductoPorId(@PathVariable Long id) {
-        return new ResponseEntity<>(productService.buscarProducto(id), null, HttpStatus.OK);
+    public ResponseEntity<CategoriaDto> buscarCategoriaPorId(@PathVariable Long id) {
+        return new ResponseEntity<>(categoriaService.buscarCategoria(id), null, HttpStatus.OK);
     }
 
     // DELETE
-    @Operation(summary = "Eliminación de un producto por ID")
+    @Operation(summary = "Eliminación de una categoria por ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Producto eliminado correctamente",
+            @ApiResponse(responseCode = "204", description = "CAtegoria eliminada correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = CategoriaDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
                     content = @Content)
     })
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<?> eliminarProductoPorId(@PathVariable Long id) throws ResourceNotFoundException {
-        productService.eliminarProducto(id);
-        return ResponseEntity.ok("Producto eliminado");
+    public ResponseEntity<?> eliminarCategoriaPorId(@PathVariable Long id) throws ResourceNotFoundException {
+        categoriaService.eliminarCategoria(id);
+        return ResponseEntity.ok("Categoria eliminada");
     }
 
     // CREATE
-    @Operation(summary = "Creación de un producto")
+    @Operation(summary = "Creación de una categoria")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Producto creado correctamente",
+            @ApiResponse(responseCode = "201", description = "Categoria creada correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = CategoriaDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
                     content = @Content)
     })
     @PostMapping("/registrar")
-    public ResponseEntity<ProductDto> registrarProducto(
-            @Valid @RequestBody ProductDto productDto
-    ) throws BadRequestException {
-        return new ResponseEntity<>(productService.guardarProducto(productDto), HttpStatus.CREATED);
+    public ResponseEntity<CategoriaDto> registrarCategoria(@Valid @RequestBody com.backend.alquicancha.entity.Categoria categoria) throws BadRequestException {
+        return new ResponseEntity<>(categoriaService.guardarCategoria(categoria), null, HttpStatus.CREATED);
     }
 
 
     // UPDATE
-    @Operation(summary = "Modificación de un producto por ID")
+    @Operation(summary = "Modificación de una categoria por ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Producto modificado correctamente",
+            @ApiResponse(responseCode = "200", description = "Categoria modificada correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = CategoriaDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
                     content = @Content)
     })
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<ProductDto> actualizarProducto(@Valid @RequestBody com.backend.alquicancha.entity.Product product, @PathVariable long id) throws ResourceNotFoundException {
-        return new ResponseEntity<>(productService.actualizarProducto(product, id), null, HttpStatus.OK);
+    public ResponseEntity<CategoriaDto> actualizarCategoria(@Valid @RequestBody com.backend.alquicancha.entity.Categoria categoria, @PathVariable long id) throws ResourceNotFoundException {
+        return new ResponseEntity<>(categoriaService.actualizarCategoria(categoria, id), null, HttpStatus.OK);
     }
 
 }
