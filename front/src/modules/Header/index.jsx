@@ -5,6 +5,7 @@ import {
   Register,
   LoginRegister,
   LoginRegisterMenu,
+  LoginRegisterMenuInit,
   Logo,
   LogoTitle,
   LogoWrapper,
@@ -14,13 +15,16 @@ import {
   ButtonLoggout,
 } from "./header.style";
 
+import MenuButton from "../MenuBurger/menuBurger"
+import NavBar from "../MenuBurger/navbar"
+import NavBarUser from "../MenuBurger/NavBarUser";
 import logo from "../../assets/alquicancha.png";
-import burguerLogo from "../../assets/logoBurguer.png";
 import { Link, useNavigate } from "react-router-dom";
 import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
+
   const { isAdmin, logged, user, logout } = useContext(ContextGlobal).contextValue;
   
   const navigate = useNavigate();
@@ -37,12 +41,19 @@ const Header = () => {
   },[user])
 
   const handleLogoClick = ()=>{
+    setOpen(!open);
     console.log('Aqui debe mostrarse menu para cerrar sesión o ir a conf');
   }
 
   const handleExit = ()=>{
     logout();
     navigate("/");
+  }
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
   }
 
   return (
@@ -61,14 +72,17 @@ const Header = () => {
 
       <div>
         {logged ? (
-          <LetterContainer onClick={handleLogoClick}>
+          <LetterContainer onClick={handleClick}>
             <LetterAvatar>{initials}</LetterAvatar>
             {isAdmin && <p>Administrador</p>}
             <ButtonLoggout onClick={handleExit}>Salir</ButtonLoggout>
+            <LoginRegisterMenuInit  >
+            <NavBarUser open={open}/>                                                  
+          </LoginRegisterMenuInit>
           </LetterContainer>
         ) : (
           <>
-            <LoginRegister>
+            <LoginRegister logged = {!open}>
               <Register>
                 <Link to={"/register"}>Crear Cuenta</Link>
               </Register>
@@ -76,14 +90,17 @@ const Header = () => {
                 <Link to={"/login"}>Iniciar sesión</Link>
               </Login>
             </LoginRegister>
-            <LoginRegisterMenu>
-              <img src={burguerLogo} alt="logoBurguer" />
-            </LoginRegisterMenu>
+            <LoginRegisterMenu >
+            <NavBar open={open} />
+            <MenuButton open={open} handleClick={handleClick} />                            
+          </LoginRegisterMenu>
           </>
         )}
       </div>
+
     </HeaderWrapper>
   );
 };
 
 export default Header;
+         
