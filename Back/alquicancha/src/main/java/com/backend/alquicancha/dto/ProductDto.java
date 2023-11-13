@@ -12,13 +12,15 @@ public class ProductDto {
     private String description;
     private double price;
     private List<String> imagenes;
+    private List<Long> categorias;
 
-    public ProductDto(Long id, String title, String description, double price, List<String> imagenes) {
+    public ProductDto(Long id, String title, String description, double price, List<String> imagenes, List<Long> categorias) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
         this.imagenes = imagenes;
+        this.categorias = categorias;
     }
 
     public ProductDto() {
@@ -51,6 +53,7 @@ public class ProductDto {
     public void setPrice(int price) {
         this.price = price;
     }
+
     public List<String> getImagenes() {
         return imagenes;
     }
@@ -58,6 +61,15 @@ public class ProductDto {
     public void setImagenes(List<String> imagenes) {
         this.imagenes = imagenes;
     }
+
+    public List<Long> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Long> categorias) {
+        this.categorias = categorias;
+    }
+
 
 
 }

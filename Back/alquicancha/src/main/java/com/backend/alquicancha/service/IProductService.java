@@ -16,7 +16,7 @@ public interface IProductService {
 
     void eliminarProducto(Long id) throws ResourceNotFoundException;
 
-    ProductDto buscarProducto(Long id) ;
+    ProductDto buscarProducto(Long id);
 
     ProductDto actualizarProducto(Product product, Long id) throws ResourceNotFoundException;
 }
