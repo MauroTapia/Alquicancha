@@ -17,9 +17,13 @@ function NavBarUser({open}) {
 
   return (
     <NavBarWrapper open={!open} >
-      <Link to={"/"}>Link 1</Link>
-      {! isAdmin && <Link to={"/"}>Link exclusivo para el Usuario</Link>}
-      {isAdmin && <Link to={"/"}>Link exclusivo para el Administrador</Link>}
+      <Link to={"/"}>Home</Link>
+      
+      { isAdmin ?  
+        <Link to={"/administracion"}>Dashboard</Link>
+        :
+        <Link to={"/"}>Link exclusivo para el Usuario</Link>
+      }
       <Link open={open} onClick={handleExit}>Cerrar Sesión</Link>
     </NavBarWrapper>
   );
