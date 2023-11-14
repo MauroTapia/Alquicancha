@@ -5,7 +5,7 @@ import {
   Register,
   LoginRegister,
   LoginRegisterMenu,
-  LoginRegisterMenuInit,
+  LoginRegisterMenuUser,
   Logo,
   LogoTitle,
   LogoWrapper,
@@ -40,11 +40,6 @@ const Header = () => {
     }
   },[user])
 
-  const handleLogoClick = ()=>{
-    setOpen(!open);
-    console.log('Aqui debe mostrarse menu para cerrar sesión o ir a conf');
-  }
-
   const handleExit = ()=>{
     logout();
     navigate("/");
@@ -73,12 +68,13 @@ const Header = () => {
       <div>
         {logged ? (
           <LetterContainer onClick={handleClick}>
-            <LetterAvatar>{initials}</LetterAvatar>
+            <LetterAvatar> {initials} </LetterAvatar>
+            {user && <p>Usuario</p>}
             {isAdmin && <p>Administrador</p>}
             <ButtonLoggout onClick={handleExit}>Salir</ButtonLoggout>
-            <LoginRegisterMenuInit  >
+            <LoginRegisterMenuUser  >
             <NavBarUser open={open}/>                                                  
-          </LoginRegisterMenuInit>
+          </LoginRegisterMenuUser>
           </LetterContainer>
         ) : (
           <>
