@@ -113,6 +113,7 @@ const ProductDetail = () => {
 
           <ProductDetails>
             <TextDetails>{description}</TextDetails>
+            
             <Price>$ {dayPrice} x día</Price>
             {details.length ? (
               <Caracteristicas>

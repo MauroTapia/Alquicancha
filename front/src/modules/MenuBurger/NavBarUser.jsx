@@ -1,14 +1,30 @@
-import React from "react";
-import { NavBarWrapper } from "./navbarInit.style";
-import { Link } from "react-router-dom";
-
+import React, { useContext } from "react";
+import { NavBarWrapper } from "./navBarUser.style";
+import { Link, useNavigate} from "react-router-dom";
+import { ContextGlobal } from "../../context/context";
 
 function NavBarUser({open}) {
   
+  const { isAdmin, logout, logoutAdmin } = useContext(ContextGlobal).contextValue;
+
+  const navigate = useNavigate();
+
+  const handleExit = ()=>{
+    logout();
+    logoutAdmin ();
+    navigate("/");
+  }
+
   return (
     <NavBarWrapper open={!open} >
-      <a href="#"><Link to={"/"}>Link 1</Link></a>
-      <a href="#"><Link to={"/"}>Link 2</Link></a>
+      <Link to={"/"}>Home</Link>
+      
+      { isAdmin ?  
+        <Link to={"/administracion"}>Dashboard</Link>
+        :
+        <Link to={"/"}>Link exclusivo para el Usuario</Link>
+      }
+      <Link open={open} onClick={handleExit}>Cerrar Sesión</Link>
     </NavBarWrapper>
   );
 }

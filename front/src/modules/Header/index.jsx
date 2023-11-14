@@ -5,7 +5,7 @@ import {
   Register,
   LoginRegister,
   LoginRegisterMenu,
-  LoginRegisterMenuInit,
+  LoginRegisterMenuUser,
   Logo,
   LogoTitle,
   LogoWrapper,
@@ -15,7 +15,6 @@ import {
   ButtonLoggout,
 } from "./header.style";
 
-import MenuButton from "../MenuBurger/menuBurger"
 import NavBar from "../MenuBurger/navbar"
 import NavBarUser from "../MenuBurger/NavBarUser";
 import logo from "../../assets/alquicancha.png";
@@ -25,9 +24,7 @@ import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
 
-  const { isAdmin, logged, user, logout } = useContext(ContextGlobal).contextValue;
-  
-  const navigate = useNavigate();
+  const { isAdmin, logged, user } = useContext(ContextGlobal).contextValue;
 
   const scrolledDown = useScrollDetector();
   const [initials, setInitials] = useState("");
@@ -39,16 +36,6 @@ const Header = () => {
       setInitials(resultado.toUpperCase());
     }
   },[user])
-
-  const handleLogoClick = ()=>{
-    setOpen(!open);
-    console.log('Aqui debe mostrarse menu para cerrar sesión o ir a conf');
-  }
-
-  const handleExit = ()=>{
-    logout();
-    navigate("/");
-  }
 
   const [open, setOpen] = useState(false);
 
@@ -73,16 +60,16 @@ const Header = () => {
       <div>
         {logged ? (
           <LetterContainer onClick={handleClick}>
-            <LetterAvatar>{initials}</LetterAvatar>
+            <LetterAvatar> {initials} </LetterAvatar>
+            {! isAdmin && <p>Usuario</p>} 
             {isAdmin && <p>Administrador</p>}
-            <ButtonLoggout onClick={handleExit}>Salir</ButtonLoggout>
-            <LoginRegisterMenuInit  >
+            <LoginRegisterMenuUser  >
             <NavBarUser open={open}/>                                                  
-          </LoginRegisterMenuInit>
+          </LoginRegisterMenuUser>
           </LetterContainer>
         ) : (
           <>
-            <LoginRegister logged = {!open}>
+            <LoginRegister>
               <Register>
                 <Link to={"/register"}>Crear Cuenta</Link>
               </Register>
@@ -91,8 +78,7 @@ const Header = () => {
               </Login>
             </LoginRegister>
             <LoginRegisterMenu >
-            <NavBar open={open} />
-            <MenuButton open={open} handleClick={handleClick} />                            
+            <NavBar open={open} />                          
           </LoginRegisterMenu>
           </>
         )}

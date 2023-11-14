@@ -101,7 +101,7 @@ export const LoginRegisterMenu = styled.div`
   }
 `;
 
-export const LoginRegisterMenuInit = styled.div`
+export const LoginRegisterMenuUser = styled.div`
   
   display: flex;
   height: 30px;
@@ -119,17 +119,19 @@ export const LoginRegisterMenuInit = styled.div`
 
 export const LetterContainer = styled.div`
   margin-right: 32px;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   width: 100px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
 `;
 
 export const LetterAvatar = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
