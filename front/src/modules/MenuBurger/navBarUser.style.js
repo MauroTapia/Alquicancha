@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavBarWrapper = styled.nav`
+export const NavBarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
