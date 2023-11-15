@@ -7,6 +7,7 @@ import Login from "../pages/Login/Login/";
 import ProductDetail from "../pages/ProductDetail";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
+import UserPerfil from "../pages/usePerfil";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/userPerfil" element={<UserPerfil/>} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/" element={<ProtectedRoutes />}>
             <Route path="administracion" element={<Dashboard />} />

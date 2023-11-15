@@ -22,7 +22,7 @@ function NavBarUser({open}) {
       { isAdmin ?  
         <Link to={"/administracion"}>Dashboard</Link>
         :
-        <Link to={"/"}>Link exclusivo para el Usuario</Link>
+        <Link to={"/userPerfil"}>Editar perfil</Link>
       }
       <Link open={open} onClick={handleExit}>Cerrar Sesión</Link>
     </NavBarWrapper>
