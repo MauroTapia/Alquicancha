@@ -10,6 +10,7 @@ import {
   Body,
   ProductDetails,
   TextDetails,
+  Categories,
   Caracteristicas,
   ButtonReserva,
   Included,
@@ -63,7 +64,7 @@ const ProductDetail = () => {
     return <p>Cargando...</p>;
   }
 
-  const { images, title, dayPrice, description, details } = product;
+  const { images, title, dayPrice, description, category, details } = product;
 
   const handleSecondaryImageClick = (index) => {
     if (selected !== index) {
@@ -113,7 +114,7 @@ const ProductDetail = () => {
 
           <ProductDetails>
             <TextDetails>{description}</TextDetails>
-            
+            <Categories>Categoría: {category}</Categories>
             <Price>$ {dayPrice} x día</Price>
             {details.length ? (
               <Caracteristicas>

@@ -155,6 +155,16 @@ export const TextDetails = styled.p`
   }
 `;
 
+export const Categories = styled.p`
+  font-size: 24px;
+  margin: 0;
+  padding-bottom: 12px;
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
+`;
+
 export const Price = styled.p`
   font-size: 20px;
   color: brown;
