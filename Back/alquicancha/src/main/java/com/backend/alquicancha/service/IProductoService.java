@@ -1,6 +1,7 @@
 package com.backend.alquicancha.service;
 
 import com.backend.alquicancha.dto.ProductoDto;
+import com.backend.alquicancha.entity.Categoria;
 import com.backend.alquicancha.entity.Imagen;
 import com.backend.alquicancha.entity.Producto;
 import com.backend.alquicancha.exceptions.BadRequestException;
@@ -24,9 +25,9 @@ public interface IProductoService {
 
     ProductoDto actualizarProducto(Producto producto, Long id) throws ResourceNotFoundException;
 
-    void agregarCategoria(Long id, String categoria) throws ResourceNotFoundException;
+    void agregarCategoria(Long id, Categoria categoria) throws ResourceNotFoundException;
 
-    void eliminarCategoria(Long id, String categoria) throws ResourceNotFoundException;
+    void eliminarCategoria(Long id, Categoria categoria) throws ResourceNotFoundException;
 
     void uploadProductImage(Long productId, MultipartFile photo) throws IOException;
 

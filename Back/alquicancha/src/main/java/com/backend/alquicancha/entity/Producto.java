@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "PRODUCTOS")
+@Table(name = "productos")
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,23 +29,23 @@ public class Producto {
     @NotNull(message = "El precio no puede ser nula")
     private double price;
 
-    @ElementCollection
-    private Set<String> category;
+    @ManyToMany(mappedBy = "productos", fetch = FetchType.EAGER)
+    private Set<Categoria> categorias;
     @OneToMany(mappedBy = "producto" , fetch = FetchType.EAGER)
     private Set<Imagen> imagenes = new HashSet<>();
 
     public Producto() {
     }
 
-    public Producto(String title, String description, double price, Set<Imagen> imagenes) {
+    public Producto(String title, String description, double price,Set<Categoria> categorias ,Set<Imagen> imagenes) {
         this.title = title;
         this.description = description;
         this.price = price;
+        this.categorias = categorias;
         this.imagenes = imagenes;
     }
 
-    public Producto(Long id, String title, String description, double price, Set<Imagen> imagenes) {
-        this.id = id;
+    public Producto(String title, String description, double price, Set<Imagen> imagenes) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -89,23 +89,23 @@ public class Producto {
         this.imagenes = imagens;
     }
 
-    public Set<String> getCategory() {
-        return category;
+    public Set<Categoria> getCategorias() {
+        return categorias;
     }
 
-    public void setCategory(Set<String> category) {
-        this.category = category;
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
-    public void agregarCategory(String category){
-        if (category != null && !this.category.contains(category)) {
-            this.category.add(category);
+    public void agregarCategoria(Categoria categoria){
+        if (categoria != null && !this.categorias.contains(categoria)) {
+            this.categorias.add(categoria);
         }
     }
 
-    public void removerCategory(String category){
-        if (category != null) {
-            this.category.remove(category);
+    public void removerCategoria(Categoria categoria){
+        if (categoria != null) {
+            this.categorias.remove(categoria);
         }
     }
 

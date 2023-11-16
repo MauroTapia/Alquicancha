@@ -1,6 +1,7 @@
 package com.backend.alquicancha.controller;
 
 import com.backend.alquicancha.dto.ProductoDto;
+import com.backend.alquicancha.entity.Categoria;
 import com.backend.alquicancha.entity.Imagen;
 import com.backend.alquicancha.entity.Producto;
 import com.backend.alquicancha.exceptions.BadRequestException;
@@ -128,14 +129,14 @@ public class ProductoController {
 
     @Operation(summary = "Agregar una categoria a un producto")
     @PostMapping("/{id}/categorias/{categoria}")
-    public ResponseEntity<Object> agregarCategoria(@PathVariable Long id, @PathVariable String categoria) throws ResourceNotFoundException {
+    public ResponseEntity<Object> agregarCategoria(@PathVariable Long id, @RequestBody Categoria categoria) throws ResourceNotFoundException {
         productoService.agregarCategoria(id, categoria);
         return ResponseEntity.ok("Categoria agregada");
     }
 
     @Operation(summary = "Eliminar una categoria de un producto")
     @DeleteMapping("/{id}/categorias/{categoria}")
-    public ResponseEntity<Object> eliminarCategoria(@PathVariable Long id, @PathVariable String categoria) throws ResourceNotFoundException {
+    public ResponseEntity<Object> eliminarCategoria(@PathVariable Long id, @RequestBody Categoria categoria) throws ResourceNotFoundException {
         productoService.eliminarCategoria(id, categoria);
         return ResponseEntity.ok("Categoria eliminada");
     }

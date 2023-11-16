@@ -2,6 +2,7 @@ package com.backend.alquicancha.service.impl;
 
 
 import com.backend.alquicancha.dto.ProductoDto;
+import com.backend.alquicancha.entity.Categoria;
 import com.backend.alquicancha.entity.Imagen;
 import com.backend.alquicancha.entity.Producto;
 import com.backend.alquicancha.exceptions.BadRequestException;
@@ -110,10 +111,10 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public void agregarCategoria(Long id, String categoria) throws ResourceNotFoundException {
+    public void agregarCategoria(Long id, Categoria categoria) throws ResourceNotFoundException {
         Producto producto = productRepository.findById(id).orElse(null);
         if (producto != null) {
-            producto.agregarCategory(categoria);
+            producto.agregarCategoria(categoria);
             productRepository.save(producto);
             LOGGER.info("Se ha agregado la categoria {} al producto con id {}", categoria, id);
         } else {
@@ -123,10 +124,10 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public void eliminarCategoria(Long id, String categoria) throws ResourceNotFoundException {
+    public void eliminarCategoria(Long id, Categoria categoria) throws ResourceNotFoundException {
         Producto producto = productRepository.findById(id).orElse(null);
         if (producto != null) {
-            producto.removerCategory(categoria);
+            producto.removerCategoria(categoria);
             productRepository.save(producto);
             LOGGER.info("Se ha eliminado la categoria {} al producto con id {}", categoria, id);
         } else {

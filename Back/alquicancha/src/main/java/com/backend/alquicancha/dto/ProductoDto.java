@@ -1,5 +1,6 @@
 package com.backend.alquicancha.dto;
 
+import com.backend.alquicancha.entity.Categoria;
 import com.backend.alquicancha.entity.Producto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -17,7 +18,7 @@ public class ProductoDto {
     private String description;
     private double price;
 
-    private Set<String> category;
+    private Set<Categoria> categorias;
     private Set<ImagenDto> imagenes = new HashSet<>();
 
     public ProductoDto(Producto producto) {
@@ -25,7 +26,7 @@ public class ProductoDto {
         this.title = producto.getTitle();
         this.description = producto.getDescription();
         this.price = producto.getPrice();
-        this.category = producto.getCategory();
+        this.categorias = producto.getCategorias();
         this.imagenes = producto.getImagenes().stream().map(ImagenDto::new).collect(Collectors.toSet());
     }
 
@@ -60,8 +61,8 @@ public class ProductoDto {
         this.price = price;
     }
 
-    public Set<String> getCategory() {
-        return category;
+    public Set<Categoria> getCategorias() {
+        return categorias;
     }
 
     public Set<ImagenDto> getImagenes() {
