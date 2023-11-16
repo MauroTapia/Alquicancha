@@ -4,11 +4,12 @@ import com.backend.alquicancha.exceptions.ValidarNumero;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "PRODUCTOS")
-public class Product {
+public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,21 +30,21 @@ public class Product {
     private double price;
 
     @ElementCollection
-    @CollectionTable(name = "PRODUCT_IMAGES", joinColumns = @JoinColumn(name = "product_id"))
-    @Column(name = "image_name")
-    private List<String> imagenes;
+    private Set<String> category;
+    @OneToMany(mappedBy = "producto" , fetch = FetchType.EAGER)
+    private Set<Imagen> imagenes = new HashSet<>();
 
-    public Product() {
+    public Producto() {
     }
 
-    public Product(String title, String description, double price, List<String> imagenes) {
+    public Producto(String title, String description, double price, Set<Imagen> imagenes) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.imagenes = imagenes;
     }
 
-    public Product(Long id, String title, String description, double price, List<String> imagenes) {
+    public Producto(Long id, String title, String description, double price, Set<Imagen> imagenes) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -80,12 +81,45 @@ public class Product {
         this.price = price;
     }
 
-    public List<String> getImagenes() {
+    public Set<Imagen> getImagenes() {
         return imagenes;
     }
 
-    public void setImagenes(List<String> imageNames) {
-        this.imagenes = imageNames;
+    public void setImagenes(Set<Imagen> imagens) {
+        this.imagenes = imagens;
+    }
+
+    public Set<String> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<String> category) {
+        this.category = category;
+    }
+
+    public void agregarCategory(String category){
+        if (category != null && !this.category.contains(category)) {
+            this.category.add(category);
+        }
+    }
+
+    public void removerCategory(String category){
+        if (category != null) {
+            this.category.remove(category);
+        }
+    }
+
+    public void agregarImagen(Imagen imagen){
+        if (imagen != null && !imagenes.contains(imagen)) {
+            imagenes.add(imagen);
+            imagen.setProduct(this);
+        }
+    }
+
+    public void removerImagen(Imagen imagen){
+        if (imagen != null) {
+            imagenes.remove(imagen);
+        }
     }
 
     @Override

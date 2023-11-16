@@ -1,11 +1,11 @@
 package com.backend.alquicancha.controller;
 
-import com.backend.alquicancha.dto.ProductDto;
+import com.backend.alquicancha.dto.ProductoDto;
 import com.backend.alquicancha.dto.ReservaDto;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
 import com.backend.alquicancha.service.IReservaService;
-import com.backend.alquicancha.service.impl.ProductService;
+import com.backend.alquicancha.service.impl.ProductoService;
 import com.backend.alquicancha.service.impl.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,13 +24,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/turnos")
 @CrossOrigin
-public class Reserva {
+public class ReservaController {
     private IReservaService turnoService;
-    private UsuarioService pacienteService;
-    private ProductService odontologoService;
+    private UsuarioService usuarioService;
+    private ProductoService productoService;
 
     @Autowired
-    public Reserva(IReservaService turnoService) {
+    public ReservaController(IReservaService turnoService) {
         this.turnoService = turnoService;
     }
 
@@ -38,7 +38,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listado correcto",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "404", description = "Turnos no encontrados",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -54,7 +54,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Turno creado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -71,7 +71,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Turno encontrado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Turno no encontrado",
@@ -89,7 +89,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Turno eliminado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -106,7 +106,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Turno modificado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",

@@ -1,6 +1,6 @@
 package com.backend.alquicancha.service.impl;
 
-import com.backend.alquicancha.dto.ProductDto;
+import com.backend.alquicancha.dto.ProductoDto;
 import com.backend.alquicancha.dto.UsuarioDto;
 import com.backend.alquicancha.dto.ReservaDto;
 import com.backend.alquicancha.entity.Reserva;
@@ -20,15 +20,15 @@ import java.util.List;
 public class ReservaService implements IReservaService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservaService.class);
     private final IReservaRepository turnoRepository;
-    private final UsuarioService pacienteService;
-    private final ProductService odontologoService;
+    private final UsuarioService usuarioService;
+    private final ProductoService productoService;
 
 
     @Autowired
-    public ReservaService(IReservaRepository turnoRepository, UsuarioService pacienteService, ProductService odontologoService) {
+    public ReservaService(IReservaRepository turnoRepository, UsuarioService usuarioService, ProductoService productoService) {
         this.turnoRepository = turnoRepository;
-        this.pacienteService = pacienteService;
-        this.odontologoService = odontologoService;
+        this.usuarioService = usuarioService;
+        this.productoService = productoService;
 
     }
 
@@ -36,19 +36,19 @@ public class ReservaService implements IReservaService {
     public ReservaDto guardarTurno(Reserva reserva) throws BadRequestException {//para que funcione el BadRequest use los repository y no los service funciona pero es una mala practia me parece
         ReservaDto reservaDto = null;
 
-        UsuarioDto paciente = pacienteService.buscarUsuarioPorId(reserva.getUsuario().getId());
-        ProductDto odontologo = odontologoService.buscarProducto(reserva.getProducto().getId());
+        UsuarioDto usuario = usuarioService.buscarUsuarioPorId(reserva.getUsuario().getId());
+        ProductoDto producto = productoService.buscarProducto(reserva.getProducto().getId());
 
-        if (paciente == null || odontologo == null) {
-            if (paciente == null && odontologo == null) {
-                LOGGER.error("El paciente y el odontologo no se encuentran en nuestra base de datos");
-                throw new BadRequestException("El paciente y el odontologo no se encuentran en nuestra base de datos");
-            } else if (paciente == null) {
-                LOGGER.error("El paciente no se encuentra en nuestra base de datos");
-                throw new BadRequestException("El paciente no se encuentra en nuestra base de datos");
+        if (usuario == null || producto == null) {
+            if (usuario == null && producto == null) {
+                LOGGER.error("El usuario y el producto no se encuentran en nuestra base de datos");
+                throw new BadRequestException("El usuario y el producto no se encuentran en nuestra base de datos");
+            } else if (usuario == null) {
+                LOGGER.error("El usuario no se encuentra en nuestra base de datos");
+                throw new BadRequestException("El usuario no se encuentra en nuestra base de datos");
             } else {
-                LOGGER.error("El odontologo no se encuentra en nuestra base de datos");
-                throw new BadRequestException("El odontologo no se encuentra en nuestra base de datos");
+                LOGGER.error("El producto no se encuentra en nuestra base de datos");
+                throw new BadRequestException("El producto no se encuentra en nuestra base de datos");
             }
         } else {
             reservaDto = ReservaDto.fromTurno(turnoRepository.save(reserva));
@@ -89,22 +89,22 @@ public class ReservaService implements IReservaService {
     public ReservaDto actualizarTurno(Reserva reserva) throws ResourceNotFoundException, BadRequestException {
 
         Reserva reservaActualizar = turnoRepository.findById(reserva.getId()).orElse(null);
-        UsuarioDto paciente = pacienteService.buscarUsuarioPorId(reserva.getUsuario().getId());
-        ProductDto odontologo = odontologoService.buscarProducto(reserva.getProducto().getId());
+        UsuarioDto usuario = usuarioService.buscarUsuarioPorId(reserva.getUsuario().getId());
+        ProductoDto producto = productoService.buscarProducto(reserva.getProducto().getId());
 
         ReservaDto reservaDtoActualiazado = null;
 
         if (reservaActualizar != null) {
-            if (paciente == null || odontologo == null) {
-                if (paciente == null && odontologo == null) {
-                    LOGGER.error("El paciente y el odontologo no se encuentran en nuestra base de datos");
-                    throw new BadRequestException("El paciente y el odontologo no se encuentran en nuestra base de datos");
-                } else if (paciente == null) {
-                    LOGGER.error("El paciente no se encuentra en nuestra base de datos");
-                    throw new BadRequestException("El paciente no se encuentra en nuestra base de datos");
+            if (usuario == null || producto == null) {
+                if (usuario == null && producto == null) {
+                    LOGGER.error("El usuario y el producto no se encuentran en nuestra base de datos");
+                    throw new BadRequestException("El usuario y el producto no se encuentran en nuestra base de datos");
+                } else if (usuario == null) {
+                    LOGGER.error("El usuario no se encuentra en nuestra base de datos");
+                    throw new BadRequestException("El usuario no se encuentra en nuestra base de datos");
                 } else {
-                    LOGGER.error("El odontologo no se encuentra en nuestra base de datos");
-                    throw new BadRequestException("El odontologo no se encuentra en nuestra base de datos");
+                    LOGGER.error("El producto no se encuentra en nuestra base de datos");
+                    throw new BadRequestException("El producto no se encuentra en nuestra base de datos");
                 }
             } else {
             reservaActualizar = reserva;
@@ -123,7 +123,7 @@ public class ReservaService implements IReservaService {
     public void eliminarTurno(Long id) throws ResourceNotFoundException {
         if (buscarTurnoPorId(id) != null) {
             turnoRepository.deleteById(id);
-            LOGGER.warn("Se ha eliminado el paciente con id {}", id);
+            LOGGER.warn("Se ha eliminado el usuario con id {}", id);
         } else {
             LOGGER.warn("No se ha encontrado el turno con id {}", id);
             throw new ResourceNotFoundException("No se ha encontrado el turno con id " + id);

@@ -5,33 +5,42 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TURNOS")
+@Table(name = "RESERVAS")
 public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paciente_id", nullable = false)
-    @NotNull(message = "El paciente no puede ser nulo")
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @NotNull(message = "El usuario no puede ser nulo")
     private Usuario usuario;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "odontologo_id", nullable = false)
-    @NotNull(message = "El odontologo no puede ser nulo")
-    private Product product;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//Pasar "2023-08-25T13:30:30"
+    @JoinColumn(name = "product_id", nullable = false)
+    @NotNull(message = "El producto no puede ser nulo")
+    private Producto producto;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")//Pasar "2023-08-25"
     @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
     @NotNull(message = "Debe especificarse la fecha y hora del turno")
-    private LocalDateTime fecha;
+    private LocalDate fechaDesde;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")//Pasar "2023-08-25"
+    @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
+    @NotNull(message = "Debe especificarse la fecha y hora del turno")
+    private LocalDate fechaHasta;
 
 
-    public Reserva(Usuario usuario, Product product, LocalDateTime fecha) {
+
+
+    public Reserva(Usuario usuario, Producto producto, LocalDate fecha, LocalDate fechaHasta) {
         this.usuario = usuario;
-        this.product = product;
-        this.fecha = fecha;
+        this.producto = producto;
+        this.fechaDesde = fecha;
+        this.fechaHasta = fechaHasta;
     }
 
     public Reserva() {
@@ -49,28 +58,39 @@ public class Reserva {
         this.usuario = usuario;
     }
 
-    public Product getProducto() {
-        return product;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setProducto(Product product) {
-        this.product = product;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDate getFecha() {
+        return fechaDesde;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setFecha(LocalDate fechaDesde) {
+        this.fechaDesde = fechaDesde;
     }
+
+    public LocalDate getFechaHasta() {
+        return fechaHasta;
+    }
+
+    public void setFechaHasta(LocalDate fechaHasta) {
+        this.fechaHasta = fechaHasta;
+    }
+
+
 
     @Override
     public String toString() {
         return "Turno id: " + id +
                 ", usuario: " + usuario +
-                ", producto: " + product +
-                ", fecha: " + fecha;
+                ", producto: " + producto +
+                ", fecha desde: " + fechaDesde +
+                ", fecha hasta: " + fechaHasta;
     }
 
 
