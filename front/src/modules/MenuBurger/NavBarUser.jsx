@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavBarWrapper } from "./navBarUser.style";
 import { Link, useNavigate} from "react-router-dom";
 import { ContextGlobal } from "../../context/context";
+import Swal from "sweetalert2";
 
 function NavBarUser({open}) {
   
@@ -9,14 +10,27 @@ function NavBarUser({open}) {
 
   const navigate = useNavigate();
 
-  const handleExit = ()=>{
-    logout();
-    logoutAdmin ();
-    navigate("/");
-  }
+
+
+  const handleExit = () => {
+    Swal.fire({
+      title: "Salir?",
+      text: `Desea salir del Dashboard de administración?`,
+      icon: "question",
+      confirmButtonText: `Salir`,
+      showCancelButton: true,
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logoutAdmin();
+        logout();
+        navigate("/");
+      }
+    });
+  };
 
   return (
-    <NavBarWrapper open={!open} >
+    <NavBarWrapper open={open} >
       <Link to={"/"}>Home</Link>
       
       { isAdmin ?  
