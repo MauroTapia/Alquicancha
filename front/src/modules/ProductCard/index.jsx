@@ -23,8 +23,7 @@ const ProductCard = ({ product }) => {
       <Title>{title}</Title>
 
       <Swiper navigation={true} loop modules={Navigation}>
-        {images && 
-          images.map((imgage, index) => (
+        {images && images.map((imgage, index) => (
             <SwiperSlide key={index}>
               <ImageWrapper>
                 <ProductImage src={imgage.img} alt={images.alt} />

@@ -36,6 +36,14 @@ export const Header = styled.div`
       font-size: 14px;
     }
 
+    @media (max-width: 620px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: 420px) {
+      font-size: 10px;
+    }
+
     img {
       width: 32px;
       cursor: pointer;
@@ -57,9 +65,17 @@ export const Header = styled.div`
 
 export const Title = styled.h2`
   font-size: 40px;
-
+  padding: 0 0 0 30px;
   @media (max-width: 1024px) {
+    font-size: 30px;
+  }
+  
+  @media (max-width: 550px) {
     font-size: 20px;
+  }
+
+  @media (max-width: 420px) {
+    font-size: 15px;
   }
 `;
 
@@ -93,8 +109,8 @@ export const ImagePrincipal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 350px;
-  padding: 8px;
+  width: 400px;
+  padding-left: 8px;
   cursor: zoom-in;
 
   img {

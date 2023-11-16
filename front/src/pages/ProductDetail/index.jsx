@@ -95,6 +95,11 @@ const ProductDetail = () => {
         </Header>
         <Body>
           <Images>
+
+            <ImagePrincipal>
+              <img src={imagePrincipal} alt={images[0].alt} onClick={handleImageClick}/>
+            </ImagePrincipal>
+
             <ImagesSecondaries>
               {images.map((image, index) => (
                 <img
@@ -106,10 +111,7 @@ const ProductDetail = () => {
                 />
               ))}
             </ImagesSecondaries>
-
-            <ImagePrincipal>
-              <img src={imagePrincipal} alt={images[0].alt} onClick={handleImageClick}/>
-            </ImagePrincipal>
+            
           </Images>
 
           <ProductDetails>

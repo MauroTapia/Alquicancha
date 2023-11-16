@@ -20,7 +20,7 @@ const Search = () => {
       <SearchWrapper>
         <SearchInput
           type="text"
-          placeholder="Busca aquí la cancha que necesitas"
+          placeholder="Busca aquí lo que necesitas"
         />
         
         <div style={{display:"flex", gap:5}}>
