@@ -9,7 +9,7 @@ import {
   InputCheckBox,
   ErrorMsg,
 } from "./usePerfil.style";
-import { newUser, getUserByEmail } from "../../services/users";
+import { editUser } from "../../services/users";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { ContextGlobal } from "../../context/context";
@@ -19,16 +19,18 @@ const UserPerfil = () => {
 
     const { user } = useContext(ContextGlobal).contextValue;
 
-    const [ miUsuario, setMiUsuario ] = useState("");
+    const [ miUsuario, setMiUsuario ] = useState({});
 
     useEffect(() => {
-        setMiUsuario(user)
-        console.log(user)
-    }, [user]);
+      setMiUsuario(user);
+      //  console.log(user.name);
+  }, [user]);
+
+    // console.log(miUsuario)
 
     const [userData, setUserData] = useState({
-      name: user.name || "",
-      surname: user.surname || "",
+      name: user.nombre || "",
+      surname: user.apellido || "",
       dni: user.dni || "",
       telefono: user.telefono || "",
       localidad: user.localidad || "",
@@ -47,13 +49,6 @@ const UserPerfil = () => {
     const existDni = errors.some(([campo]) => campo === "dni");
     const existTelefono = errors.some(([campo]) => campo === "telefono");
   
-    const CheckUserExist = async (email) => {
-      const userData = await getUserByEmail(email);
-      if (userData) {
-        console.log("entre al malnacido error");
-        setErrors((prevErrors) => [...prevErrors, ["exist"]]);
-      }
-    };
   
     const checkName = () => {
       if (userData.name.length < 4) {
@@ -67,21 +62,6 @@ const UserPerfil = () => {
       }
     };
   
-    const checkEmail = async () => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-      if (!emailRegex.test(userData.email)) {
-        setErrors((prevErrors) => [...prevErrors, ["email"]]);
-      }
-    };
-  
-    const checkPass = () => {
-      if (userData.password.length < 6) {
-        setErrors((prevErrors) => [...prevErrors, ["password"]]);
-      } else if (userData.password !== userData.confirmPassword) {
-        setErrors((prevErrors) => [...prevErrors, ["confirm"]]);
-      }
-    };
   
     const handleChange = (e, field) =>{
       setUserData((prevUserData) => ({ ...prevUserData, [field]: e.target.value }));
@@ -92,21 +72,18 @@ const UserPerfil = () => {
       e.preventDefault();
   
       setErrors([]);
-      await CheckUserExist(userData.email);
-      checkEmail();
-      checkPass();
       checkName();
       checkSurname();
   
       setErrors((prevErrors) => {
         if (prevErrors.length === 0) {
-          const user = { ...userData}
-          newUser(user);
+          const userEdit = {  ...user,...userData}
+          editUser(userEdit, user.id);
+          console.log(userEdit)
           Swal.fire({
-            title: "Usuario creado!",
-            text: `El usuario a sido creado correctamente!`,
+            title: "Usuario editado!",
+            text: `El usuario a sido editado correctamente!`,
             icon: "success",
-            confirmButtonText: `Iniciar sesión`,
           }).then((result) => {
             if (result.isConfirmed) {
               navigate("/");
@@ -124,6 +101,12 @@ const UserPerfil = () => {
       });
     };
 
+
+    function capitalize(s)
+{
+    return s && s[0].toUpperCase() + s.slice(1);
+}
+
   return (
     <form onSubmit={handleSubmit}>
         <LoginWrapper>
@@ -136,7 +119,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder={"Ingresa tú nombre"}
-            value={userData.name}
+            value={capitalize(userData.name)}
             onChange={(e) => handleChange(e, "name")}
           />
           {existName === true ? (
@@ -148,7 +131,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder="Ingresa tú apellido"
-            value={userData.surname}
+            value={capitalize(userData.surname)}
             onChange={(e) => handleChange(e, "surname")}
           />
           {existSurname === true ? (
@@ -184,7 +167,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder="Ingresa tú localidad"
-            value={userData.localidad}
+            value={capitalize(userData.localidad)}
             onChange={(e) => handleChange(e, "localidad")}
           />
           {existLocalidad === true ? (

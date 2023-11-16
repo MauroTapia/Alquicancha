@@ -5,10 +5,10 @@ export const initialState = {
   logged: false,
   isAdmin: false,
   user: {
-    name: "",
-    surname: "",
-    dni: "",
-    telefono: "",
+    nombre: "",
+    apellido: "",
+    dni: 0,
+    telefono: 0,
     localidad: ""
   },
 };
