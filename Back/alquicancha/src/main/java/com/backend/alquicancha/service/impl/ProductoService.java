@@ -155,7 +155,7 @@ public class ProductoService implements IProductoService {
 
    */
 
-    public void uploadProductImage(Long productId, MultipartFile photo) throws IOException {
+    public void uploadProductImage(Long productId, MultipartFile photo, String description) throws IOException {
         // Create a folder to store the photos
         String photosDir = "./src/main/resources/static/photos";
         File photosDirFile = new File(photosDir);
@@ -176,13 +176,14 @@ public class ProductoService implements IProductoService {
 
         Producto producto = productRepository.findById(productId).orElse(null);
 
-        Imagen img = new Imagen(fileName, "/photos/" + fileName, "Photo of " + producto.getTitle());
-        Imagen photoObj = imagenRepository.save(img);
+        Imagen photoo = new Imagen(fileName, "/photos/" + fileName, "Photo of " + producto.getTitle());
+        Imagen photoObj = imagenRepository.save(photoo);
 
         producto.agregarImagen(photoObj);
 
         productRepository.save(producto);
         System.out.println("Product photos: " + producto.getImagenes());
+
     }
 
     @Override

@@ -147,9 +147,9 @@ public class ProductoController {
     @Operation(summary = "Cargar una imagen a un producto")
     @PostMapping("/products/{productId}/upload")
     @ApiResponse(responseCode = "200", description = "Photo uploaded successfully")
-    public ResponseEntity<Object> uploadProductImage(@PathVariable Long productId, @RequestParam("photo") MultipartFile photo) throws IOException {
+    public ResponseEntity<Object> uploadProductImage(@PathVariable Long productId,@RequestParam("photo") MultipartFile photo, @PathVariable String description) throws IOException {
         System.out.printf(productId.toString());
-        productoService.uploadProductImage(productId, photo);
+        productoService.uploadProductImage(productId,photo,description );
 
         return ResponseEntity.ok("Photo uploaded successfully");
     }

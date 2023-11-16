@@ -29,7 +29,7 @@ public interface IProductoService {
 
     void eliminarCategoria(Long id, Categoria categoria) throws ResourceNotFoundException;
 
-    void uploadProductImage(Long productId, MultipartFile photo) throws IOException;
+    void uploadProductImage(Long productId, MultipartFile photo, String description) throws IOException;
 
     Set<Imagen> getPhotos(Long productoId);
 
