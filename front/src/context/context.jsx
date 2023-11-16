@@ -6,7 +6,10 @@ export const initialState = {
   isAdmin: false,
   user: {
     name: "",
-    surname: ""
+    surname: "",
+    dni: "",
+    telefono: "",
+    localidad: ""
   },
 };
 

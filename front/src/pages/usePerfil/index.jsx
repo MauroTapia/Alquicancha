@@ -19,7 +19,7 @@ const UserPerfil = () => {
 
     const { user } = useContext(ContextGlobal).contextValue;
 
-    const [ miUsuario, setMiUsuario ] = useState(null);
+    const [ miUsuario, setMiUsuario ] = useState("");
 
     useEffect(() => {
         setMiUsuario(user)
@@ -27,12 +27,13 @@ const UserPerfil = () => {
     }, [user]);
 
     const [userData, setUserData] = useState({
-      name: null,
-      surname: null,
-      dni: null,
-      telefono: null,
-      localidad: null
-    });
+      name: user.name || "",
+      surname: user.surname || "",
+      dni: user.dni || "",
+      telefono: user.telefono || "",
+      localidad: user.localidad || "",
+  });
+
   
     const [errors, setErrors] = useState([]);
   
@@ -42,7 +43,7 @@ const UserPerfil = () => {
   
     const existName = errors.some(([campo]) => campo === "name");
     const existSurname = errors.some(([campo]) => campo === "surname");
-    const existEmail = errors.some(([campo]) => campo === "email");
+    const existLocalidad = errors.some(([campo]) => campo === "Localidad");
     const existDni = errors.some(([campo]) => campo === "dni");
     const existTelefono = errors.some(([campo]) => campo === "telefono");
   
@@ -134,7 +135,8 @@ const UserPerfil = () => {
           <Inputs
             type="text"
             required
-            placeholder="Ingresa tú nombre"
+            placeholder={"Ingresa tú nombre"}
+            value={userData.name}
             onChange={(e) => handleChange(e, "name")}
           />
           {existName === true ? (
@@ -146,6 +148,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder="Ingresa tú apellido"
+            value={userData.surname}
             onChange={(e) => handleChange(e, "surname")}
           />
           {existSurname === true ? (
@@ -154,14 +157,41 @@ const UserPerfil = () => {
 
           <Label>Edita tu numero de Dni</Label>
           <Inputs
-            type="num"
+            type="number"
             required
-            placeholder="edita tu dni"
+            placeholder="Edita tu dni"
+            value={userData.dni}
             onChange={(e) => handleChange(e, "dni")}
           />
           {existDni === true ? (
             <ErrorMsg>Debes ingresar un dni valido</ErrorMsg>
           ) : null}
+
+          <Label>Edita tu Telefono</Label>
+          <Inputs
+            type="text"
+            required
+            placeholder="Edita tu telefono"
+            value={userData.telefono}
+            onChange={(e) => handleChange(e, "telefono")}
+          />
+          {existTelefono === true ? (
+            <ErrorMsg>El telefono debe tener minimo 8 numeros</ErrorMsg>
+          ) : null}
+
+          <Label>Edita tu Localidad</Label>
+          <Inputs
+            type="text"
+            required
+            placeholder="Ingresa tú localidad"
+            value={userData.localidad}
+            onChange={(e) => handleChange(e, "localidad")}
+          />
+          {existLocalidad === true ? (
+            <ErrorMsg>La localidad debe tener minimo 4 letras</ErrorMsg>
+          ) : null}
+
+
 
 
           <Button>Editar</Button>
