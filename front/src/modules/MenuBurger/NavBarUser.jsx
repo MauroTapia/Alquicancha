@@ -15,7 +15,8 @@ function NavBarUser({open}) {
   const handleExit = () => {
     Swal.fire({
       title: "Salir?",
-      text: `Desea salir del Dashboard de administración?`,
+      text: `Deseas cerrar sesión
+      ?`,
       icon: "question",
       confirmButtonText: `Salir`,
       showCancelButton: true,
