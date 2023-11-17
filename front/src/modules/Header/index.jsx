@@ -29,9 +29,10 @@ const Header = () => {
   const [initials, setInitials] = useState("");
   
   useEffect(()=>{
-    if(user){
-      const primerasLetras = Object.values(user).map(valor => valor[0]);
-      const resultado = primerasLetras.join('');
+    if(user.nombre && user.apellido){
+      const primerasLetra = user.nombre[0];
+      const segundaLetra = user.apellido[0];
+      const resultado = primerasLetra + segundaLetra;
       setInitials(resultado.toUpperCase());
     }
   },[user])

@@ -31,7 +31,7 @@ const Login = () => {
   const [password, setPassword] = useState(null);
   const [errors, setErrors] = useState([]);
 
-  const { loginAdmin, login, setUserData } =
+  const { loginAdmin, login, setUserData, user } =
     useContext(ContextGlobal).contextValue;
 
   useEffect(() => {
@@ -84,14 +84,12 @@ const Login = () => {
       navigate("/administracion");
     } else {
       const userLogged = await loginUser(user, pass);
+      
       if (userLogged) {
         login();
         const userName = userLogged.nombre;
         const admin = userLogged.admin;
-        setUserData({
-          name: userLogged.nombre,
-          surname: userLogged.apellido,
-        });
+        setUserData(userLogged);
         admin && loginAdmin();
 
         Swal.fire({

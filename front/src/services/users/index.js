@@ -27,6 +27,7 @@ export const getUserById = async (id) => {
     }
 
     const jsonData = await response.json();
+
     return jsonData;
 
   } catch (error) {
