@@ -103,7 +103,7 @@ export const editUser = async (data, id) => {
     body: JSON.stringify(data), 
   }; 
 
-  fetch(`${url}/usuarios/actualizar/{id}`, opciones)
+  fetch(`${url}/usuarios/actualizar/${id}`, opciones)
   .then(response => {
     if (!response.ok) {
       throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);

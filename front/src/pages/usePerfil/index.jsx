@@ -23,14 +23,14 @@ const UserPerfil = () => {
 
     useEffect(() => {
       setMiUsuario(user);
-      //  console.log(user.name);
-  }, [user]);
+      //  console.log(user.nombre);
+  }, []);
 
-    console.log(miUsuario)
+    // console.log(miUsuario)
 
     const [userData, setUserData] = useState({
-      name: user.nombre || "",
-      surname: user.apellido || "",
+      nombre: user.nombre || "",
+      apellido: user.apellido || "",
       dni: user.dni || "",
       telefono: user.telefono || "",
       localidad: user.localidad || "",
@@ -45,8 +45,8 @@ const UserPerfil = () => {
       window.scrollTo(0, 0);
     }, []);
   
-    const existName = errors.some(([campo]) => campo === "name");
-    const existSurname = errors.some(([campo]) => campo === "surname");
+    const existName = errors.some(([campo]) => campo === "nombre");
+    const existSurname = errors.some(([campo]) => campo === "apellido");
     const existLocalidad = errors.some(([campo]) => campo === "Localidad");
     const existDni = errors.some(([campo]) => campo === "dni");
     const existTelefono = errors.some(([campo]) => campo === "telefono");
@@ -55,14 +55,14 @@ const UserPerfil = () => {
   
   
     const checkName = () => {
-      if (userData.name.length < 4) {
-        setErrors((prevErrors) => [...prevErrors, ["name"]]);
+      if (userData.nombre.length < 4) {
+        setErrors((prevErrors) => [...prevErrors, ["nombre"]]);
       }
     };
   
     const checkSurname = () => {
-      if (userData.surname.length < 4) {
-        setErrors((prevErrors) => [...prevErrors, ["surname"]]);
+      if (userData.apellido.length < 4) {
+        setErrors((prevErrors) => [...prevErrors, ["apellido"]]);
       }
     };
   
@@ -83,6 +83,7 @@ const UserPerfil = () => {
         if (prevErrors.length === 0) {
           const userEdit = {  ...user,...userData}
           editUser(userEdit, user.id);
+          setMiUsuario(userEdit);
           console.log(userEdit)
           Swal.fire({
             title: "Usuario editado!",
@@ -106,10 +107,9 @@ const UserPerfil = () => {
     };
 
 
-    function capitalize(s)
-{
-    return s && s[0].toUpperCase() + s.slice(1);
-}
+    function capitalize(s) {
+      return s && s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -123,8 +123,8 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder={"Ingresa tú nombre"}
-            value={capitalize(userData.name)}
-            onChange={(e) => handleChange(e, "name")}
+            value={capitalize(userData.nombre)}
+            onChange={(e) => handleChange(e, "nombre")}
           />
           {existName === true ? (
             <ErrorMsg>El nombre debe tener minimo 4 letras</ErrorMsg>
@@ -135,8 +135,8 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder="Ingresa tú apellido"
-            value={capitalize(userData.surname)}
-            onChange={(e) => handleChange(e, "surname")}
+            value={capitalize(userData.apellido)}
+            onChange={(e) => handleChange(e, "apellido")}
           />
           {existSurname === true ? (
             <ErrorMsg>El apellido debe tener minimo 4 letras</ErrorMsg>
