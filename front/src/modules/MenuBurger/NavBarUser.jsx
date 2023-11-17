@@ -19,11 +19,11 @@ function NavBarUser({open}) {
     <NavBarWrapper open={!open} >
       <Link to={"/"}>Home</Link>
       
-      { isAdmin ?  
-        <Link to={"/administracion"}>Dashboard</Link>
-        :
-        <Link to={"/userPerfil"}>Editar perfil</Link>
-      }
+      {isAdmin && (
+      <Link to={"/administracion"}>Dashboard</Link>
+    )}
+
+      <Link to={"/userPerfil"}>Editar perfil</Link>
       <Link open={open} onClick={handleExit}>Cerrar Sesión</Link>
     </NavBarWrapper>
   );

@@ -26,7 +26,7 @@ const UserPerfil = () => {
       //  console.log(user.name);
   }, [user]);
 
-    // console.log(miUsuario)
+    console.log(miUsuario)
 
     const [userData, setUserData] = useState({
       name: user.nombre || "",
@@ -34,6 +34,8 @@ const UserPerfil = () => {
       dni: user.dni || "",
       telefono: user.telefono || "",
       localidad: user.localidad || "",
+      calle: user.calle || "",
+      numero: user.numero || ""
   });
 
   
@@ -48,6 +50,8 @@ const UserPerfil = () => {
     const existLocalidad = errors.some(([campo]) => campo === "Localidad");
     const existDni = errors.some(([campo]) => campo === "dni");
     const existTelefono = errors.some(([campo]) => campo === "telefono");
+    const existNumero = errors.some(([campo]) => campo === "numero");
+    const existCalle = errors.some(([campo]) => campo === "calle");
   
   
     const checkName = () => {
@@ -138,7 +142,7 @@ const UserPerfil = () => {
             <ErrorMsg>El apellido debe tener minimo 4 letras</ErrorMsg>
           ) : null}
 
-          <Label>Edita tu numero de Dni</Label>
+          <Label>Edita tu numero de dni</Label>
           <Inputs
             type="number"
             required
@@ -150,9 +154,9 @@ const UserPerfil = () => {
             <ErrorMsg>Debes ingresar un dni valido</ErrorMsg>
           ) : null}
 
-          <Label>Edita tu Telefono</Label>
+          <Label>Edita tu telefono</Label>
           <Inputs
-            type="text"
+            type="string"
             required
             placeholder="Edita tu telefono"
             value={userData.telefono}
@@ -162,7 +166,7 @@ const UserPerfil = () => {
             <ErrorMsg>El telefono debe tener minimo 8 numeros</ErrorMsg>
           ) : null}
 
-          <Label>Edita tu Localidad</Label>
+          <Label>Edita tu localidad</Label>
           <Inputs
             type="text"
             required
@@ -173,7 +177,32 @@ const UserPerfil = () => {
           {existLocalidad === true ? (
             <ErrorMsg>La localidad debe tener minimo 4 letras</ErrorMsg>
           ) : null}
+          
+          <Label>Edita tu calle</Label>
+          <Inputs
+            type="text"
+            required
+            placeholder="Ingresa tú calle"
+            value={capitalize(userData.calle)}
+            onChange={(e) => handleChange(e, "calle")}
+          />
+          {existCalle === true ? (
+            <ErrorMsg>La dirección debe tener minimo 4 letras</ErrorMsg>
+          ) : null}
 
+          <Label>Edita tu número de puerta</Label>
+          <Inputs
+            type="number"
+            required
+            placeholder="Ingresa tú número de puerta"
+            value={userData.numero}
+            onChange={(e) => handleChange(e, "numero")}
+          />
+          {existNumero === true ? (
+            <ErrorMsg>El número debe tener minimo 4</ErrorMsg>
+          ) : null}
+
+          
 
 
 
