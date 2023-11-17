@@ -141,24 +141,3 @@ export const LetterAvatar = styled.div`
   color: white;
   align-self: center;
 `;
-
-export const ButtonLoggout = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  background-color: #999;
-  font-size: 14px;
-  width: 100px;
-  height: 2opx;
-  border-radius: 8px;
-  border: none;
-  margin-top: 4px;
-
-  &:hover {
-    background-color: white;
-    color: black;
-  }
-`;

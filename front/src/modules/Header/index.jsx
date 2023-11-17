@@ -12,13 +12,12 @@ import {
   TitleWrapper,
   LetterAvatar,
   LetterContainer,
-  ButtonLoggout,
 } from "./header.style";
 
 import NavBar from "../MenuBurger/navbar"
 import NavBarUser from "../MenuBurger/NavBarUser";
 import logo from "../../assets/alquicancha.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
@@ -60,8 +59,7 @@ const Header = () => {
       <div>
         {logged ? (
           <LetterContainer onClick={handleClick}>
-            <LetterAvatar> {initials} </LetterAvatar>
-            {! isAdmin && <p>Usuario</p>} 
+            <LetterAvatar> {initials} </LetterAvatar> 
             {isAdmin && <p>Administrador</p>}
             <LoginRegisterMenuUser  >
             <NavBarUser open={open}/>                                                  
