@@ -7,7 +7,7 @@ const Card = ({ category }) => {
   return (
     <CardWrapper>
       <div className="imgContainer">
-        <img src={logo} alt={alt} />
+        <img src={logo} alt={alt} /> 
       </div>
       <p>{title}</p>
     </CardWrapper>
