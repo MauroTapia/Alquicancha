@@ -3,7 +3,8 @@
     "id": 1,
     "title": "Canchas",
     "image": "./cancha.svg",
-    "alt": "Categoria Canchas"
+    "alt": "Categoria Canchas",
+    "logo": ""
   },
   {
     "id": 2,
