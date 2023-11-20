@@ -27,7 +27,7 @@ import Footer from "../../modules/Footer/index";
 
 const customStyles = {
   content: {
-    top: '60%',
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
