@@ -4,30 +4,34 @@
     "title": "Canchas",
     "image": "./cancha.svg",
     "alt": "Categoria Canchas",
-    "logo": ""
+    "logo": "./cancha.svg"
   },
   {
     "id": 2,
     "title": "Accesorios",
     "image": "./ball.svg",
-    "alt": "Categoria Accesorios"
+    "alt": "Categoria Accesorios",
+    "logo": "./ball.svg"
   },
   {
     "id": 3,
     "title": "Indumentaria",
     "image": "./ropa.svg",
-    "alt": "Categoria Indumentaria"
+    "alt": "Categoria Indumentaria",
+    "logo": "./ropa.svg"
   },
   {
     "id": 4,
     "title": "Parrilleros",
     "image": "./parrilla.svg",
-    "alt": "Categoria Parrilleros"
+    "alt": "Categoria Parrilleros",
+    "logo": "./parrilla.svg"
   },
   {
     "id": 5,
     "title": "Personal",
     "image": "./arbitro.svg",
-    "alt": "Categoria Personal"
+    "alt": "Categoria Personal",
+    "logo": "./arbitro.svg"
   }
 ]
