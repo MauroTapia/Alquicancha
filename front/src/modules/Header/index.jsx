@@ -14,8 +14,6 @@ import {
   LetterContainer,
 } from "./header.style";
 
-// probando
-
 import NavBar from "../MenuBurger/navbar"
 import NavBarUser from "../MenuBurger/NavBarUser";
 import logo from "../../assets/alquicancha.png";
