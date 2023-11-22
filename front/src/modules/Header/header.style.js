@@ -130,13 +130,13 @@ export const LetterContainer = styled.div`
 `;
 
 export const LetterAvatar = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #006400;
-  font-size: 32px;
+  font-size: 28px;
   border-radius: 50%;
   color: white;
   align-self: center;

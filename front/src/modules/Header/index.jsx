@@ -29,11 +29,14 @@ const Header = () => {
   const scrolledDown = useScrollDetector();
   const [initials, setInitials] = useState("");
   
+  
   useEffect(()=>{
     if(user){
-      const primerasLetras = Object.values(user).map(valor => valor[0]);
+      if (user === user){
+      const primerasLetras = Object.values(user).slice(0, 3).map(valor => valor[0]);
       const resultado = primerasLetras.join('');
       setInitials(resultado.toUpperCase());
+      }else{   };
     }
   },[user])
 
