@@ -17,6 +17,13 @@ import { loginUser } from "../../services/users";
 import { ContextGlobal } from "../../context/context";
 import Footer from "../../modules/Footer/index";
 
+const usersMock = [
+  {
+    email: "admin@admin.com",
+    password: "123456",
+  },
+];
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -24,11 +31,24 @@ const Login = () => {
   const [password, setPassword] = useState(null);
   const [errors, setErrors] = useState([]);
 
-  const { loginAdmin, login, setUserData } = useContext(ContextGlobal).contextValue;
+  const { loginAdmin, login, setUserData, user } =
+    useContext(ContextGlobal).contextValue;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const checkMockUsers = (user, pass) => {
+    const foundUser = usersMock.find(
+      (u) => u.email === user && u.password === pass
+    );
+
+    if (foundUser) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const checkUser = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,40 +79,41 @@ const Login = () => {
   };
 
   const CheckUserExist = async (user, pass) => {
-    const userLogged = await loginUser(user, pass);
-
-    if (userLogged) {
-      login();
-      const userName = userLogged.nombre;
-      const admin = userLogged.admin;
-      setUserData({
-        name: userLogged.nombre,
-        surname: userLogged.apellido,
-      })
-      admin && loginAdmin();
-
-      Swal.fire({
-        title: "Ingreso correcto!",
-        text: `Hola, ${userName} bienvenido!`,
-        icon: "success",
-        confirmButtonText: `Ir a ${admin ? "Dashboard" : "Home"}`,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          if (admin) {
-            navigate("/administracion");
-          } else {
-            navigate("/");
-          }
-        }
-      });
+    if (checkMockUsers(user, pass)) {
+      loginAdmin();
+      navigate("/administracion");
     } else {
-      Swal.fire({
-        title: "Error!",
-        text: `Usuario o contraseña incorrectos`,
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
+      const userLogged = await loginUser(user, pass);
+      
+      if (userLogged) {
+        login();
+        const userName = userLogged.nombre;
+        const admin = userLogged.admin;
+        setUserData(userLogged);
+        admin && loginAdmin();
+
+        Swal.fire({
+          title: "Ingreso correcto!",
+          text: `Hola, ${userName} bienvenido!`,
+          icon: "success",
+          confirmButtonText: `Ir a ${admin ? "Dashboard" : "Home"}`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (admin) {
+              navigate("/administracion");
+            } else {
+              navigate("/");
+            }
+          }
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: `Usuario o contraseña incorrectos`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
     }
   };
 

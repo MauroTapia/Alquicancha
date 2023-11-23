@@ -28,6 +28,7 @@ export const LogoWrapper = styled.div`
 
   @media (max-width: 600px) {
     padding: 0;
+    
   }
 `;
 
@@ -101,8 +102,25 @@ export const LoginRegisterMenu = styled.div`
   }
 `;
 
+export const LoginRegisterMenuUser = styled.div`
+  
+  display: flex;
+  height: 30px;
+  width: 40%;
+  gap: 16px;
+  margin-right: 32px;
+  cursor: pointer;
+  
+  &:hover {
+    img {
+      filter: invert(1) sepia(0) hue-rotate(20deg) saturate(1000%);
+    }
+  }
+`;
+
 export const LetterContainer = styled.div`
   margin-right: 32px;
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   width: 100px;
@@ -111,36 +129,16 @@ export const LetterContainer = styled.div`
   cursor: pointer;
 `;
 
+
 export const LetterAvatar = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #006400;
-  font-size: 32px;
+  font-size: 28px;
   border-radius: 50%;
   color: white;
   align-self: center;
-`;
-
-export const ButtonLoggout = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  background-color: #999;
-  font-size: 14px;
-  width: 100px;
-  height: 2opx;
-  border-radius: 8px;
-  border: none;
-  margin-top: 4px;
-
-  &:hover {
-    background-color: white;
-    color: black;
-  }
 `;

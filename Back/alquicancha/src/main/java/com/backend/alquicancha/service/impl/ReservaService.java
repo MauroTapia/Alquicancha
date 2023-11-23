@@ -3,6 +3,7 @@ package com.backend.alquicancha.service.impl;
 import com.backend.alquicancha.dto.ProductoDto;
 import com.backend.alquicancha.dto.UsuarioDto;
 import com.backend.alquicancha.dto.ReservaDto;
+import com.backend.alquicancha.dto.UsuarioDto;
 import com.backend.alquicancha.entity.Reserva;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
@@ -107,10 +108,11 @@ public class ReservaService implements IReservaService {
                     throw new BadRequestException("El producto no se encuentra en nuestra base de datos");
                 }
             } else {
-            reservaActualizar = reserva;
-            turnoRepository.save(reservaActualizar);
-            reservaDtoActualiazado = ReservaDto.fromTurno(reserva);
-            LOGGER.info("Turno actualizado con exito: {}", JsonPrinter.toString(reservaDtoActualiazado));}
+                reservaActualizar = reserva;
+                turnoRepository.save(reservaActualizar);
+                reservaDtoActualiazado = ReservaDto.fromTurno(reserva);
+                LOGGER.info("Turno actualizado con exito: {}", JsonPrinter.toString(reservaDtoActualiazado));
+            }
         } else {
             LOGGER.info("No se pudo actualizar, el turno no se encuentra registrado.");
             throw new ResourceNotFoundException("No se pudo actualizar, el turno no se encuentra registrado.");

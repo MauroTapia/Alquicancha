@@ -11,6 +11,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import { ButtonClose, ButtonContainer, Image } from "./imageModal.style";
 
 const ImageModal = ({ images, closeModal }) => {
+  console.log([images])
   return (
     <div>
       <Swiper

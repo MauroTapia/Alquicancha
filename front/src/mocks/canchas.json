@@ -31,13 +31,15 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       },
       {
-        "name": "Red"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       }
     ]
   },
@@ -73,13 +75,15 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Red"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
       }
     ]
   },
@@ -115,16 +119,19 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       }
     ]
   },
@@ -160,10 +167,11 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Alcanzapelotas"
+        "name": "Alcanzapelotas",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -199,16 +207,19 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -244,13 +255,15 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
       }
     ]
   },
@@ -286,7 +299,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[ ]
   },
   {
@@ -321,19 +334,23 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png" 
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -369,13 +386,15 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       }
     ]
   },
@@ -411,19 +430,23 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -459,16 +482,19 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -504,13 +530,15 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   }

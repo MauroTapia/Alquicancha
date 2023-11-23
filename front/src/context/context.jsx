@@ -1,12 +1,15 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 export const initialState = {
   theme: "light",
   logged: false,
   isAdmin: false,
   user: {
-    name: "",
-    surname: ""
+    nombre: "",
+    apellido: "",
+    dni: 0,
+    telefono: 0,
+    localidad: ""
   },
 };
 
@@ -21,6 +24,8 @@ export const ContextProvider = ({ children }) => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
+
+  
 
   const login = ()=>{
     setLogged(true);

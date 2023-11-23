@@ -10,6 +10,7 @@ import {
   Body,
   ProductDetails,
   TextDetails,
+  Categories,
   Caracteristicas,
   ButtonReserva,
   Included,
@@ -26,13 +27,13 @@ import Footer from "../../modules/Footer/index";
 
 const customStyles = {
   content: {
-    top: '50%',
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: '100%',
+    width: '50%',
     maxWidth: '1000px',
     height: '80vh',
   },
@@ -63,7 +64,9 @@ const ProductDetail = () => {
     return <p>Cargando...</p>;
   }
 
-  const { images, title, dayPrice, description, details } = product;
+  const { images, title, dayPrice, description, category, details } = product;
+
+  console.log([details.icon])
 
   const handleSecondaryImageClick = (index) => {
     if (selected !== index) {
@@ -94,38 +97,39 @@ const ProductDetail = () => {
         </Header>
         <Body>
           <Images>
-            <ImagesSecondaries>
-              {images.map((image, index) => (
-                <img
-                  src={image.img}
-                  alt={image.alt}
-                  key={index}
-                  onClick={() => handleSecondaryImageClick(index)}
-                  className={selected === index ? "selected" : ""}
-                />
-              ))}
-            </ImagesSecondaries>
 
             <ImagePrincipal>
               <img src={imagePrincipal} alt={images[0].alt} onClick={handleImageClick}/>
             </ImagePrincipal>
+
+            <ImagesSecondaries>
+              {images.map((image, index) => (
+                <img src={image.img} alt={image.alt} key={index} onClick={() => handleSecondaryImageClick(index)} className={selected === index ? "selected" : ""}
+                />
+              ))}
+            </ImagesSecondaries>
+            
           </Images>
 
           <ProductDetails>
             <TextDetails>{description}</TextDetails>
+            <Categories>Categoría: {category}</Categories>
             <Price>$ {dayPrice} x día</Price>
             {details.length ? (
-              <Caracteristicas>
-                <p>Que incluye:</p>
-                <ul>
-                  <Included>
-                    {details.map((detail, index) => (
-                      <li key={index}>{detail.name}</li>
-                    ))}
-                  </Included>
-                </ul>
-              </Caracteristicas>
-            ) : null}
+                  <Caracteristicas>
+                    <p>Que incluye:</p>
+                    <ul>
+                      <Included>
+                        {details.map((detail, index) => (
+                          <li key={index}>
+                            <img src={detail.icon}/>
+                            <p>{detail.name}</p>
+                          </li>
+                        ))}
+                      </Included>
+                    </ul>
+                  </Caracteristicas>
+                ) : null}
             <ButtonReserva>Reservar</ButtonReserva>
           </ProductDetails>
         </Body>
