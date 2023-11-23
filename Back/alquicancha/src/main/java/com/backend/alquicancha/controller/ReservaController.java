@@ -1,11 +1,11 @@
 package com.backend.alquicancha.controller;
 
-import com.backend.alquicancha.dto.ProductDto;
+import com.backend.alquicancha.dto.ProductoDto;
 import com.backend.alquicancha.dto.ReservaDto;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
 import com.backend.alquicancha.service.IReservaService;
-import com.backend.alquicancha.service.impl.ProductService;
+import com.backend.alquicancha.service.impl.ProductoService;
 import com.backend.alquicancha.service.impl.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,23 +22,23 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/turnos")
+@RequestMapping("/reservas")
 @CrossOrigin
-public class Reserva {
-    private IReservaService turnoService;
-    private UsuarioService pacienteService;
-    private ProductService odontologoService;
+public class ReservaController {
+    private IReservaService reservaService;
+    private UsuarioService usuarioService;
+    private ProductoService productoService;
 
     @Autowired
-    public Reserva(IReservaService turnoService) {
-        this.turnoService = turnoService;
+    public ReservaController(IReservaService turnoService) {
+        this.reservaService = turnoService;
     }
 
     @Operation(summary = "Listado de todos los turnos")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listado correcto",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "404", description = "Turnos no encontrados",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -46,7 +46,7 @@ public class Reserva {
     })
     @GetMapping()
     public List<ReservaDto> listarTurnos() {
-        return turnoService.listarTodos();
+        return reservaService.listarTodos();
     }
 
     // CREATE
@@ -54,7 +54,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Turno creado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -63,7 +63,7 @@ public class Reserva {
     @PostMapping("/registrar")
     public ResponseEntity<ReservaDto> guardarTurno(@Valid @RequestBody com.backend.alquicancha.entity.Reserva reserva) throws BadRequestException {
 
-        return new ResponseEntity<>(turnoService.guardarTurno(reserva), null, HttpStatus.CREATED);
+        return new ResponseEntity<>(reservaService.guardarTurno(reserva), null, HttpStatus.CREATED);
     }
 
     // READ
@@ -71,7 +71,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Turno encontrado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Turno no encontrado",
@@ -81,7 +81,7 @@ public class Reserva {
     })
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDto> buscarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
-        return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), null, HttpStatus.OK);
+        return new ResponseEntity<>(reservaService.buscarTurnoPorId(id), null, HttpStatus.OK);
     }
 
     // DELETE
@@ -89,7 +89,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Turno eliminado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -97,7 +97,7 @@ public class Reserva {
     })
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminarTurno(@PathVariable Long id) throws ResourceNotFoundException {
-        turnoService.eliminarTurno(id);
+        reservaService.eliminarTurno(id);
         return ResponseEntity.ok("Turno eliminado");
     }
 
@@ -106,7 +106,7 @@ public class Reserva {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Turno modificado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ProductDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -114,6 +114,6 @@ public class Reserva {
     })
     @PutMapping("/actualizar")
     public ResponseEntity<ReservaDto> actualizarTurno(@Valid @RequestBody com.backend.alquicancha.entity.Reserva reserva) throws ResourceNotFoundException, BadRequestException {
-        return new ResponseEntity<>(turnoService.actualizarTurno(reserva), null, HttpStatus.OK);
+        return new ResponseEntity<>(reservaService.actualizarTurno(reserva), null, HttpStatus.OK);
     }
 }

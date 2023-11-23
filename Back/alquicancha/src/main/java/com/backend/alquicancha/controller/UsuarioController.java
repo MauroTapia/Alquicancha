@@ -1,6 +1,6 @@
 package com.backend.alquicancha.controller;
 
-import com.backend.alquicancha.dto.ProductDto;
+import com.backend.alquicancha.dto.ProductoDto;
 import com.backend.alquicancha.dto.UsuarioDto;
 import com.backend.alquicancha.exceptions.BadRequestException;
 import com.backend.alquicancha.exceptions.ResourceNotFoundException;
@@ -22,12 +22,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 
-public class Usuario {
+public class UsuarioController {
 
     private IUsuarioService usuarioService;
 
     @Autowired
-    public Usuario(IUsuarioService usuarioService) {
+    public UsuarioController(IUsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
@@ -36,7 +36,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listado correcto",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "404", description = "Usuarios no encontrados",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",
@@ -52,7 +52,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuario encontrado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Usuario no encontrado",
@@ -69,7 +69,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Usuario logueado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Datos invalidos",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Loggin no correcto",
@@ -137,7 +137,7 @@ public class Usuario {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Usuario eliminado correctamente",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioDto.class))}),
+                            schema = @Schema(implementation = ProductoDto.class))}),
             @ApiResponse(responseCode = "400", description = "Id invalido",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Unexpected server error",

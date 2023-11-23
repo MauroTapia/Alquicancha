@@ -4,30 +4,32 @@ import com.backend.alquicancha.entity.Reserva;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReservaDto {
 
     private Long id;
-    private Long idPaciente;
-    private Long idOdontologo;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime fecha;
+    private Long idUsuario;
+    private Long idProducto;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDate fecha;
 
     public ReservaDto() {
     }
 
-    public ReservaDto(Long id, Long idPaciente, Long idOdontologo, LocalDateTime fecha) {
+    public ReservaDto(Long id, Long idUsuario,Long idProducto,LocalDate fecha) {
 
         this.id = id;
-        this.idPaciente = idPaciente;
-
-        this.idOdontologo = idOdontologo;
+        this.idUsuario = idUsuario;
+        this.idProducto = idProducto;
         this.fecha = fecha;
+
     }
 
-    public ReservaDto(UsuarioDto pacienteTurno, ProductDto odontologoTurno, LocalDateTime fecha) {
+    public ReservaDto(UsuarioDto usuarioTurno, ProductoDto productoTurno, LocalDate fecha) {
     }
 
     public Long getId() {
@@ -38,33 +40,33 @@ public class ReservaDto {
         this.id = id;
     }
 
-    public Long getPaciente() {
-        return idPaciente;
+    public Long getUsuario() {
+        return idUsuario;
     }
 
-    public void setPaciente(Long paciente) {
-        this.idPaciente = idPaciente;
+    public void setUsuario(Long usuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Long getOdontologo() {
-        return idOdontologo;
+    public Long getIdProducto() {
+        return idProducto;
     }
 
-    public void setOdontologo(Long odontologo) {
-        this.idOdontologo = idOdontologo;
+    public void setIdProducto(Long producto) {
+        this.idProducto = idProducto;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
     public static ReservaDto fromTurno(Reserva reserva) {
-        Long paciente = reserva.getUsuario().getId();
-        Long odontologo = reserva.getProducto().getId();
-        return new ReservaDto(reserva.getId(), paciente, odontologo, reserva.getFecha());
+        Long usuario = reserva.getUsuario().getId();
+        Long producto = reserva.getProducto().getId();
+        return new ReservaDto(reserva.getId(), usuario, producto, reserva.getFecha());
     }
 }

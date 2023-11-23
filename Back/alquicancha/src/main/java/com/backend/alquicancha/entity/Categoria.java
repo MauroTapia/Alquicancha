@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "CATEGORIAS")
+@Table(name = "categorias")
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,22 +19,33 @@ public class Categoria {
     @NotBlank(message = "Debe especificarse un nombre")
     private String nombre;
 
-    @Size(max = 50, message = "La imagen debe tener hasta 50 caracteres")
-    @NotNull(message = "La imagen no puede ser nulo")
-    @NotBlank(message = "Debe especificarse una imagen")
+
     private String imagen;
+
+    @ManyToMany
+    private Set<Producto> productos = new HashSet<>();
+
 
     public Categoria() {
     }
 
-    public Categoria(Long id, String nombre, String imagen) {
-        this.id = id;
+    public Categoria(String nombre, String imagen, Set<Producto> productos) {
         this.nombre = nombre;
         this.imagen = imagen;
+        this.productos = productos;
     }
+    public Categoria(String nombre, Set<Producto> productos) {
+        this.nombre = nombre;
+        this.productos = productos;
+    }
+
     public Categoria(String nombre, String imagen) {
         this.nombre = nombre;
         this.imagen = imagen;
+    }
+
+    public Categoria(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombre() {
@@ -56,6 +67,22 @@ public class Categoria {
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public void addProducto(Producto producto) {
+        this.productos.add(producto);
+    }
+
+    public void removeProducto(Producto producto) {
+        this.productos.remove(producto);
     }
 
 

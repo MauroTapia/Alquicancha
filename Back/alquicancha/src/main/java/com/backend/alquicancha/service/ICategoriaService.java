@@ -1,22 +1,19 @@
 package com.backend.alquicancha.service;
 
-import com.backend.alquicancha.dto.CategoriaDto;
 import com.backend.alquicancha.entity.Categoria;
-import com.backend.alquicancha.exceptions.BadRequestException;
-import com.backend.alquicancha.exceptions.ResourceNotFoundException;
 
-import javax.validation.Valid;
 import java.util.List;
 
 public interface ICategoriaService {
+    Categoria buscarCategoriaPorId(Long id);
 
-    CategoriaDto guardarCategoria(com.backend.alquicancha.entity.Categoria categoria) throws BadRequestException;
+    List<Categoria> listarCategorias();
 
-    List<CategoriaDto> listarCategorias();
+    Categoria guardarCategoria(String nombre);
 
-    void eliminarCategoria(Long id) throws ResourceNotFoundException;
+    void eliminarCategoria(Long id);
 
-    CategoriaDto buscarCategoria(Long id);
+    Categoria actualizarCategoria(Long id, Categoria categoria);
 
-    CategoriaDto actualizarCategoria(@Valid Categoria categoria, Long id) throws ResourceNotFoundException;
+
 }
