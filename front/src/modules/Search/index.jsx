@@ -20,8 +20,9 @@ const Search = () => {
       <SearchWrapper>
         <SearchInput
           type="text"
-          placeholder="Busca aquí la cancha que necesitas"
+          placeholder="Busca aquí lo que necesitas"
         />
+        
         <div style={{display:"flex", gap:5}}>
           <DateForm>
             <Label htmlFor="start">Desde: </Label>
@@ -31,10 +32,9 @@ const Search = () => {
             <Label htmlFor="end">Hasta:</Label>
             <Input type="date" id="end" />
           </DateForm>
-
           <ButtonSearch type="submit">
             <LupaImg src={lupa} alt="" />
-          </ButtonSearch>
+          </ButtonSearch>          
         </div>
       </SearchWrapper>
     </form>

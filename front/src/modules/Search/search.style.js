@@ -42,6 +42,12 @@ export const SearchInput = styled.input`
   @media(max-width: 950px){
     width: 100%;
   }
+
+  @media all and (max-width: 450px) {
+    width: 90%;
+    font-size: 15px;
+    margin-left: -10%
+    }
 `;
 export const Input = styled.input`
   width: 75%;
@@ -49,12 +55,22 @@ export const Input = styled.input`
   border-radius: 8px;
   border: none;
   font-size: 15px;
+
+  @media all and (max-width: 450px) {
+    width: 100%;
+    font-size: 15px;
+    }
 ;`
 
 
 export const DateForm = styled.div`
   display: flex;
   justify-content: start;
+  
+  @media all and (max-width: 450px) {
+  display: inline-block;
+  font-size: 15px;
+  }
 `;
 
 export const ButtonSearch = styled.button`
@@ -66,8 +82,13 @@ export const ButtonSearch = styled.button`
   justify-content: center;
   border: none;
   border-radius: 8px;
+
+  @media all and (max-width: 450px) {
+    margin-top: -51px;
+    }
+
 `;
 
 export const LupaImg = styled.img`
-  
+
 `;

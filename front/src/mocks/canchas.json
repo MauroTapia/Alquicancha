@@ -31,7 +31,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Alcanzapelota",
@@ -75,7 +75,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -119,7 +119,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -167,7 +167,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Alcanzapelotas",
@@ -207,7 +207,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -255,7 +255,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -299,7 +299,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[ ]
   },
   {
@@ -334,7 +334,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -386,7 +386,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -430,7 +430,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -482,7 +482,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Redes",
@@ -530,7 +530,7 @@
       "dateStart": "",
       "dateEnd": ""
     },
-    "category": 1,
+    "category": "Canchas",
     "details":[
       {
         "name": "Iluminación",

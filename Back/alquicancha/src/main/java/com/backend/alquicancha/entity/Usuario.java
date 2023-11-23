@@ -47,7 +47,8 @@ public class Usuario {
     @Min(value = 1, message = "El DNI debe ser un número entero mayor o igual a 1.")
     private int dni;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-//    @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
+    //@FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
+    // Se quito validación de fecha menor a la del día para poder editar usuario desde el front
     @NotNull(message = "Debe especificarse la fecha de ingreso del usuario")
     private LocalDate fechaIngreso;
 
@@ -83,6 +84,17 @@ public class Usuario {
         this.email = email;
         this.telefono = phone;
         this.fechaIngreso = fechaIngreso;
+        this.isAdmin = isAdmin;
+        this.calle = calle;
+        this.numero = numero;
+        this.localidad = localidad;
+    }
+    public Usuario(String nombre, String apellido, String email, String phone, int dni, boolean isAdmin, String calle, int numero, String localidad) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.email = email;
+        this.telefono = phone;
         this.isAdmin = isAdmin;
         this.calle = calle;
         this.numero = numero;

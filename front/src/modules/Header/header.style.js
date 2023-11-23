@@ -131,36 +131,14 @@ export const LetterContainer = styled.div`
 
 
 export const LetterAvatar = styled.div`
-  padding: 20px;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #006400;
-  font-size: 25px;
+  font-size: 28px;
   border-radius: 50%;
   color: white;
   align-self: center;
-`;
-
-export const ButtonLoggout = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  background-color: #999;
-  font-size: 14px;
-  width: 100px;
-  height: 2opx;
-  border-radius: 8px;
-  border: none;
-  margin-top: 4px;
-
-  &:hover {
-    background-color: white;
-    color: black;
-  }
 `;
