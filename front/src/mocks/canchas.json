@@ -34,10 +34,12 @@
     "category": 1,
     "details":[
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       },
       {
-        "name": "Red"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       }
     ]
   },
@@ -76,11 +78,12 @@
     "category": 1,
     "details":[
       {
-        "name": "Red"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
         "name": "Iluminación",
-        "cant": "2"
+        "icon": "/icons/iluminacion.png"
       }
     ]
   },
@@ -119,14 +122,16 @@
     "category": 1,
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
         "name": "Iluminación",
-        "icon": "/icon/iluminacion.png"
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       }
     ]
   },
@@ -165,7 +170,8 @@
     "category": 1,
     "details":[
       {
-        "name": "Alcanzapelotas"
+        "name": "Alcanzapelotas",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -204,13 +210,16 @@
     "category": 1,
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -249,11 +258,12 @@
     "category": 1,
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
         "name": "Iluminación",
-        "cant": "2"
+        "icon": "/icons/iluminacion.png"
       }
     ]
   },
@@ -327,17 +337,20 @@
     "category": 1,
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
         "name": "Iluminación",
-        "cant": "2"
+        "icon": "/icons/iluminacion.png" 
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -376,10 +389,12 @@
     "category": 1,
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       }
     ]
   },
@@ -418,17 +433,20 @@
     "category": 1,
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
         "name": "Iluminación",
-        "cant": "2"
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Indicador luminico"
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -467,14 +485,16 @@
     "category": 1,
     "details":[
       {
-        "name": "Redes"
+        "name": "Redes",
+        "icon": "/icons/redes.png"
       },
       {
         "name": "Iluminación",
-        "cant": 2
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   },
@@ -514,10 +534,11 @@
     "details":[
       {
         "name": "Iluminación",
-        "cant": "2"
+        "icon": "/icons/iluminacion.png"
       },
       {
-        "name": "Alcanzapelota"
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
       }
     ]
   }

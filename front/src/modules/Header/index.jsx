@@ -12,18 +12,13 @@ import {
   TitleWrapper,
   LetterAvatar,
   LetterContainer,
-  ButtonLoggout,
 } from "./header.style";
 
 import NavBar from "../MenuBurger/navbar"
 import NavBarUser from "../MenuBurger/NavBarUser";
-import logo from "../../assets/alquicancha.png";
-<<<<<<< Updated upstream
-import { Link, useNavigate } from "react-router-dom";
-=======
 import MenuButton from "../MenuBurger/menuBurger";
+import logo from "../../assets/alquicancha.png";
 import { Link } from "react-router-dom";
->>>>>>> Stashed changes
 import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
@@ -34,12 +29,14 @@ const Header = () => {
   const scrolledDown = useScrollDetector();
   const [initials, setInitials] = useState("");
   
+  
   useEffect(()=>{
-    if(user.nombre && user.apellido){
-      const primerasLetra = user.nombre[0];
-      const segundaLetra = user.apellido[0];
-      const resultado = primerasLetra + segundaLetra;
+    if(user){
+      if (user === user){
+      const primerasLetras = Object.values(user).slice(0, 3).map(valor => valor[0]);
+      const resultado = primerasLetras.join('');
       setInitials(resultado.toUpperCase());
+      }else{   };
     }
   },[user])
 
@@ -66,12 +63,7 @@ const Header = () => {
       <div>
         {logged ? (
           <LetterContainer onClick={handleClick}>
-<<<<<<< Updated upstream
-            <LetterAvatar> {initials} </LetterAvatar>
-            {! isAdmin && <p>Usuario</p>} 
-=======
-           <LetterAvatar> {initials} </LetterAvatar> 
->>>>>>> Stashed changes
+            <LetterAvatar> {initials} </LetterAvatar> 
             {isAdmin && <p>Administrador</p>}
             <LoginRegisterMenuUser  >
             <NavBarUser open={open}/>                                                  
@@ -87,7 +79,7 @@ const Header = () => {
                 <Link to={"/login"}>Iniciar sesión</Link>
               </Login>
             </LoginRegister>
-            <MenuButton handleClick={handleClick}/>
+            < MenuButton handleClick={handleClick}/>
             <LoginRegisterMenu >
             <NavBar open={open} />                          
           </LoginRegisterMenu>

@@ -17,18 +17,18 @@ import { ContextGlobal } from "../../context/context";
 const UserPerfil = () => {
     const navigate = useNavigate();
 
-    const { user } = useContext(ContextGlobal).contextValue;
+    const { user, setUserData } = useContext(ContextGlobal).contextValue;
 
     const [ miUsuario, setMiUsuario ] = useState({});
 
     useEffect(() => {
       setMiUsuario(user);
       //  console.log(user.nombre);
-  }, [user]);
+  }, []);
 
     // console.log(miUsuario)
 
-    const [userData, setUserData] = useState({
+    const [newUserData, setNewUserData] = useState({
       nombre: user.nombre || "",
       apellido: user.apellido || "",
       dni: user.dni || "",
@@ -55,20 +55,20 @@ const UserPerfil = () => {
   
   
     const checkName = () => {
-      if (userData.nombre.length < 4) {
+      if (newUserData.nombre.length < 4) {
         setErrors((prevErrors) => [...prevErrors, ["nombre"]]);
       }
     };
   
     const checkSurname = () => {
-      if (userData.apellido.length < 4) {
+      if (newUserData.apellido.length < 4) {
         setErrors((prevErrors) => [...prevErrors, ["apellido"]]);
       }
     };
   
   
     const handleChange = (e, field) =>{
-      setUserData((prevUserData) => ({ ...prevUserData, [field]: e.target.value }));
+      setNewUserData((prevUserData) => ({ ...prevUserData, [field]: e.target.value }));
       setErrors([]);
     }
   
@@ -81,10 +81,11 @@ const UserPerfil = () => {
   
       setErrors((prevErrors) => {
         if (prevErrors.length === 0) {
-          const userEdit = {  ...user,...userData}
+          const userEdit = {  ...user,...newUserData}
           editUser(userEdit, user.id);
+          setUserData(userEdit)
           setMiUsuario(userEdit);
-          // console.log(userEdit)
+          console.log(userEdit)
           Swal.fire({
             title: "Usuario editado!",
             text: `El usuario a sido editado correctamente!`,
@@ -111,8 +112,6 @@ const UserPerfil = () => {
       return s && s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     }
 
-
-
   return (
     <form onSubmit={handleSubmit}>
         <LoginWrapper>
@@ -125,7 +124,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder={"Ingresa tú nombre"}
-            value={capitalize(userData.nombre)}
+            value={capitalize(newUserData.nombre)}
             onChange={(e) => handleChange(e, "nombre")}
           />
           {existName === true ? (
@@ -137,7 +136,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder="Ingresa tú apellido"
-            value={capitalize(userData.apellido)}
+            value={capitalize(newUserData.apellido)}
             onChange={(e) => handleChange(e, "apellido")}
           />
           {existSurname === true ? (
@@ -149,7 +148,7 @@ const UserPerfil = () => {
             type="number"
             required
             placeholder="Edita tu dni"
-            value={userData.dni}
+            value={newUserData.dni}
             onChange={(e) => handleChange(e, "dni")}
           />
           {existDni === true ? (
@@ -161,7 +160,7 @@ const UserPerfil = () => {
             type="string"
             required
             placeholder="Edita tu telefono"
-            value={userData.telefono}
+            value={newUserData.telefono}
             onChange={(e) => handleChange(e, "telefono")}
           />
           {existTelefono === true ? (
@@ -173,7 +172,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder="Ingresa tú localidad"
-            value={capitalize(userData.localidad)}
+            value={capitalize(newUserData.localidad)}
             onChange={(e) => handleChange(e, "localidad")}
           />
           {existLocalidad === true ? (
@@ -185,7 +184,7 @@ const UserPerfil = () => {
             type="text"
             required
             placeholder="Ingresa tú calle"
-            value={capitalize(userData.calle)}
+            value={capitalize(newUserData.calle)}
             onChange={(e) => handleChange(e, "calle")}
           />
           {existCalle === true ? (
@@ -197,7 +196,7 @@ const UserPerfil = () => {
             type="number"
             required
             placeholder="Ingresa tú número de puerta"
-            value={userData.numero}
+            value={newUserData.numero}
             onChange={(e) => handleChange(e, "numero")}
           />
           {existNumero === true ? (
