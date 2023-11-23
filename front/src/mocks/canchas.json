@@ -79,7 +79,8 @@
         "name": "Red"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "cant": "2"
       }
     ]
   },
@@ -121,7 +122,8 @@
         "name": "Redes"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "icon": "/icon/iluminacion.png"
       },
       {
         "name": "Indicador luminico"
@@ -250,7 +252,8 @@
         "name": "Redes"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "cant": "2"
       }
     ]
   },
@@ -327,7 +330,8 @@
         "name": "Redes"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "cant": "2"
       },
       {
         "name": "Indicador luminico"
@@ -417,7 +421,8 @@
         "name": "Redes"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "cant": "2"
       },
       {
         "name": "Indicador luminico"
@@ -465,7 +470,8 @@
         "name": "Redes"
       },
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "cant": 2
       },
       {
         "name": "Alcanzapelota"
@@ -507,7 +513,8 @@
     "category": 1,
     "details":[
       {
-        "name": "Iluminación"
+        "name": "Iluminación",
+        "cant": "2"
       },
       {
         "name": "Alcanzapelota"

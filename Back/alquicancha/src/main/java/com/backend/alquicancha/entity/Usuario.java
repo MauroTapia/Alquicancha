@@ -47,7 +47,7 @@ public class Usuario {
     @Min(value = 1, message = "El DNI debe ser un número entero mayor o igual a 1.")
     private int dni;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
+//    @FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
     @NotNull(message = "Debe especificarse la fecha de ingreso del usuario")
     private LocalDate fechaIngreso;
 

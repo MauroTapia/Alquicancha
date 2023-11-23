@@ -24,7 +24,7 @@ const UserPerfil = () => {
     useEffect(() => {
       setMiUsuario(user);
       //  console.log(user.nombre);
-  }, []);
+  }, [user]);
 
     // console.log(miUsuario)
 
@@ -84,7 +84,7 @@ const UserPerfil = () => {
           const userEdit = {  ...user,...userData}
           editUser(userEdit, user.id);
           setMiUsuario(userEdit);
-          console.log(userEdit)
+          // console.log(userEdit)
           Swal.fire({
             title: "Usuario editado!",
             text: `El usuario a sido editado correctamente!`,
@@ -110,6 +110,8 @@ const UserPerfil = () => {
     function capitalize(s) {
       return s && s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     }
+
+
 
   return (
     <form onSubmit={handleSubmit}>

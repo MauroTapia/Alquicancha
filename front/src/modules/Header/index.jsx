@@ -18,7 +18,12 @@ import {
 import NavBar from "../MenuBurger/navbar"
 import NavBarUser from "../MenuBurger/NavBarUser";
 import logo from "../../assets/alquicancha.png";
+<<<<<<< Updated upstream
 import { Link, useNavigate } from "react-router-dom";
+=======
+import MenuButton from "../MenuBurger/menuBurger";
+import { Link } from "react-router-dom";
+>>>>>>> Stashed changes
 import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
@@ -61,8 +66,12 @@ const Header = () => {
       <div>
         {logged ? (
           <LetterContainer onClick={handleClick}>
+<<<<<<< Updated upstream
             <LetterAvatar> {initials} </LetterAvatar>
             {! isAdmin && <p>Usuario</p>} 
+=======
+           <LetterAvatar> {initials} </LetterAvatar> 
+>>>>>>> Stashed changes
             {isAdmin && <p>Administrador</p>}
             <LoginRegisterMenuUser  >
             <NavBarUser open={open}/>                                                  
@@ -78,6 +87,7 @@ const Header = () => {
                 <Link to={"/login"}>Iniciar sesión</Link>
               </Login>
             </LoginRegister>
+            <MenuButton handleClick={handleClick}/>
             <LoginRegisterMenu >
             <NavBar open={open} />                          
           </LoginRegisterMenu>

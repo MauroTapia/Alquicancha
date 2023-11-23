@@ -17,17 +17,31 @@ import { Navigation } from "swiper/modules";
 
 const ProductCard = ({ product }) => {
   const { images, title, dayPrice, id } = product;
+  // console.log([images, title, dayPrice])
 
   return (
     <CardContainer>
       <Title>{title}</Title>
 
+<<<<<<< Updated upstream
       <Swiper navigation={true} loop modules={Navigation}>
         {images && 
           images.map((imgage, index) => (
+=======
+      <Swiper
+        slidesPerView={1}
+        pagination={{
+          clickable: true,
+        }}
+        loop={true}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        >
+        {images && images.map((image, index) => (
+>>>>>>> Stashed changes
             <SwiperSlide key={index}>
               <ImageWrapper>
-                <ProductImage src={imgage.img} alt={images.alt} />
+                <ProductImage src={image.img} alt={image.alt} />
               </ImageWrapper>
             </SwiperSlide>
           ))}
