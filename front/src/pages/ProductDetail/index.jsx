@@ -66,6 +66,8 @@ const ProductDetail = () => {
 
   const { images, title, dayPrice, description, category, details } = product;
 
+  console.log([details.icon])
+
   const handleSecondaryImageClick = (index) => {
     if (selected !== index) {
       setImagePrincipal(images[index].img);
@@ -102,12 +104,7 @@ const ProductDetail = () => {
 
             <ImagesSecondaries>
               {images.map((image, index) => (
-                <img
-                  src={image.img}
-                  alt={image.alt}
-                  key={index}
-                  onClick={() => handleSecondaryImageClick(index)}
-                  className={selected === index ? "selected" : ""}
+                <img src={image.img} alt={image.alt} key={index} onClick={() => handleSecondaryImageClick(index)} className={selected === index ? "selected" : ""}
                 />
               ))}
             </ImagesSecondaries>
@@ -119,17 +116,20 @@ const ProductDetail = () => {
             <Categories>Categoría: {category}</Categories>
             <Price>$ {dayPrice} x día</Price>
             {details.length ? (
-              <Caracteristicas>
-                <p>Que incluye:</p>
-                <ul>
-                  <Included>
-                    {details.map((detail, index) => (
-                      <li key={index}>{detail.name}</li>
-                    ))}
-                  </Included>
-                </ul>
-              </Caracteristicas>
-            ) : null}
+                  <Caracteristicas>
+                    <p>Que incluye:</p>
+                    <ul>
+                      <Included>
+                        {details.map((detail, index) => (
+                          <li key={index}>
+                            <img src={detail.icon}/>
+                            <p>{detail.name}</p>
+                          </li>
+                        ))}
+                      </Included>
+                    </ul>
+                  </Caracteristicas>
+                ) : null}
             <ButtonReserva>Reservar</ButtonReserva>
           </ProductDetails>
         </Body>

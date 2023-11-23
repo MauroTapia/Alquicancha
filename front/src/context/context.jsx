@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 export const initialState = {
   theme: "light",
@@ -24,6 +24,8 @@ export const ContextProvider = ({ children }) => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
+
+  
 
   const login = ()=>{
     setLogged(true);

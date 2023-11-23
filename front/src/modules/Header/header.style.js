@@ -28,6 +28,7 @@ export const LogoWrapper = styled.div`
 
   @media (max-width: 600px) {
     padding: 0;
+    
   }
 `;
 
@@ -126,8 +127,8 @@ export const LetterContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
 `;
+
 
 export const LetterAvatar = styled.div`
   width: 70px;

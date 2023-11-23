@@ -18,6 +18,7 @@ import { Pagination, Navigation } from "swiper/modules";
 
 const ProductCard = ({ product }) => {
   const { images, title, dayPrice, id } = product;
+  // console.log([images, title, dayPrice])
 
   return (
     <CardContainer>
@@ -35,7 +36,7 @@ const ProductCard = ({ product }) => {
         {images && images.map((imgage, index) => (
             <SwiperSlide key={index}>
               <ImageWrapper>
-                <ProductImage src={imgage.img} alt={images.alt} />
+                <ProductImage src={image.img} alt={image.alt} />
               </ImageWrapper>
             </SwiperSlide>
           ))}
