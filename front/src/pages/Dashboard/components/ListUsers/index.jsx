@@ -26,7 +26,7 @@ const ListUsers = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [users]);
 
   const notify = (msj) => {
     toast.success(msj, {
