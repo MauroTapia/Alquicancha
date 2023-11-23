@@ -22,16 +22,16 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/turnos")
+@RequestMapping("/reservas")
 @CrossOrigin
 public class ReservaController {
-    private IReservaService turnoService;
+    private IReservaService reservaService;
     private UsuarioService usuarioService;
     private ProductoService productoService;
 
     @Autowired
     public ReservaController(IReservaService turnoService) {
-        this.turnoService = turnoService;
+        this.reservaService = turnoService;
     }
 
     @Operation(summary = "Listado de todos los turnos")
@@ -46,7 +46,7 @@ public class ReservaController {
     })
     @GetMapping()
     public List<ReservaDto> listarTurnos() {
-        return turnoService.listarTodos();
+        return reservaService.listarTodos();
     }
 
     // CREATE
@@ -63,7 +63,7 @@ public class ReservaController {
     @PostMapping("/registrar")
     public ResponseEntity<ReservaDto> guardarTurno(@Valid @RequestBody com.backend.alquicancha.entity.Reserva reserva) throws BadRequestException {
 
-        return new ResponseEntity<>(turnoService.guardarTurno(reserva), null, HttpStatus.CREATED);
+        return new ResponseEntity<>(reservaService.guardarTurno(reserva), null, HttpStatus.CREATED);
     }
 
     // READ
@@ -81,7 +81,7 @@ public class ReservaController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDto> buscarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
-        return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), null, HttpStatus.OK);
+        return new ResponseEntity<>(reservaService.buscarTurnoPorId(id), null, HttpStatus.OK);
     }
 
     // DELETE
@@ -97,7 +97,7 @@ public class ReservaController {
     })
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminarTurno(@PathVariable Long id) throws ResourceNotFoundException {
-        turnoService.eliminarTurno(id);
+        reservaService.eliminarTurno(id);
         return ResponseEntity.ok("Turno eliminado");
     }
 
@@ -114,6 +114,6 @@ public class ReservaController {
     })
     @PutMapping("/actualizar")
     public ResponseEntity<ReservaDto> actualizarTurno(@Valid @RequestBody com.backend.alquicancha.entity.Reserva reserva) throws ResourceNotFoundException, BadRequestException {
-        return new ResponseEntity<>(turnoService.actualizarTurno(reserva), null, HttpStatus.OK);
+        return new ResponseEntity<>(reservaService.actualizarTurno(reserva), null, HttpStatus.OK);
     }
 }

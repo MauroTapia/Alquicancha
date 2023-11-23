@@ -2,6 +2,7 @@ package com.backend.alquicancha.service;
 
 import com.backend.alquicancha.dto.ProductoDto;
 import com.backend.alquicancha.entity.Categoria;
+import com.backend.alquicancha.entity.Especificacion;
 import com.backend.alquicancha.entity.Imagen;
 import com.backend.alquicancha.entity.Producto;
 import com.backend.alquicancha.exceptions.BadRequestException;
@@ -29,6 +30,8 @@ public interface IProductoService {
 
     void eliminarCategoria(Long id, Categoria categoria) throws ResourceNotFoundException;
 
+    List<ProductoDto> filtrarPorCategoria(Long id) throws Exception;
+
     void uploadProductImage(Long productId, MultipartFile photo, String description) throws IOException;
 
     Set<Imagen> getPhotos(Long productoId);
@@ -38,4 +41,9 @@ public interface IProductoService {
     void deletePhoto(Long productoId, Long imagenId);
 
 
+    void agregarEspecificacion(Long id, Especificacion especificacion) throws ResourceNotFoundException;
+
+    void eliminarEspecificacion(Long id, Especificacion especificacion) throws ResourceNotFoundException;
+
+    List<ProductoDto> filtrarPorEspecificacion(Long id) throws Exception;
 }
