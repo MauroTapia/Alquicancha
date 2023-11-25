@@ -234,8 +234,15 @@ export const Included = styled.div`
   flex-wrap: wrap;
   margin-left: 30px;
   margin-top: 20px;
+  
 
   li {
     padding: 12px;
+    display: flex; 
   }
+`;
+
+export const ImgDetailIcon = styled.div`
+  width: 40px;
+  height: auto;
 `;

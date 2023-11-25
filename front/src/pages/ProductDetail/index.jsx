@@ -9,6 +9,7 @@ import {
   ImagesSecondaries,
   Body,
   ProductDetails,
+  ImgDetailIcon,
   TextDetails,
   Categories,
   Caracteristicas,
@@ -121,8 +122,8 @@ const ProductDetail = () => {
                     <ul>
                       <Included>
                         {details.map((detail, index) => (
-                          <li key={index}>
-                            <img src={detail.icon}/>
+                          <li key={index} >
+                            <ImgDetailIcon><img src={detail.icon} alt={detail.icon}/></ImgDetailIcon> 
                             <p>{detail.name}</p>
                           </li>
                         ))}
