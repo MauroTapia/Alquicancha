@@ -20,8 +20,8 @@ const AppRoutes = () => {
           <Route path="/userPerfil" element={<UserPerfil/>} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/" element={<ProtectedRoutes />}>
-            <Route path="administracion" element={<Dashboard />} />
-          </Route>
+          <Route path="administracion" element={<Dashboard />} />
+        </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

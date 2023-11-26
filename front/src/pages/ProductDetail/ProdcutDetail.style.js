@@ -237,7 +237,7 @@ export const Included = styled.div`
   
 
   li {
-    padding: 12px;
+    padding: 10px;
     display: flex; 
   }
 `;

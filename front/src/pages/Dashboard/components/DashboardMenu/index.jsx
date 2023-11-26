@@ -23,7 +23,7 @@ const DashboardMenu = (props) => {
         <FaListAlt />
         Categorías
       </MenuButton>
-      <MenuButton onClick={()=> handleClick('Exit')}>
+      <MenuButton onClick={()=> handleClick('Exit')}>z
         <ImExit />
         Salir
       </MenuButton>
