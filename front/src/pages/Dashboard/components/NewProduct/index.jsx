@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Buttons,
   ButtonsContainer,
@@ -9,68 +9,53 @@ import {
   Selects,
   TextAreas,
 } from "./newProduct.style";
-import { getAllCategories } from "../../../../services/categories";
-import { editProductById, findProductTitle, newProduct } from "../../../../services/product";
+import {
+  findProductTitle,
+} from "../../../../services/product";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import MultipleImageUploader from "./MultipleImageUpload";
+import { crearProducto, editarProductoById } from "../../../../services/product/productFirebase";
+import { ContextGlobal } from "../../../../context/context";
 
 const NewProduct = ({ data, changeSection }) => {
-  const { category, dayPrice, description, details, images, title, id } =
+  const { categorias } =
+  useContext(ContextGlobal).contextValue;
+
+  const { categoria, precio, descripcion, detalles, imagenes, titulo, id } =
     data || {};
 
   const [product, setProduct] = useState({
-    title: title || "",
-    description: description || "",
-    details: details || "",
-    dayPrice: dayPrice || "",
-    images: images || [],
-    category: category || "",
+    titulo: titulo || "",
+    descripcion: descripcion || "",
+    detalles: detalles || "",
+    precio: precio || "",
+    imagenes: imagenes || [],
+    categoria: categoria || "",
+    id: id || ''
   });
 
   const [isEdit, setIsEdit] = useState(data ? true : false);
   const [categories, setCategories] = useState(null);
 
-  const [uploadedFiles, setUploadedFiles] = useState(product.images);
+  const [uploadedFiles, setUploadedFiles] = useState(product.imagenes);
 
   useEffect(() => {
-    getAllCategories().then((result) => {
-      setCategories(result);
-    });
+    setCategories(categorias);
   }, []);
 
-  const imagePath = (image)=>{
-    if(image.path){
-      if(image.name.includes('/canchas/')){
-        return image
-      }
-      return `/canchas/${image.name}`;
-    }
-    return image.img
-  }
+  const formatImagenes = async () => {
 
-  const validateForm = async () => {
-    console.log(uploadedFiles);
-    product.images.length = 0;
-    uploadedFiles.forEach((image) =>{
-      console.log(image);
-      const img = {
-        img: imagePath(image),
-        alt: product.title
-      }
-      product.images.push(img);
+    product.imagenes.length = 0;
+
+    uploadedFiles.forEach((image) => {
+      const imagen = {
+        img: image
+      };
+      product.imagenes.push(imagen);
     });
-    console.log(product);
-    if(!isEdit){
-      const existProduct = await findProductTitle(product.title);
-  
-      if(existProduct) return false
-
-    }
-
-    return true;
   };
 
   const notify = (msj) => {
@@ -87,7 +72,9 @@ const NewProduct = ({ data, changeSection }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if ( await validateForm()) {
+    if (true) {
+      formatImagenes();
+      if(product.categoria === '') product.categoria = categorias[0].id;
       Swal.fire({
         title: "Guardar cambios",
         text: `Desea guardar los cambios?`,
@@ -95,24 +82,27 @@ const NewProduct = ({ data, changeSection }) => {
         confirmButtonText: `Guardar`,
         showCancelButton: true,
         reverseButtons: true,
-      }).then((result) => {
+      }).then(async (result) => {
         if (result.isConfirmed) {
-          product.id = id;
-          isEdit
-            ? (
-              editProductById(id, product),
-              setTimeout(() => {
-                changeSection("SectionProducts");
-              }, 2000),
-              notify("Producto editado con éxito!"))
-            : (newProduct(product),
-              setTimeout(() => {
-                changeSection("SectionProducts");
-              }, 2000),
-              notify("Nuevo producto creado con éxito!"));
+
+          !isEdit
+          ?(
+            await crearProducto(product),
+            setTimeout(() => {
+              changeSection("SectionProducts");
+            }, 2000),
+            notify("Nuevo producto creado con éxito!")
+          )
+          :(
+            await editarProductoById(product.id, product),
+            setTimeout(() => {
+              changeSection("SectionProducts");
+            }, 2000),
+            notify("Nuevo producto editado con éxito!")
+          )
         }
       });
-    }else{
+    } else {
       Swal.fire({
         title: "Atención",
         text: `El producto ya existe en la BD`,
@@ -124,11 +114,22 @@ const NewProduct = ({ data, changeSection }) => {
 
   const handleChange = (e, fieldName) => {
     const value = e.target.value;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [fieldName]: value,
-    }));
+  
+    // Si el campo es "categoria" y el valor es el valor por defecto del primer elemento
+    if (fieldName === "categoria" && value === categorias[0].id) {
+      // Establecer el valor en el id de la primera categoría
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        [fieldName]: categorias[0].id,
+      }));
+    } else {
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        [fieldName]: value,
+      }));
+    }
   };
+  
 
   const handleCancel = () => {
     Swal.fire({
@@ -152,18 +153,18 @@ const NewProduct = ({ data, changeSection }) => {
           <Labels htmlFor="name">Nombre:</Labels>
           <Inputs
             type="text"
-            value={product.title}
+            value={product.titulo}
             id="name"
-            onChange={(e) => handleChange(e, "title")}
+            onChange={(e) => handleChange(e, "titulo")}
           />
         </InputContainer>
 
         <InputContainer>
           <Labels htmlFor="description">Descripción:</Labels>
           <TextAreas
-            value={product.description}
+            value={product.descripcion}
             id="description"
-            onChange={(e) => handleChange(e, "description")}
+            onChange={(e) => handleChange(e, "descripcion")}
           />
         </InputContainer>
 
@@ -171,31 +172,35 @@ const NewProduct = ({ data, changeSection }) => {
           <Labels htmlFor="price">Precio diario:</Labels>
           <Inputs
             type="number"
-            value={product.dayPrice}
+            value={product.precio}
             id="price"
-            onChange={(e) => handleChange(e, "dayPrice")}
+            onChange={(e) => handleChange(e, "precio")}
           />
         </InputContainer>
 
         <InputContainer>
           <Labels htmlFor="category">Categoria:</Labels>
           <Selects
-            id="categories"
-            name="categories"
-            onChange={(e) => handleChange(e, "category")}
+            id="category"
+            name="categoria"
+            onChange={(e) => handleChange(e, "categoria")}
+            value={product.categoria !== ''? product.categoria : categorias[0].id}
           >
             {categories &&
               categories.map((category) => (
                 <option key={category.id} value={category.id}>
-                  {category.title}
+                  {category.titulo}
                 </option>
               ))}
           </Selects>
         </InputContainer>
-        
+
         <InputContainer>
           <Labels>Imagenes</Labels>
-          <MultipleImageUploader uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles}/>
+          <MultipleImageUploader
+            uploadedFiles={uploadedFiles}
+            setUploadedFiles={setUploadedFiles}
+          />
         </InputContainer>
 
         <ButtonsContainer>

@@ -1,12 +1,16 @@
-import mockCategories from "../../mocks/categories.json";
+import { useContext } from "react";
 import { CategoriesWrapper } from "./categories.style";
 import Card from "./modules/Card";
+import { ContextGlobal } from "../../context/context";
 
 const Categories = () => {
+
+  const { categorias } = useContext(ContextGlobal).contextValue;
+
   return (
     <CategoriesWrapper>
-      {mockCategories.map((category, index) => (
-        <Card category={category} key={index} />
+      {categorias && categorias.map((categoria, index) => (
+        <Card categoria={categoria} key={index} />
       ))}
     </CategoriesWrapper>
   );

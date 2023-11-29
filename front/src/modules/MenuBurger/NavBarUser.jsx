@@ -3,14 +3,13 @@ import { NavBarWrapper } from "./navBarUser.style";
 import { Link, useNavigate} from "react-router-dom";
 import { ContextGlobal } from "../../context/context";
 import Swal from "sweetalert2";
+import { signOutUsuario } from "../../services/users/userFirebase";
 
 function NavBarUser({open}) {
   
   const { isAdmin, logout, logoutAdmin } = useContext(ContextGlobal).contextValue;
 
   const navigate = useNavigate();
-
-
 
   const handleExit = () => {
     Swal.fire({
@@ -22,8 +21,9 @@ function NavBarUser({open}) {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        logoutAdmin();
+        signOutUsuario();
         logout();
+        logoutAdmin();
         navigate("/");
       }
     });
@@ -38,6 +38,7 @@ function NavBarUser({open}) {
     )}
 
       <Link to={"/userPerfil"}>Editar perfil</Link>
+      <Link to={"/"}>Mis favoritos</Link>
       <Link open={open} onClick={handleExit}>Cerrar Sesión</Link>
     </NavBarWrapper>
   );

@@ -4,7 +4,7 @@ export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 80px;
   height: 95px;
   background-color: var(--color-orange);
@@ -19,18 +19,18 @@ export const CardWrapper = styled.div`
     transform: scale(1.1);
     color: black;
 
-    .imgContainer {
+    /* .imgContainer {
       img {
         filter: brightness(0);
       }
-    }
+    } */
   }
 
   .imgContainer {
     min-height: 70%;
 
     img {
-      width: 64px;
+      width: 60px;
       height: auto;
     }
   }

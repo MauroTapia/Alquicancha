@@ -22,8 +22,8 @@ export const Header = styled.div`
   border-radius: 8px;
   margin-bottom: 10px;
 
-  :nth-child(2) {
-    width: 300px;
+  :nth-child(1) {
+    width: 250px;
   }
 `;
 
@@ -31,10 +31,6 @@ export const ProductItem = styled.div`
   display: flex;
   justify-content: space-between;
   height: 40px;
-  :first-child {
-    margin-left: 14px;
-    width: 50px;
-  }
 `;
 
 export const ItemTitle = styled.p`

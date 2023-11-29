@@ -1,35 +1,41 @@
-import ProductCard from "../ProductCard"
-import { RecommendedWrapper, TitleSeccion } from "./recommended.style"
-import { getRandomElements } from "../../utils/get-random-elements"
-import { getAllProducts } from "../../services/product"
-import { useEffect, useState } from "react"
+import ProductCard from "../ProductCard";
+import { RecommendedWrapper, TitleSeccion } from "./recommended.style";
+import { getRandomElements } from "../../utils/get-random-elements";
+import React, { useContext, useEffect, useState } from "react";
+import { ContextGlobal } from "../../context/context";
 
 const Recommended = () => {
+  const { productos } = useContext(ContextGlobal).contextValue;
 
-  const [productsToShow, setProductsToShow] = useState(null);
+  const [productsToShow, setProductsToShow] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo(0, 0);
 
-    async function fetchData () {
-      await getAllProducts()
-        .then((result) =>{
-          setProductsToShow(getRandomElements(result, 10));
-        }) 
-    }
-    fetchData();
-  },[]);
-  
+    // setProductsToShow(getRandomElements(productos, 10));
+    setProductsToShow(productos);
+    console.log(productos);
+  }, [productos]);
+
   return (
     <>
-      <TitleSeccion>Productos recomendados</TitleSeccion>    
-      <RecommendedWrapper>
-          {productsToShow && productsToShow.map((product, index)=>(
-            <ProductCard key={index} product={product}/>
-          ))}
-      </RecommendedWrapper>
+      {productos && Object.keys(productos).length > 0 ? (
+        <>
+          <TitleSeccion>Productos recomendados</TitleSeccion>
+          <RecommendedWrapper>
+            {productos.length &&
+              productos.map((product, index) => (
+                <ProductCard key={index} product={product} />
+              ))}
+          </RecommendedWrapper>
+        </>
+      ) : (
+        <>
+          <TitleSeccion>No hay coincidencias para la busqueda</TitleSeccion>
+        </>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default Recommended
+export default Recommended;

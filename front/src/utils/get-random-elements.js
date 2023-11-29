@@ -1,4 +1,6 @@
 export const getRandomElements = (array, numElements)=>{
-  const shuffledArray = array?.sort(() => Math.random() - 0.5);
-  return shuffledArray?.slice(0, numElements);
+  if(array.length > 1 ){
+    const shuffledArray = array?.sort(() => Math.random() - 0.5);
+    return shuffledArray?.slice(0, numElements);
+  }
 }

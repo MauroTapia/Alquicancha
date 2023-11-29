@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  deleteProductById,
-  getAllProducts,
-} from "../../../../services/product";
+import React, { useContext, useEffect, useState } from "react";
+
 import {
   ButtonNew,
   ButtonNewContainer,
@@ -12,7 +9,6 @@ import {
   ProductItem,
   Wrapper,
 } from "./sectionProducts.style";
-import { getAllCategories } from "../../../../services/categories";
 import Paginator from "./modules/Paginator";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
@@ -21,8 +17,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { HiMiniDocumentPlus } from "react-icons/hi2";
 import NewProduct from "../NewProduct";
+import {
+  eliminarProductoById,
+  listarProductos,
+} from "../../../../services/product/productFirebase";
+import { ContextGlobal } from "../../../../context/context";
 
-const SectionProducts = ( {changeSection} ) => {
+const SectionProducts = ({ changeSection }) => {
+  const { productos, setProductData, categorias } =
+    useContext(ContextGlobal).contextValue;
 
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -34,25 +37,22 @@ const SectionProducts = ( {changeSection} ) => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    getAllProducts().then((result) => {
-      setProducts(result);
-
-      result.sort((a,b) => parseInt(a.id) - parseInt(b.id));
-
-      const total = Math.ceil(result.length / productsPerPage);
+    const fetchData = async () => {
+      const productData = await listarProductos();
+      setProducts(productData);
+      setProductData(productData);
+      const total = Math.ceil(products?.length / productsPerPage);
       setTotalPages(total);
-    });
+    };
 
-    getAllCategories().then((result) => {
-      setCategories(result);
-    });
+    fetchData();
+
+    setCategories(categorias);
   }, []);
 
   const getCatName = (id) => {
-    const category = categories.find(
-      (category) => category.id === parseInt(id)
-    );
-    return category.title;
+    const categoria = categorias.find((item) => item.id === id);
+    return categoria.titulo;
   };
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -93,63 +93,59 @@ const SectionProducts = ( {changeSection} ) => {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await deleteProductById(id);
-        getAllProducts().then((result) => {
-          setProducts(result);
-
-          const total = Math.ceil(result.length / productsPerPage);
-          setTotalPages(total);
+        // const deleted = await eliminarProductoById(id);
+        await eliminarProductoById(id).then(async () => {
+          setProducts(await listarProductos());
+          notify("Producto eliminado correctamente!");
         });
-        notify("Producto eliminado correctamente!");
+
+        //     // const total = Math.ceil(result.length / productsPerPage);
       }
     });
   };
 
   return (
-        <Wrapper>
-          <ButtonNewContainer>
-            <ButtonNew
-              onClick={()=>changeSection('Edit')}
-            >
-              Agregar nuevo
-              <HiMiniDocumentPlus />
-            </ButtonNew>
-          </ButtonNewContainer>
+    <Wrapper>
+      <ButtonNewContainer>
+        <ButtonNew onClick={() => changeSection("Edit")}>
+          Agregar nuevo
+          <HiMiniDocumentPlus />
+        </ButtonNew>
+      </ButtonNewContainer>
 
-          <Paginator
-            paginate={paginate}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            indexOfFirstProduct={indexOfFirstProduct}
-            indexOfLastProduct={indexOfLastProduct}
-            products={products}
-          />
+      {/* <Paginator
+        paginate={paginate}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        indexOfFirstProduct={indexOfFirstProduct}
+        indexOfLastProduct={indexOfLastProduct}
+        products={products}
+      /> */}
 
-          <Header>
-            <p>Id</p>
-            <p>Nombre</p>
-            <p>Categoria</p>
-            <p>Precio</p>
-            <p>Acciones</p>
-          </Header>
+      <Header>
+        <p>Nombre</p>
+        <p>Categoria</p>
+        <p>Precio</p>
+        <p>Acciones</p>
+      </Header>
 
-          {currentProducts.map((product, index) => (
-            <ProductItem key={index}>
-              <p># {product.id}</p>
-              <ItemTitle>{product.title}</ItemTitle>
-              <p>{getCatName(product.category)}</p>
-              <p>{product.dayPrice}</p>
-              <Buttons>
-                <button onClick={() => changeSection('Edit', product)}>Editar</button>
-                <button onClick={() => handleDelete(product.id, product.title)}>
-                  Eliminar
-                </button>
-              </Buttons>
-            </ProductItem>
-          ))}
-          <ToastContainer />
-        </Wrapper>
-
+      {products.map((product, index) => (
+        <ProductItem key={index}>
+          <ItemTitle>{product.titulo}</ItemTitle>
+          <p>{getCatName(product.categoria)}</p>
+          <p>{product.precio}</p>
+          <Buttons>
+            <button onClick={() => changeSection("Edit", product)}>
+              Editar
+            </button>
+            <button onClick={() => handleDelete(product.id, product.titulo)}>
+              Eliminar
+            </button>
+          </Buttons>
+        </ProductItem>
+      ))}
+      <ToastContainer />
+    </Wrapper>
   );
 };
 
