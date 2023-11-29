@@ -24,7 +24,7 @@
         "alt": "Cancha 7 cesped"
       }
   ],
-    "description": "Cancha de futbol 7 exterior, pasto natural, totalmente cercada ",
+    "description": "Cancha de futbol 7 exterior, pasto natural, totalmente cercada",
     "dayPrice" : 20000,
     "availability":{
       "isAbalible": true,
@@ -68,7 +68,7 @@
         "alt": "Cancha 7 sintetico"
       }
     ],
-    "description": "Cancha de futbol 7 exterior, pasto sintetico, totalmente cercada ",
+    "description": "Cancha de futbol 7 exterior, pasto sintetico, totalmente cercada",
     "dayPrice" : 18000,
     "availability":{
       "isAbalible": true,
