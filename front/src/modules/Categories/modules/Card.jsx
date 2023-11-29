@@ -1,15 +1,25 @@
+import { useContext } from "react";
+import { allProductsBy } from "../../../services/product/productFirebase";
 import { CardWrapper } from "./card.style";
+import { ContextGlobal } from "../../../context/context";
 
-const Card = ({ category }) => {
-  const { title, image, alt } = category;
-  const logo = image;
+const Card = ({ categoria }) => {
+  const { setProductData } = useContext(ContextGlobal).contextValue;
+
+  const { titulo, urlImage, id } = categoria;
+
+
+  const handleClick = async ()=>{
+    const productos = await allProductsBy('categoria', id);
+    setProductData(productos);
+  };
 
   return (
-    <CardWrapper>
+    <CardWrapper onClick={handleClick}>
       <div className="imgContainer">
-        <img src={logo} alt={alt} /> 
+        <img src={urlImage} alt={titulo} /> 
       </div>
-      <p>{title}</p>
+      <p>{titulo}</p>
     </CardWrapper>
   );
 };

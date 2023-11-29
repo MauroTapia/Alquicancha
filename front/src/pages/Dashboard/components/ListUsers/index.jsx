@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { editUser, getAllUsers, getUserById } from "../../../../services/users";
 import { Buttons, Header, ItemTitle, ProductItem, Wrapper } from "./listUser.style";
 import { ToastContainer, toast } from "react-toastify";
+import { editarUsuarioById, listarUsuarios } from "../../../../services/users/userFirebase";
 
 const ListUsers = () => {
   const [users, setUsers] = useState(null);
 
 
 
-  const changeRol = async (id)=>{
-    const userFinded = await getUserById(id);
-    userFinded.admin = !userFinded.admin;
-    await editUser(userFinded, id);
+  const changeRol = async (user)=>{
+
+    user.admin = !user.admin;
+    await editarUsuarioById(user.id, user);
     notify('Se ha cambiado el rol del usuario!')
   }
 
@@ -19,7 +20,7 @@ const ListUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const result = await getAllUsers();
+        const result = await listarUsuarios();
         setUsers(result);
       } catch (error) {
         console.log("Error obteniendo los usuarios");
@@ -51,13 +52,13 @@ const ListUsers = () => {
             <p>Rol</p>
           </Header>
 
-          {users.map((user, index) => (
-            <ProductItem key={index}>
+          {users.map((user) => (
+            <ProductItem key={user.id}>
               <ItemTitle>{user.nombre}</ItemTitle>
               <p>{user.apellido}</p>
               <p>{user.email}</p>
               <Buttons>
-                <button onClick={() => changeRol(user.id)}
+                <button onClick={() => changeRol(user)}
                 className={user.admin ? 'admin' : ''}
                 >
                   {user.admin ? 'Admin' : 'Usuario' }

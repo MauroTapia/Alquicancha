@@ -24,9 +24,6 @@ const MultipleImageUploader = ({ uploadedFiles, setUploadedFiles}) => {
     }
   });
 
-  const imagePath = (image)=>{
-    return `/canchas/${image.name}`;
-  }
 
   return (
     <div style={{maxWidth:'600px'}}>
@@ -37,11 +34,11 @@ const MultipleImageUploader = ({ uploadedFiles, setUploadedFiles}) => {
       <div style={{maxWidth:'600px'}}>
         <h4>Imágenes subidas:</h4>
         <ul style={{display:'flex',gap:5, listStyle:'none', flexWrap:'wrap'}}>
-          {uploadedFiles.map((file, index) => (
+          {uploadedFiles?.map((file, index) => (
             <li key={index}>
               <img
-                src={file.path ? URL.createObjectURL(file) : file.img}
-                alt={`Thumbnail ${file.name ? file.name : file.alt}`}
+                src={file.path ? URL.createObjectURL(file) : file.urlImage}
+                alt={`Thumbnail ${file.name ? file.name : 'Imagen de producto'}`}
                 style={thumbnailStyles}
               />
             </li>

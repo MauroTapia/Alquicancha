@@ -1,6 +1,5 @@
 import { Outlet } from "react-router"
 import Header from "./modules/Header"
-import Footer from "./modules/Footer"
 import Container from "./atoms/Container"
 
 function App() {
@@ -11,7 +10,6 @@ function App() {
       <Container>
         <Outlet />
       </Container>
-      {/* <Footer /> */}
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Detail,
   Header,
@@ -17,12 +17,13 @@ import {
   Price,
 } from "./ProdcutDetail.style";
 import { useParams } from "react-router";
-import { getProductById } from "../../services/product";
 import flecha from "../../assets/flecha.png";
 import { Link } from "react-router-dom";
 import Modal from 'react-modal';
 import ImageModal from "./modules/ImageModal";
 import Footer from "../../modules/Footer/index";
+import { productoById } from "../../services/product/productFirebase";
+import { ContextGlobal } from "../../context/context";
 
 
 const customStyles = {
@@ -43,6 +44,9 @@ const customStyles = {
 const ProductDetail = () => {
   const { id } = useParams();
 
+  const { categorias } =
+  useContext(ContextGlobal).contextValue;
+
   const [product, setProduct] = useState(null);
   const [imagePrincipal, setImagePrincipal] = useState(null);
   const [selected, setSelected] = useState(0);
@@ -50,27 +54,26 @@ const ProductDetail = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
+
+    const getProducto = async ()=>{
+      const product = await productoById(id);
+      setProduct(product);
+      setImagePrincipal(product.imagenes[0]?.urlImage);
+    }
+
+    getProducto();
     window.scrollTo(0, 0);
 
-    getProductById(id).then((result) => {
-      setProduct(result);
-      if (result && result.images.length > 0) {
-        setImagePrincipal(result.images[0].img);
-      }
-    });
   }, []);
 
-  if (!product) {
-    return <p>Cargando...</p>;
+  const getCategoriaNombre = (id)=>{
+    const categoria = categorias.find(item => item.id === id);
+    return categoria.titulo;
   }
-
-  const { images, title, dayPrice, description, category, details } = product;
-
-  console.log([details.icon])
 
   const handleSecondaryImageClick = (index) => {
     if (selected !== index) {
-      setImagePrincipal(images[index].img);
+      setImagePrincipal(imagenes[index].urlImagen);
       setSelected(index);
     }
   };
@@ -84,6 +87,13 @@ const ProductDetail = () => {
     setModalOpen(false);
   }
 
+  if (!product) {
+    return <p>Cargando...</p>;
+  }
+
+  const { imagenes, titulo, precio, descripcion, categoria, detalles } = product;
+
+
   return (
     <>
     <Detail>
@@ -93,18 +103,20 @@ const ProductDetail = () => {
             <img src={flecha} alt="flecha" />
             Volver
           </Link>
-          <Title>{title}</Title>
+          <Title>{titulo}</Title>
         </Header>
         <Body>
           <Images>
 
             <ImagePrincipal>
-              <img src={imagePrincipal} alt={images[0].alt} onClick={handleImageClick}/>
+              {imagePrincipal && (
+                <img src={imagePrincipal} alt={'Imagen'} onClick={handleImageClick}/>
+              )}
             </ImagePrincipal>
 
             <ImagesSecondaries>
-              {images.map((image, index) => (
-                <img src={image.img} alt={image.alt} key={index} onClick={() => handleSecondaryImageClick(index)} className={selected === index ? "selected" : ""}
+              {product.imagenes?.map((image, index) => (
+                <img src={image.urlImage} alt={image.urlImage} key={index} onClick={() => handleSecondaryImageClick(index)} className={selected === index ? "selected" : ""}
                 />
               ))}
             </ImagesSecondaries>
@@ -112,15 +124,15 @@ const ProductDetail = () => {
           </Images>
 
           <ProductDetails>
-            <TextDetails>{description}</TextDetails>
-            <Categories>Categoría: {category}</Categories>
-            <Price>$ {dayPrice} x día</Price>
-            {details.length ? (
+            <TextDetails>{descripcion}</TextDetails>
+            <Categories>Categoría: {getCategoriaNombre(categoria)}</Categories>
+            <Price>$ {precio} x día</Price>
+            {detalles.length ? (
                   <Caracteristicas>
                     <p>Que incluye:</p>
                     <ul>
                       <Included>
-                        {details.map((detail, index) => (
+                        {detalles?.map((detail, index) => (
                           <li key={index}>
                             <img src={detail.icon}/>
                             <p>{detail.name}</p>
@@ -141,7 +153,7 @@ const ProductDetail = () => {
         ariaHideApp={false}
       >
 
-        <ImageModal images={images} closeModal={closeModal}/>
+        <ImageModal images={imagenes} closeModal={closeModal}/>
 
       </Modal>
     </Detail>

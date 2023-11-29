@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DashboardSection, DashboardWrapper, MobileScreen, Title, TitleError } from "./dashboard.style";
+import {
+  DashboardSection,
+  DashboardWrapper,
+  MobileScreen,
+  Title,
+  TitleError,
+} from "./dashboard.style";
 import DashboardMenu from "./components/DashboardMenu";
 import SectionProducts from "./components/SectionProducts";
 import ListUsers from "./components/ListUsers";
@@ -8,8 +14,10 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import NewProduct from "./components/NewProduct";
 import { ContextGlobal } from "../../context/context";
-import varImage from '../../assets/var.jpeg';
-
+import varImage from "../../assets/var.jpeg";
+import NewCategory from "./components/ListCategories/components/newCategory";
+import ListAtributos from "./components/ListAtributos";
+import NewAtributo from "./components/ListAtributos/components/newAtributo";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -65,7 +73,16 @@ const Dashboard = () => {
         setSelection(<ListUsers />);
         break;
       case "SectionCategories":
-        setSelection(<ListCategories />);
+        setSelection(<ListCategories changeSection={handleClick} />);
+        break;
+      case "NewCategory":
+        setSelection(<NewCategory data={data} changeSection={handleClick} />);
+        break;
+      case "SectionAtributos":
+        setSelection(<ListAtributos changeSection={handleClick} />);
+        break;
+      case "NewAtributo":
+        setSelection(<NewAtributo data={data} changeSection={handleClick} />);
         break;
       case "Exit":
         handleExit();
@@ -80,11 +97,13 @@ const Dashboard = () => {
     <DashboardWrapper>
       {isMobile ? (
         <>
-        <MobileScreen>
-          <p>Atención!!!</p>
-          <TitleError>El Dashboard solo está diseñado para vista desktop</TitleError>
-          <img src={varImage} alt="imagen Error" />
-        </MobileScreen>
+          <MobileScreen>
+            <p>Atención!!!</p>
+            <TitleError>
+              El Dashboard solo está diseñado para vista desktop
+            </TitleError>
+            <img src={varImage} alt="imagen Error" />
+          </MobileScreen>
         </>
       ) : (
         <>

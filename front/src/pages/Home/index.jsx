@@ -13,7 +13,6 @@ const Home = () => {
     // Si no existe guarda los datos del json en mock
     // Eliminar luego al utilizar backend
     // ******************************
-    getFromLocalStorage("categories");
     getFromLocalStorage("products");
   }, []);
 

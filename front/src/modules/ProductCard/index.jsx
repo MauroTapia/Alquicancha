@@ -17,12 +17,11 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 
 const ProductCard = ({ product }) => {
-  const { images, title, dayPrice, id } = product;
-  // console.log([images, title, dayPrice])
+  const { imagenes, titulo, precio, id } = product;
 
   return (
     <CardContainer>
-      <Title>{title}</Title>
+      <Title>{titulo}</Title>
 
       <Swiper
         slidesPerView={1}
@@ -33,10 +32,10 @@ const ProductCard = ({ product }) => {
         navigation={true}
         modules={[Pagination, Navigation]}
         >
-        {images && images.map((image, index) => (
+        {imagenes && imagenes.map((imagen, index) => (
             <SwiperSlide key={index}>
               <ImageWrapper>
-                <ProductImage src={image.img} alt={image.alt} />
+                <ProductImage src={imagen.urlImage} alt={imagen.titulo} />
               </ImageWrapper>
             </SwiperSlide>
           ))}
@@ -44,7 +43,7 @@ const ProductCard = ({ product }) => {
 
       <Price>
         <div>
-          <span>Precio por dia:</span> $ {dayPrice}
+          <span>Precio por dia:</span> $ {precio}
         </div>
         <ButtonDetails to={`/product/${id}`}>Ver más</ButtonDetails>
       </Price>

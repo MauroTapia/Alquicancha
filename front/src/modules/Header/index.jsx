@@ -14,7 +14,7 @@ import {
   LetterContainer,
 } from "./header.style";
 
-import NavBar from "../MenuBurger/navbar"
+import NavBar from "../MenuBurger/navbar";
 import NavBarUser from "../MenuBurger/NavBarUser";
 import MenuButton from "../MenuBurger/menuBurger";
 import logo from "../../assets/alquicancha.png";
@@ -23,28 +23,29 @@ import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
-
   const { isAdmin, logged, user } = useContext(ContextGlobal).contextValue;
 
   const scrolledDown = useScrollDetector();
   const [initials, setInitials] = useState("");
-  
-  
-  useEffect(()=>{
-    if(user){
-      if (user === user){
-      const primerasLetras = Object.values(user).slice(0, 3).map(valor => valor[0]);
-      const resultado = primerasLetras.join('');
-      setInitials(resultado.toUpperCase());
-      }else{   };
+
+  useEffect(() => {
+    if (user) {
+      if (user === user) {
+        const primeraLetraNombre = user.nombre ? user.nombre[0] : "";
+        const primeraLetraApellido = user.apellido
+          ? user.apellido[0]
+          : "";
+        const resultado = primeraLetraNombre + primeraLetraApellido;
+        setInitials(resultado.toUpperCase());
+      }
     }
-  },[user])
+  }, [user]);
 
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
-  }
+  };
 
   return (
     <HeaderWrapper
@@ -63,11 +64,11 @@ const Header = () => {
       <div>
         {logged ? (
           <LetterContainer onClick={handleClick}>
-            <LetterAvatar> {initials} </LetterAvatar> 
+            <LetterAvatar> {initials} </LetterAvatar>
             {isAdmin && <p>Administrador</p>}
-            <LoginRegisterMenuUser  >
-            <NavBarUser open={open}/>                                                  
-          </LoginRegisterMenuUser>
+            <LoginRegisterMenuUser>
+              <NavBarUser open={open} />
+            </LoginRegisterMenuUser>
           </LetterContainer>
         ) : (
           <>
@@ -79,17 +80,15 @@ const Header = () => {
                 <Link to={"/login"}>Iniciar sesión</Link>
               </Login>
             </LoginRegister>
-            < MenuButton handleClick={handleClick}/>
-            <LoginRegisterMenu >
-            <NavBar open={open} />                          
-          </LoginRegisterMenu>
+            <MenuButton handleClick={handleClick} />
+            <LoginRegisterMenu>
+              <NavBar open={open} />
+            </LoginRegisterMenu>
           </>
         )}
       </div>
-
     </HeaderWrapper>
   );
 };
 
 export default Header;
-         

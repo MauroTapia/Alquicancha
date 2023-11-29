@@ -13,20 +13,12 @@ import { editUser } from "../../services/users";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { ContextGlobal } from "../../context/context";
+import { editarUsuarioById } from "../../services/users/userFirebase";
 
 const UserPerfil = () => {
     const navigate = useNavigate();
 
     const { user, setUserData } = useContext(ContextGlobal).contextValue;
-
-    const [ miUsuario, setMiUsuario ] = useState({});
-
-    useEffect(() => {
-      setMiUsuario(user);
-      //  console.log(user.nombre);
-  }, []);
-
-    // console.log(miUsuario)
 
     const [newUserData, setNewUserData] = useState({
       nombre: user.nombre || "",
@@ -72,6 +64,11 @@ const UserPerfil = () => {
       setErrors([]);
     }
   
+    const guardarDatos = async ()=>{
+      const userEdit = {  ...user,...newUserData}
+      await editarUsuarioById(user.id, userEdit);
+    };
+
     const handleSubmit = async (e) => {
       e.preventDefault();
   
@@ -81,11 +78,9 @@ const UserPerfil = () => {
   
       setErrors((prevErrors) => {
         if (prevErrors.length === 0) {
+          guardarDatos();
           const userEdit = {  ...user,...newUserData}
-          editUser(userEdit, user.id);
-          setUserData(userEdit)
-          setMiUsuario(userEdit);
-          console.log(userEdit)
+          setUserData(userEdit);
           Swal.fire({
             title: "Usuario editado!",
             text: `El usuario a sido editado correctamente!`,

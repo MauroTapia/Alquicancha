@@ -13,6 +13,12 @@ import { newUser, getUserByEmail } from "../../services/users";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../modules/Footer/index";
+import {
+  crearUsuario,
+  listarUsuarios,
+  registrarUsuario,
+  signOutUsuario,
+} from "../../services/users/userFirebase";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -56,18 +62,10 @@ const Register = () => {
   const existEmail = errors.some(([campo]) => campo === "email");
   const existPassword = errors.some(([campo]) => campo === "password");
   const existConfirm = errors.some(([campo]) => campo === "confirm");
-  const existUser = errors.some(([campo]) => campo === "exist");
   const existTelefono = errors.some(([campo]) => campo === "telefono");
   const existCalle = errors.some(([campo]) => campo === "calle");
   const existNumero = errors.some(([campo]) => campo === "numero");
   const existLocalidad = errors.some(([campo]) => campo === "localidad");
-
-  const CheckUserExist = async (email) => {
-    const user = await getUserByEmail(email);
-    if (user) {
-      setErrors((prevErrors) => [...prevErrors, ["exist"]]);
-    }
-  };
 
   const checkName = () => {
     if (userData.nombre.length < 4) {
@@ -105,11 +103,36 @@ const Register = () => {
     setErrors([]);
   };
 
+  const creandoUsuario = async () => {
+    const user = { ...userData };
+    // newUser(user);
+    const userCreado = await crearUsuario(user);
+    if (userCreado !== null) {
+      signOutUsuario();
+      Swal.fire({
+        title: "Usuario creado!",
+        text: `El usuario a sido creado correctamente!`,
+        icon: "success",
+        confirmButtonText: `Iniciar sesión`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Error!",
+        text: "El correo ya esta en uso!",
+        icon: "error",
+        confirmButtonText: "Volver",
+      });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setErrors([]);
-    await CheckUserExist(userData.email);
     checkEmail();
     checkPass();
     checkName();
@@ -117,20 +140,7 @@ const Register = () => {
 
     setErrors((prevErrors) => {
       if (prevErrors.length === 0) {
-        const user = { ...userData };
-        console.log(user);
-        newUser(user);
-
-        Swal.fire({
-          title: "Usuario creado!",
-          text: `El usuario a sido creado correctamente!`,
-          icon: "success",
-          confirmButtonText: `Iniciar sesión`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate("/login");
-          }
-        });
+        creandoUsuario();
       } else {
         Swal.fire({
           title: "Error!",
@@ -180,9 +190,7 @@ const Register = () => {
             placeholder="Ingresa tú e-mail"
             onChange={(e) => handleChange(e, "email")}
           />
-          {existUser === true ? (
-            <ErrorMsg>El correo ya esta registrado a una cuenta</ErrorMsg>
-          ) : existEmail === true ? (
+          {existEmail === true ? (
             <ErrorMsg>Debes ingresar un correo valido</ErrorMsg>
           ) : null}
 

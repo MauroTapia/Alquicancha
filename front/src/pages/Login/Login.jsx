@@ -13,16 +13,9 @@ import {
 } from "./login.style";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { loginUser } from "../../services/users";
 import { ContextGlobal } from "../../context/context";
 import Footer from "../../modules/Footer/index";
-
-const usersMock = [
-  {
-    email: "admin@admin.com",
-    password: "123456",
-  },
-];
+import { loginUsuario, userByCampo } from "../../services/users/userFirebase";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,18 +30,6 @@ const Login = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const checkMockUsers = (user, pass) => {
-    const foundUser = usersMock.find(
-      (u) => u.email === user && u.password === pass
-    );
-
-    if (foundUser) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const checkUser = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -78,28 +59,24 @@ const Login = () => {
     setErrors([]);
   };
 
-  const CheckUserExist = async (user, pass) => {
-    if (checkMockUsers(user, pass)) {
-      loginAdmin();
-      navigate("/administracion");
-    } else {
-      const userLogged = await loginUser(user, pass);
-      
-      if (userLogged) {
+  const CheckUserExist = async (email, pass) => {
+    const loggedUser = await loginUsuario(email, pass);
+    if(loggedUser !==null){
+      const userLogged = await userByCampo("userId", loggedUser.user.uid);
+      const usuario = userLogged[0];
+      const admin = usuario.admin;
+      if (usuario) {
+        setUserData(usuario);
         login();
-        const userName = userLogged.nombre;
-        const admin = userLogged.admin;
-        setUserData(userLogged);
-        admin && loginAdmin();
-
         Swal.fire({
           title: "Ingreso correcto!",
-          text: `Hola, ${userName} bienvenido!`,
+          text: `Hola, ${usuario.nombre} bienvenido!`,
           icon: "success",
-          confirmButtonText: `Ir a ${admin ? "Dashboard" : "Home"}`,
+          confirmButtonText: `Ir a ${admin ? "Dashboard" : "Home"} `,
         }).then((result) => {
           if (result.isConfirmed) {
             if (admin) {
+              loginAdmin();
               navigate("/administracion");
             } else {
               navigate("/");
@@ -114,6 +91,13 @@ const Login = () => {
           confirmButtonText: "Ok",
         });
       }
+    }else{
+      Swal.fire({
+        title: "Error!",
+        text: `Usuario o contraseña incorrectos`,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
   };
 
