@@ -32,10 +32,10 @@ const ProductCard = ({ product }) => {
         navigation={true}
         modules={[Pagination, Navigation]}
         >
-        {imagenes && imagenes.map((imagen, index) => (
+        {imagenes.length > 0 && imagenes.map((imagen, index) => (
             <SwiperSlide key={index}>
               <ImageWrapper>
-                <ProductImage src={imagen.urlImage} alt={imagen.titulo} />
+                <ProductImage src={imagen.urlImage} alt={"imagen"} />
               </ImageWrapper>
             </SwiperSlide>
           ))}

@@ -21,6 +21,7 @@ import {
 } from "firebase/firestore";
 import { obtenerNombreArchivoDesdeURL } from "../../utils/obtener-nombre-de-url";
 
+
 export const listarProductos = async () => {
   const collectionRef = collection(db, "productos");
   try {
@@ -149,11 +150,33 @@ export const eliminarProductoById = async (id) => {
 
 export const editarProductoById = async (id, data) => {
   try {
+    if(data.imagenes.length ){
+      // Subir todas las imágenes y obtener las URLs
+      const urls = await Promise.all(
+        data.imagenes.map(
+          async (imagen) => await uploadProductImage(imagen.img)
+        )
+      );
+
+      // Crear una nueva lista de imágenes con las URLs
+      const nuevasImagenes = urls.map((url) => ({ urlImage: url }));
+
+      // Crear el objeto de datos del producto con la nueva lista de imágenes
+
+    const nuevoProducto = { ...data, imagenes: nuevasImagenes };
+
     const collectionRef = collection(db, "productos");
 
     const prodRef = doc(collectionRef, id);
-    const result = await setDoc(prodRef, data, { merge: true });
+    const result = await setDoc(prodRef, nuevoProducto, { merge: true });
     console.log("Edicion correcta de producto :", id);
+    }else{
+      const collectionRef = collection(db, "productos");
+
+      const prodRef = doc(collectionRef, id);
+      const result = await setDoc(prodRef, data, { merge: true });
+      console.log("Edicion correcta de producto :", id);
+    }    
   } catch (error) {
     console.log(error);
   }

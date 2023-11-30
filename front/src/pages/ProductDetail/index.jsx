@@ -109,13 +109,13 @@ const ProductDetail = () => {
           <Images>
 
             <ImagePrincipal>
-              {imagePrincipal && (
+              {imagePrincipal !== undefined && (
                 <img src={imagePrincipal} alt={'Imagen'} onClick={handleImageClick}/>
               )}
             </ImagePrincipal>
 
             <ImagesSecondaries>
-              {product.imagenes?.map((image, index) => (
+              {product.imagenes.length > 0 && product.imagenes.map((image, index) => (
                 <img src={image.urlImage} alt={image.urlImage} key={index} onClick={() => handleSecondaryImageClick(index)} className={selected === index ? "selected" : ""}
                 />
               ))}
