@@ -11,7 +11,6 @@ function App() {
       <Container>
         <SendMessage/>
         <Outlet />
-        
       </Container>
     </>
   )
