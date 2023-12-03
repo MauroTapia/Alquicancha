@@ -5,6 +5,8 @@ import {
 } from "../../../../services/categories/categoriesFirebase";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
+import { HiMiniDocumentPlus } from "react-icons/hi2";
+import listCategoriesStyles from "./newCategory.style";
 
 const ListCategories = ({ changeSection }) => {
   const [categorias, setCategorias] = useState([]);
@@ -56,44 +58,40 @@ const ListCategories = ({ changeSection }) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={listCategoriesStyles.container}>
+      <div style={listCategoriesStyles.header}>
       <button
-        style={{ alignSelf: "flex-end", padding: 8, margin: 4 }}
-        onClick={() => changeSection("NewCategory")}
-      >
-        Nueva
-      </button>
+            style={listCategoriesStyles.addButton}
+            onClick={() => changeSection("NewCategory")}
+          >
+            Agregar nuevo
+            <HiMiniDocumentPlus style={listCategoriesStyles.miniDocumentIcon} />
+          </button>
+        </div>
       {categorias &&
-        categorias.map((categoria, index) => {
-          return (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: 20,
-                alignItems: "center",
-              }}
-              key={index}
-            >
-              <p>{categoria.titulo}</p>
-              <div style={{width:50, height: 50}}>
-                <img src={categoria?.urlImage} style={{width:'100%', height:'auto'}}/>
-              </div>
-              <button
-                style={{ backgroundColor: "green", padding: 8 }}
-                onClick={() => changeSection("NewCategory", categoria)}
-              >
-                Editar
-              </button>
-              <button
-                style={{ backgroundColor: "red", padding: 8 }}
-                onClick={() => handleDelete(categoria.id, categoria.titulo)}
-              >
-                Eliminar
-              </button>
+        categorias.map((categoria, index) => (
+          <div
+            style={listCategoriesStyles.listItem}
+            key={index}
+          >
+            <p>{categoria.titulo}</p>
+            <div style={{ width: 50, height: 50 }}>
+              <img src={categoria?.urlImage} style={{ width: "100%", height: "auto" }} />
             </div>
-          );
-        })}
+            <button
+              style={listCategoriesStyles.editButton}
+              onClick={() => changeSection("NewCategory", categoria)}
+            >
+              Editar
+            </button>
+            <button
+              style={listCategoriesStyles.deleteButton}
+              onClick={() => handleDelete(categoria.id, categoria.titulo)}
+            >
+              Eliminar
+            </button>
+          </div>
+        ))}
       <ToastContainer />
     </div>
   );

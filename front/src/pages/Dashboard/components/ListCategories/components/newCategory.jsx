@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import { crearCategoria, editarCategoriaById } from "../../../../../services/categories/categoriesFirebase";
+import { NewCategoryDiv, InputContainer, Labels, Inputs, ButtonsContainer, Buttons } from "./newCategory.style";
 
 const NewCategory = ({ data, changeSection }) => {
   const { id, imagen, titulo } = data || {};
@@ -92,43 +93,37 @@ const NewCategory = ({ data, changeSection }) => {
   };
 
   return (
-    <div>
+    <NewCategoryDiv>
       <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 6,
-          padding: 20,
-        }}
-      >
-        <label htmlFor="titulo">Titulo</label>
-        <input
-          type="text"
-          value={categoria.titulo}
-          onChange={(e) => handleChange(e, "titulo")}
-        />
+        onSubmit={handleSubmit}>
+        <InputContainer>
+          <Labels htmlFor="name">Titulo:</Labels>
+          <Inputs
+            type="text"
+            value={categoria.titulo}
+            id="name"
+            onChange={(e) => handleChange(e, "titulo")}
+          />
+        </InputContainer>
 
-        <label htmlFor="imagen">Imagen</label>
-        <input
+        <Labels htmlFor="imagen">Imagen:  </Labels>
+        <Inputs
           type="file"
           // value={categoria.imagen}
           onChange={(e) => handleChange(e, "imagen")}
         />
 
-        <div
-          style={{ display: "flex", justifyContent: "center", width: "100%" }}
-        >
-          <button style={{ width: 300, padding: 10 }} onClick={handleCancel}>
+        <ButtonsContainer>
+          <Buttons onClick={handleCancel}>
             Cancelar
-          </button>
-          <button style={{ width: 300, padding: 10 }}>
+          </Buttons>
+          <Buttons>
             {isEdit ? "Editar" : "Guardar"}
-          </button>
-        </div>
+          </Buttons>
+        </ButtonsContainer>
       </form>
       <ToastContainer />
-    </div>
+    </NewCategoryDiv>
   );
 };
 

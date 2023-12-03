@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import { eliminarAtributoById, listarAtributos } from "../../../../services/atributos/AtributosFirebase";
+import { HiMiniDocumentPlus } from "react-icons/hi2";
+import listAtributosStyles from './listAtributos.style';
+
 
 const ListAtributos = ({ changeSection }) => {
   const [atributos, setAtributos] = useState([]);
@@ -44,48 +47,44 @@ const ListAtributos = ({ changeSection }) => {
     });
   };
 
-  return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <button
-        style={{ alignSelf: "flex-end", padding: 8, margin: 4 }}
-        onClick={() => changeSection("NewAtributo")}
-      >
-        Nueva
-      </button>
-      {atributos &&
-        atributos.map((atributo, index) => {
-          return (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: 20,
-                alignItems: "center",
-              }}
-              key={index}
-            >
-              <p>{atributo.titulo}</p>
-              <div style={{width:50, height: 50}}>
-                <img src={atributo?.urlImage} style={{width:'100%', height:'auto'}}/>
-              </div>
-              <button
-                style={{ backgroundColor: "green", padding: 8 }}
-                onClick={() => changeSection("NewAtributo", atributo)}
-              >
-                Editar
-              </button>
-              <button
-                style={{ backgroundColor: "red", padding: 8 }}
-                onClick={() => handleDelete(atributo.id, atributo.titulo)}
-              >
-                Eliminar
-              </button>
-            </div>
-          );
-        })}
-      <ToastContainer />
-    </div>
-  );
-};
 
+    return (
+      <div style={listAtributosStyles.container}>
+        <div style={listAtributosStyles.header}>
+          <button
+            style={listAtributosStyles.addButton}
+            onClick={() => changeSection("NewAtributo")}
+          >
+            Agregar nuevo
+            <HiMiniDocumentPlus style={listAtributosStyles.miniDocumentIcon} />
+          </button>
+        </div>
+        {atributos &&
+          atributos.map((atributo, index) => {
+            return (
+              <div style={listAtributosStyles.listItem} key={index}>
+                <p>{atributo.titulo}</p>
+                <div style={{ width: 50, height: 50 }}>
+                  <img src={atributo?.urlImage} style={{ width: '100%', height: 'auto' }} />
+                </div>
+                
+                <button
+                  style={listAtributosStyles.editButton}
+                  onClick={() => changeSection("NewAtributo", atributo)}
+                >
+                  Editar
+                </button>
+                <button
+                  style={listAtributosStyles.deleteButton}
+                  onClick={() => handleDelete(atributo.id, atributo.titulo)}
+                >
+                  Eliminar
+                </button>
+              </div>
+            );
+          })}
+        <ToastContainer />
+      </div>
+    );
+  }
 export default ListAtributos;
