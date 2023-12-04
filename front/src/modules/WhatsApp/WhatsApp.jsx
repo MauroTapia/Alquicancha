@@ -1,16 +1,17 @@
 import React from 'react';
 import { WhatsAppWidget } from 'react-whatsapp-widget';
-import './custom.css';
+import './whatsApp.css';
 
 
 const SendMessage = () => {
 
+
     return (
-        
-        <WhatsAppWidget        
-            message={`Hola! s👋🏼 \n\nEn qué puedo ayudarte?`}
-            phoneNumber="541165492709"
-        />
+        <><div id="soporte"></div>
+            <WhatsAppWidget
+
+            message={`Hola! 👋🏼 \nEn qué puedo ayudarte?`}
+            phoneNumber="541165492709" /></>
     );
 };
 
