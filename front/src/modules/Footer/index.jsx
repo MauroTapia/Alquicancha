@@ -6,6 +6,8 @@ import whatsapp from '../../assets/square-whatsapp.svg'
 import instagram from '../../assets/square-instagram.svg'
 import facebook from '../../assets/square-facebook.svg'
 
+
+
 const Footer = () => {
   return (
     <FooterWrapper>
@@ -13,8 +15,11 @@ const Footer = () => {
         <img src={logoTeam} alt="logo equipo uno" />
         <p>Copyright ©2023 All rights reserved</p>
       </TeamDiv>
+
+      
+
       <SocialMedia>
-        <a href=""><img src={whatsapp} alt="whatsapp logo" /></a>
+        <a href="https://api.whatsapp.com/send?phone=541165492709&text=Hola,%20me%20gustaría%20contactar%20contigo" target="_blank"><img src={whatsapp} alt="whatsapp logo" /></a> 
         <a href="https://www.instagram.com/_digitalhouse/"><img src={instagram} alt="instagram logo" /></a>
         <a href="https://www.facebook.com/digitalhouseschool"><img src={facebook} alt="facebook logo" /></a>
         <a href="https://twitter.com/_digitalhouse?lang=es"><img src={x} alt="x logo" /></a>
