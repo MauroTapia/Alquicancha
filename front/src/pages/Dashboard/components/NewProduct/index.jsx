@@ -274,11 +274,6 @@ const NewProduct = ({ data, changeSection }) => {
         </InputContainer>
         
         <InputContainer>
-        <Labels>Atributos</Labels>
-        
-        </InputContainer> 
-
-        <InputContainer>
           <Labels>Atributos</Labels>
           {atributos.length > 1 && (
             <Atributo>
