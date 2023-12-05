@@ -4,6 +4,7 @@ import "./index.css";
 import AppRoutes from "./routes/AppRoutes.jsx";
 import { ContextProvider } from "./context/context";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 
     <ContextProvider>

@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const temblor = keyframes`
+  0% { transform: translateX(-2px); }
+  25% { transform: translateX(2px); }
+  50% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(-2px); }
+`;
 
 export const CardContainer = styled.div`
   height: 310px;
@@ -92,5 +100,20 @@ export const ButtonDetails = styled(Link)`
   @media (max-width: 600px) {
     width: 100%;
     margin-top: 16px;
+  }
+`;
+
+export const FabHeart = styled.div`
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease-in-out;
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+
+  &:hover {
+    animation: ${temblor} 0.2s ease-in-out;
   }
 `;

@@ -1,19 +1,17 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Categories from "../../modules/Categories";
 import Recommended from "../../modules/Recommended";
 import Search from "../../modules/Search";
 import { HomeWrapper } from "./home.style";
 import { getFromLocalStorage } from "../../mocks/initLocalStorage";
 import Footer from "../../modules/Footer/index";
+import { ContextGlobal } from "../../context/context";
 
 const Home = () => {
+  const { allProducts } = useContext(ContextGlobal).contextValue;
+
   useEffect(() => {
-    // ******************************
-    // Traer datos del localStorage si existen
-    // Si no existe guarda los datos del json en mock
-    // Eliminar luego al utilizar backend
-    // ******************************
-    getFromLocalStorage("products");
+    localStorage.setItem('productos', JSON.stringify(allProducts));
   }, []);
 
   return (

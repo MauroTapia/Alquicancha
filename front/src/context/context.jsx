@@ -50,7 +50,9 @@ export const ContextProvider = ({ children }) => {
     localStorage.setItem("theme", theme);
     localStorage.setItem("logged", logged);
     localStorage.setItem("isAdmin", isAdmin);
-    localStorage.setItem("user", JSON.stringify(user));
+    if (logged) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
     // Llamar a la función al inicio de la aplicación
     cargarDatos();
   }, [theme, logged, isAdmin, user]);
@@ -72,6 +74,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   const logout = () => {
+    localStorage.removeItem("user");
     setLogged(false);
   };
 

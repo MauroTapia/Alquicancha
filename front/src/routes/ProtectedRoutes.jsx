@@ -6,7 +6,7 @@ const ProtectedRoutes = () => {
   const { isAdmin } = useContext(ContextGlobal).contextValue;
 
   if (!isAdmin) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   return <Outlet />;
