@@ -194,6 +194,11 @@ const NewProduct = ({ data, changeSection }) => {
               ))}
           </Selects>
         </InputContainer>
+        
+        <InputContainer>
+        <Labels>Atributos</Labels>
+        
+        </InputContainer> 
 
         <InputContainer>
           <Labels>Imagenes</Labels>
