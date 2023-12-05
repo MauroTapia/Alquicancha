@@ -12,8 +12,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.div`
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 150px 250px 300px 150px;
+  justify-content: space-between;
   height: 32px;
   font-size: 20px;
   text-transform: uppercase;
@@ -30,7 +31,8 @@ export const Header = styled.div`
 `;
 
 export const ProductItem = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 150px 200px 300px 200px;
   justify-content: space-between;
   height: 40px;
   :first-child {

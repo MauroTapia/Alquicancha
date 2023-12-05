@@ -23,9 +23,9 @@ const ImageModal = ({ images, closeModal }) => {
         navigation={true}
         modules={[Pagination, Navigation]}
         >
-        {images.map((image, index) => (
+        {images.map((detail, index) => (
           <SwiperSlide key={index}>
-            <Image src={image.urlImage} alt='Imagen' />
+            <Image src={detail.urlImage} alt='Imagen' />
           </SwiperSlide>
         ))}
       </Swiper>

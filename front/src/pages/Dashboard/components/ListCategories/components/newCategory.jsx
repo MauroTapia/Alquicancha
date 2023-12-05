@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import { crearCategoria, editarCategoriaById } from "../../../../../services/categories/categoriesFirebase";
-import { NewCategoryDiv, InputContainer, Labels, Inputs, ButtonsContainer, Buttons } from "./newCategory.style";
+import { 
+  NewCategoryDiv, 
+  InputContainer, 
+  Labels, 
+  Inputs, 
+  ButtonsContainer, 
+  Buttons 
+} from "../components/newCategory.style";
 
 const NewCategory = ({ data, changeSection }) => {
   const { id, imagen, titulo } = data || {};
