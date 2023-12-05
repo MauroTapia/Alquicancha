@@ -82,3 +82,19 @@ export const Buttons = styled.button`
     color: wheat;
   }
 `;
+
+export const Atributo = styled.div`
+  display: flex;
+  background-color: #fff;
+  height: 100px;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 15px;
+  width: 600px;
+  border-radius: 8px;
+`;
+
+export const Titulo = styled.label`
+  font-size: 14px;
+`;
+

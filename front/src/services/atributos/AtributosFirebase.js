@@ -136,3 +136,25 @@ export const editarAtributoById = async (id, data) => {
     console.log(error);
   }
 };
+
+export const getAtributoById = async (id)=>{
+  try {
+    const collectionRef = collection(db, "atributos");
+
+    const documentRef = doc(collectionRef, id);
+
+    // traer datos que cumplan con la query
+    const atributoData = await getDoc(documentRef);
+
+    if (atributoData.exists()) {
+      const atributo = atributoData.data();
+      return atributo;
+    } else {
+      console.log("El documento no existe");
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

@@ -23,7 +23,7 @@ import useScrollDetector from "../../hooks/useScrollDetector";
 import { ContextGlobal } from "../../context/context";
 
 const Header = () => {
-  const { isAdmin, logged, user } = useContext(ContextGlobal).contextValue;
+  const { isAdmin, logged, user, allProducts, setProductData } = useContext(ContextGlobal).contextValue;
 
   const scrolledDown = useScrollDetector();
   const [initials, setInitials] = useState("");
@@ -41,6 +41,11 @@ const Header = () => {
     }
   }, [user]);
 
+  const getAllProducts = () => {
+    localStorage.setItem('productos', JSON.stringify(allProducts));
+    setProductData(allProducts);
+  };
+
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -51,7 +56,7 @@ const Header = () => {
     <HeaderWrapper
       style={{ backgroundColor: scrolledDown ? "rgb(155, 191, 13)" : "" }}
     >
-      <Link to={"/"}>
+      <Link to={"/"} onClick={getAllProducts}>
         <LogoWrapper>
           <Logo src={logo} alt="" />
           <TitleWrapper>

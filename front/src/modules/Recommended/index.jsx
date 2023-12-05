@@ -5,9 +5,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { ContextGlobal } from "../../context/context";
 
 const Recommended = () => {
-  const { productos } = useContext(ContextGlobal).contextValue;
+  const { productos, allProducts } = useContext(ContextGlobal).contextValue;
 
-  const [productsToShow, setProductsToShow] = useState([]);
+  const [productsToShow, setProductsToShow] = useState(productos);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,6 +16,7 @@ const Recommended = () => {
     setProductsToShow(productos);
     console.log(productos);
   }, [productos]);
+
 
   return (
     <>

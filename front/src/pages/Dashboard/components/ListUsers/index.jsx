@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { editUser, getAllUsers, getUserById } from "../../../../services/users";
-import { Buttons, Header, ItemTitle, ProductItem, Wrapper } from "./listUser.style";
+import {
+  Buttons,
+  Header,
+  ItemTitle,
+  ProductItem,
+  Wrapper,
+} from "./listUser.style";
 import { ToastContainer, toast } from "react-toastify";
-import { editarUsuarioById, listarUsuarios } from "../../../../services/users/userFirebase";
+import {
+  editarUsuarioById,
+  listarUsuarios,
+} from "../../../../services/users/userFirebase";
+import { ContextGlobal } from "../../../../context/context";
 
 const ListUsers = () => {
   const [users, setUsers] = useState(null);
+  const { logoutAdmin, loginAdmin } = useContext(ContextGlobal).contextValue;
 
-
-
-  const changeRol = async (user)=>{
-
+  const changeRol = async (user) => {
     user.admin = !user.admin;
     await editarUsuarioById(user.id, user);
-    notify('Se ha cambiado el rol del usuario!')
-  }
-
+    notify("Se ha cambiado el rol del usuario!");
+    if(user.admin){
+      loginAdmin()
+    }else{
+      logoutAdmin();
+    }
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -40,7 +52,6 @@ const ListUsers = () => {
     });
   };
 
-
   return (
     <div>
       {users && (
@@ -58,10 +69,11 @@ const ListUsers = () => {
               <p>{user.apellido}</p>
               <p>{user.email}</p>
               <Buttons>
-                <button onClick={() => changeRol(user)}
-                className={user.admin ? 'admin' : ''}
+                <button
+                  onClick={() => changeRol(user)}
+                  className={user.admin ? "admin" : ""}
                 >
-                  {user.admin ? 'Admin' : 'Usuario' }
+                  {user.admin ? "Admin" : "Usuario"}
                 </button>
               </Buttons>
             </ProductItem>

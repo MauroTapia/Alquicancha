@@ -19,6 +19,7 @@ import {
   registrarUsuario,
   signOutUsuario,
 } from "../../services/users/userFirebase";
+import emailjs from '@emailjs/browser';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -103,12 +104,29 @@ const Register = () => {
     setErrors([]);
   };
 
+  const enviarMail = (usuario)=>{
+
+    const data = {
+      to_name: usuario.email,
+      name: usuario.nombre,
+      message:'Tu registro en la web de Alquicancha a sido exitoso.',
+    }
+
+    emailjs.send('service_05f9hdj', 'template_mcksxdi', data, 'l1rLzDMKHIaVUF7Vx')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });  
+  }
+
   const creandoUsuario = async () => {
     const user = { ...userData };
     // newUser(user);
     const userCreado = await crearUsuario(user);
     if (userCreado !== null) {
       signOutUsuario();
+      enviarMail(user);
       Swal.fire({
         title: "Usuario creado!",
         text: `El usuario a sido creado correctamente!`,

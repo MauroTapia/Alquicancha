@@ -237,5 +237,18 @@ export const Included = styled.div`
 
   li {
     padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img{
+      width: 25px;
+      height: auto;
+    }
   }
+
+  @media (max-width: 600px) {
+    margin-left: 0px;
+    }
+
 `;
