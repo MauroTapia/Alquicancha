@@ -23,14 +23,14 @@ import { ContextGlobal } from "../../context/context";
 
 const ProductCard = ({ product }) => {
   const { imagenes, titulo, precio, id } = product;
-  const { user, setUserData } = useContext(ContextGlobal).contextValue;
+  const { user,  } = useContext(ContextGlobal).contextValue;
   const [esFavorito, setEsFavorito] = useState(false);
 
   const [usuario, setUsuario] = useState(user);
 
   useEffect(()=>{
     console.log(user);
-    if(usuario.favoritos){
+    if(usuario && usuario.favoritos){
       setEsFavorito(usuario.favoritos.includes(id));
     }
   },[]);
