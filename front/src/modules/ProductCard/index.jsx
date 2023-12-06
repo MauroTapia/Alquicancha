@@ -34,6 +34,7 @@ const ProductCard = ({ product }) => {
       setEsFavorito(usuario.favoritos.includes(id));
     }
   },[]);
+   
 
   const addToFav = () => {
     console.log("clikeado");
