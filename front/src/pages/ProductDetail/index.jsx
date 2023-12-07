@@ -156,8 +156,12 @@ const ProductDetail = () => {
                     </Included>
                 </Caracteristicas>
               ) : null}
+
+              
               <ButtonReserva>Reservar</ButtonReserva>
             </ProductDetails>
+
+            
           </Body>
         </CardDetail>
 
@@ -165,6 +169,7 @@ const ProductDetail = () => {
           <ImageModal images={imagenes} closeModal={closeModal} />
         </Modal>
       </Detail>
+      
       <Footer />
     </>
   );
