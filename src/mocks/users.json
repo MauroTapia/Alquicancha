@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "data":{
+      "name": "Pepe",
+      "surname": "Lopez",
+      "email": "pepe@mail.com",
+      "password": "123456",
+      "phone": "22334456"
+    },
+    "admin": true
+  },
+  {
+    "id": 1,
+    "data":{
+      "name": "Luis",
+      "surname": "Fernandez",
+      "email": "elfernandez@mail.com",
+      "password": "123456",
+      "phone": "22334456"
+    },
+    "admin": false
+  }
+]
