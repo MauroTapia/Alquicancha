@@ -107,6 +107,7 @@ export const FabHeart = styled.div`
   width: 18px;
   height: 18px;
   transition: transform 0.2s ease-in-out;
+  cursor: pointer;
 
   svg {
     width: 100%;
@@ -115,5 +116,15 @@ export const FabHeart = styled.div`
 
   &:hover {
     animation: ${temblor} 0.2s ease-in-out;
+  }
+`;
+
+export const Share = styled.div`
+  cursor: pointer;
+  &:hover{
+    svg{
+      transform: scale(1.2);
+      fill: green;
+    }
   }
 `;

@@ -8,6 +8,7 @@ import ProductDetail from "../pages/ProductDetail";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
 import UserPerfil from "../pages/usePerfil";
+import Politicas from "../pages/Politicas";
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/userPerfil" element={<UserPerfil/>} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/politicas" element={<Politicas />} />
           <Route path="/" element={<ProtectedRoutes />}>
             <Route path="administracion" element={<Dashboard />} />
           </Route>

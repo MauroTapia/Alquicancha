@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   CardContainer,
@@ -8,7 +8,27 @@ import {
   Price,
   ButtonDetails,
   FabHeart,
+  Share,
 } from "./productCard.style";
+
+import {
+  FacebookShareCount,
+  PinterestShareCount,
+  RedditShareCount,
+} from "react-share";
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  InstapaperShareButton,
+  LinkedinShareButton,
+  PinterestShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TwitterShareButton
+} from "react-share";
+
+import ReactDOM from "react-dom";
+import { Modal } from "react-responsive-modal";
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,6 +36,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
+import { IoShareSocialSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
 
 import { Pagination, Navigation } from "swiper/modules";
@@ -28,7 +49,16 @@ const ProductCard = ({ product }) => {
 
   const [usuario, setUsuario] = useState(user);
 
-  useEffect(()=>{
+  const [open, setOpen] = useState(false);
+  const modalRef = useRef(null);
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => {
+    setOpen(false);
+    console.log(open);
+  };
+
+  useEffect(() => {
     console.log(user);
     if(usuario && usuario.favoritos){
       setEsFavorito(usuario.favoritos.includes(id));
@@ -86,14 +116,18 @@ const ProductCard = ({ product }) => {
         }}
       >
         <Title>{titulo}</Title>
-        <FabHeart>
-          {esFavorito
-          ?
-          <FaHeart onClick={addToFav} style={{fill:'red'}}/>
-          :
-          <FaRegHeart onClick={addToFav} />
-        }
-        </FabHeart>
+        <div style={{ display: "flex", gap: 20 }}>
+          <Share onClick={onOpenModal}>
+            <IoShareSocialSharp />
+          </Share>
+          <FabHeart>
+            {esFavorito ? (
+              <FaHeart onClick={addToFav} style={{ fill: "red" }} />
+            ) : (
+              <FaRegHeart onClick={addToFav} />
+            )}
+          </FabHeart>
+        </div>
       </div>
 
       <Swiper
@@ -121,6 +155,19 @@ const ProductCard = ({ product }) => {
         </div>
         <ButtonDetails to={`/product/${id}`}>Ver más</ButtonDetails>
       </Price>
+
+      <Modal
+        ref={modalRef}
+        open={open}
+        onClose={onCloseModal}
+        focusTrapped={true}
+        initialFocusRef={modalRef}
+        center
+      >
+        <h3 style={{ marginTop: 20 }}>
+          Comparte esta publicación en tu red Favorita
+        </h3>
+      </Modal>
     </CardContainer>
   );
 };
