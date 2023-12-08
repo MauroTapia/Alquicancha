@@ -23,7 +23,7 @@ const AppRoutes = () => {
           <Route path="/politicas" element={<Politicas />} />
           <Route path="/" element={<ProtectedRoutes />}>
             <Route path="administracion" element={<Dashboard />} />
-          </Route>
+            </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
