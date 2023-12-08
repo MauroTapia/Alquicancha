@@ -123,8 +123,6 @@ const NewProduct = ({ data, changeSection }) => {
     
   };
 
-  console.log(product);
-
   const formatImagenes = async () => {
     product.imagenes.length = 0;
 
