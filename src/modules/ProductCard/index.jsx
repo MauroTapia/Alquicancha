@@ -38,13 +38,18 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { IoShareSocialSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Pagination, Navigation } from "swiper/modules";
 import { ContextGlobal } from "../../context/context";
 
+
 const ProductCard = ({ product }) => {
   const { imagenes, titulo, precio, id } = product;
   const { user,  } = useContext(ContextGlobal).contextValue;
+
+  const navigate = useNavigate();
+
   const [esFavorito, setEsFavorito] = useState(false);
 
   const [usuario, setUsuario] = useState(user);
