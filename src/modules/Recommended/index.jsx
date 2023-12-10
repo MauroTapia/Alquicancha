@@ -14,7 +14,6 @@ const Recommended = () => {
 
     // setProductsToShow(getRandomElements(productos, 10));
     setProductsToShow(productos);
-    // console.log(productos);
   }, [productos]);
 
 

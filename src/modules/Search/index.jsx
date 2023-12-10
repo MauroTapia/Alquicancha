@@ -69,7 +69,6 @@ const Search = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(search);
     console.log("desde: ", initDate);
     console.log("hasta: ", endDate);
   };

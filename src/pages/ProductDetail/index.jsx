@@ -150,6 +150,15 @@ const ProductDetail = () => {
     );
   });
 
+  const diasDeReserva = (start, end) => {
+    const fechaInicio = new Date(start);
+    const fechaFin = new Date(end);
+
+    const diferencia = fechaFin - fechaInicio;
+    const dias = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+    return dias + 1;
+  };
+
   const verificarFechas = () => {
     // Calcular el número de milisegundos en dos días
     const dosDiasEnMilisegundos = 2 * 24 * 60 * 60 * 1000;
@@ -179,9 +188,17 @@ const ProductDetail = () => {
   const handleReserva = () => {
     if (logged) {
       const estadoReserva = verificarFechas();
+
       if (estadoReserva) {
-        console.log("continuamos");
-        // navigate('/checkout');
+        const checkout = {
+          productId: id,
+          fechaInicio: formatearFecha(startDate),
+          fechaFinal: formatearFecha(endDate),
+          precio: precio,
+          dias: diasDeReserva(formatearFecha(startDate), formatearFecha(endDate)),
+        }
+        localStorage.setItem('Checkout', JSON.stringify(checkout));
+        navigate('/checkout');
       }
     } else {
       Swal.fire({

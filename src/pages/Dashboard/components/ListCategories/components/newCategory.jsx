@@ -84,7 +84,8 @@ const NewCategory = ({ data, changeSection }) => {
     }
   };
 
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    e.preventDefault();
     Swal.fire({
       title: "Atención",
       text: `Desea cancelar y volver al listado?`,

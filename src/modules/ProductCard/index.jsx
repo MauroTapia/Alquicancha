@@ -60,11 +60,9 @@ const ProductCard = ({ product }) => {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
     setOpen(false);
-    console.log(open);
   };
 
   useEffect(() => {
-    console.log(user);
     if(usuario && usuario.favoritos){
       setEsFavorito(usuario.favoritos.includes(id));
     }
@@ -72,7 +70,6 @@ const ProductCard = ({ product }) => {
    
 
   const addToFav = () => {
-    console.log("clikeado");
     if (usuario !== null) {
       setUsuario((prevObjeto) => {
         // Verificar si ya hay una lista de favoritos
