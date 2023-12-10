@@ -61,20 +61,33 @@ const ProductDetail = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [dateRange, setDateRange] = useState(null, null);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   const minDate = Date.now();
 
   // ***********************************************
-  // SE TRAERÁ LAS FECHAS YA RESERVADAS DEL PRODUCTO
+  // SE TRAE LAS FECHAS YA RESERVADAS DEL PRODUCTO
   // ***********************************************
-  const events = [
-    { start: new Date(2023, 11, 10), end: new Date(2023, 11, 12) },
-    { start: new Date(2023, 11, 18), end: new Date(2023, 11, 22) },
-    { start: new Date(2023, 11, 24), end: new Date(2023, 11, 25) },
-  ];
 
+  const [events, setEvents] = useState([]);
+
+  useEffect(()=>{
+    if(product){
+      const hayReservas = product.reservas && Object.keys(product.reservas).length > 0;
+      if(hayReservas){
+        const reservasArray = Object.values(product.reservas);
+        const mappedEvents = reservasArray.map((reserva) => ({
+          start: new Date(reserva.inicio),
+          end: new Date(reserva.final),
+        }));
+        setEvents(mappedEvents);
+        console.log(mappedEvents);
+      }
+    }
+  },[product]);
+
+  // obtenerReservas();
   useEffect(() => {
     const getProducto = async () => {
       const product = await productoById(id);
@@ -116,8 +129,8 @@ const ProductDetail = () => {
   const formatearFecha = (fechaOriginal) => {
     // Obtener año, mes y día de la fecha original
     const año = fechaOriginal.getFullYear();
-    const mes = ("0" + (fechaOriginal.getMonth() + 1)).slice(-2); // Agrega un cero al principio si es necesario
-    const dia = ("0" + fechaOriginal.getDate()).slice(-2); // Agrega un cero al principio si es necesario
+    const mes = ("0" + (fechaOriginal.getMonth() + 1)).slice(-2); 
+    const dia = ("0" + fechaOriginal.getDate()).slice(-2); 
 
     // Formatear la fecha en el formato (YYYY-MM-DD)
     const fechaFormateada = año + "-" + mes + "-" + dia;
@@ -130,7 +143,7 @@ const ProductDetail = () => {
     setEndDate(end);
   };
 
-  const disabledDateRanges = events.map((range) => ({
+  const disabledDateRanges = events && events.map((range) => ({
     start: new Date(range.start),
     end: new Date(range.end),
   }));
@@ -176,7 +189,7 @@ const ProductDetail = () => {
     if (existeFechaEnRango) {
       Swal.fire({
         title: "Verifica las fechas!",
-        text: `Existen fechas ya reservadas en tu selección!`,
+        text: `Existen fechas no disponibles en tu selección!`,
         icon: "warning",
       });
       return false;
@@ -303,7 +316,7 @@ const ProductDetail = () => {
               selectsRange={true}
               inline
               monthsShown={2}
-              excludeDateIntervals={disabledDateRanges}
+              excludeDateIntervals={events.length && disabledDateRanges}
             />
             <ButtonReserva style={{ maxWidth: 480 }} onClick={handleReserva}>
               Reservar
