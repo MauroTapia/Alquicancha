@@ -28,7 +28,6 @@ export const ContextProvider = ({ children }) => {
 
   const cargarDatos = async () => {
     try {
-      console.log("Cargando datos al inicio");
       // Cargar productos al inicio
       const productosData = await listarProductos();
       setProductos(productosData);
@@ -92,7 +91,6 @@ export const ContextProvider = ({ children }) => {
 
   const setProductData = (data) => {
     setProductos(data);
-    console.log("guardando :", data, " en localstorage");
     localStorage.setItem("productos", JSON.stringify(data));
   };
 

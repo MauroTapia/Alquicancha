@@ -38,13 +38,18 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { IoShareSocialSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Pagination, Navigation } from "swiper/modules";
 import { ContextGlobal } from "../../context/context";
 
+
 const ProductCard = ({ product }) => {
   const { imagenes, titulo, precio, id } = product;
   const { user,  } = useContext(ContextGlobal).contextValue;
+
+  const navigate = useNavigate();
+
   const [esFavorito, setEsFavorito] = useState(false);
 
   const [usuario, setUsuario] = useState(user);
@@ -55,11 +60,9 @@ const ProductCard = ({ product }) => {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => {
     setOpen(false);
-    console.log(open);
   };
 
   useEffect(() => {
-    console.log(user);
     if(usuario && usuario.favoritos){
       setEsFavorito(usuario.favoritos.includes(id));
     }
@@ -67,7 +70,6 @@ const ProductCard = ({ product }) => {
    
 
   const addToFav = () => {
-    console.log("clikeado");
     if (usuario !== null) {
       setUsuario((prevObjeto) => {
         // Verificar si ya hay una lista de favoritos

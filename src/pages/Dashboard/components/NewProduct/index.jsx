@@ -95,10 +95,6 @@ const NewProduct = ({ data, changeSection }) => {
     // getAtributos();
   }, [detalles]);
 
-
-  console.log(checkboxStates);
-
-
   const handleCheckboxChange = (e) => {
     const checkboxId = e.target.value;
 

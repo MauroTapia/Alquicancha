@@ -15,6 +15,15 @@ export const CardDetail = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 8px;
   padding: 16px;
+
+  .react-datepicker{
+    @media(max-width: 594px){
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 
 export const Header = styled.div`
@@ -82,6 +91,7 @@ export const Title = styled.h2`
 export const Body = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 
   @media (max-width: 1024px) {
     flex-direction: column;

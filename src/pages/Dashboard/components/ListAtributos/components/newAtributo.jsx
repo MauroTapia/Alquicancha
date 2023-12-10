@@ -77,7 +77,9 @@ const NewAtributo = ({ data, changeSection }) => {
     }
   };
 
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    e.preventDefault();
+    console.log('Cancelar');
     Swal.fire({
       title: "Atención",
       text: `Desea cancelar y volver al listado?`,
