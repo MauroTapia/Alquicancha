@@ -21,7 +21,6 @@ import {
 } from "firebase/firestore";
 import { obtenerNombreArchivoDesdeURL } from "../../utils/obtener-nombre-de-url";
 
-
 export const listarProductos = async () => {
   const collectionRef = collection(db, "productos");
   try {
@@ -150,7 +149,7 @@ export const eliminarProductoById = async (id) => {
 
 export const editarProductoById = async (id, data) => {
   try {
-    if(data.imagenes.length ){
+    if (data.imagenes.length) {
       // Subir todas las imágenes y obtener las URLs
       const urls = await Promise.all(
         data.imagenes.map(
@@ -163,20 +162,20 @@ export const editarProductoById = async (id, data) => {
 
       // Crear el objeto de datos del producto con la nueva lista de imágenes
 
-    const nuevoProducto = { ...data, imagenes: nuevasImagenes };
+      const nuevoProducto = { ...data, imagenes: nuevasImagenes };
 
-    const collectionRef = collection(db, "productos");
+      const collectionRef = collection(db, "productos");
 
-    const prodRef = doc(collectionRef, id);
-    const result = await setDoc(prodRef, nuevoProducto, { merge: true });
-    console.log("Edicion correcta de producto :", id);
-    }else{
+      const prodRef = doc(collectionRef, id);
+      const result = await setDoc(prodRef, nuevoProducto, { merge: true });
+      console.log("Edicion correcta de producto :", id);
+    } else {
       const collectionRef = collection(db, "productos");
 
       const prodRef = doc(collectionRef, id);
       const result = await setDoc(prodRef, data, { merge: true });
       console.log("Edicion correcta de producto :", id);
-    }    
+    }
   } catch (error) {
     console.log(error);
   }
@@ -248,4 +247,16 @@ export const deleteAtributo = async (id) => {
   await Promise.all(newList);
 
   console.log("Atributo eliminado exitosamente de los productos.");
+};
+
+export const editarProductoByIdNoImage = async (id, data) => {
+  try {
+    const collectionRef = collection(db, "productos");
+
+    const prodRef = doc(collectionRef, id);
+    const result = await setDoc(prodRef, data, { merge: true });
+    console.log("Edicion correcta de producto :", id);
+  } catch (error) {
+    console.log(error);
+  }
 };

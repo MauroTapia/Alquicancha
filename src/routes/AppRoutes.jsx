@@ -10,6 +10,8 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import UserPerfil from "../pages/usePerfil";
 import Politicas from "../pages/Politicas";
 import Checkout from "../pages/Checkout";
+import MisReservas from "../pages/MisReservas";
+import MisFavoritos from "../pages/Favoritos";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +25,8 @@ const AppRoutes = () => {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/politicas" element={<Politicas />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/reservas" element={<MisReservas />} />
+          <Route path="/favoritos" element={<MisFavoritos />} />
           <Route path="/" element={<ProtectedRoutes />}>
             <Route path="administracion" element={<Dashboard />} />
           </Route>

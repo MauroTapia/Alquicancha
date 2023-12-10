@@ -33,20 +33,26 @@ export const getAllReservas = async () => {
   }
 };
 
+
 export const getReservaById = async (id) => {
-
   try {
-    const response = await fetch(`${url}/reservas/${id}`);
-    if(!response.ok){
-      throw new Error('Error response was no ok');
+    const collectionRef = collection(db, "reservas");
+
+    const documentRef = doc(collectionRef, id);
+
+    // traer datos que cumplan con la query
+    const reservaData = await getDoc(documentRef);
+
+    if (reservaData.exists()) {
+      const reserva = reservaData.data();
+      return reserva;
+    } else {
+      console.log("El documento no existe");
+      return null;
     }
-
-    const jsonData = await response.json();
-
-    return jsonData;
-
   } catch (error) {
-    console.log('Error obteniendo reserva', error);
+    console.log(error);
+    return null;
   }
 };
 

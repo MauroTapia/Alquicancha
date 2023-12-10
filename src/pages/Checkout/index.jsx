@@ -114,7 +114,7 @@ const Checkout = () => {
         'usuario': user.id,
         'producto': productId,
       }
-      await editarProductoById(productId, producto);
+      await editarProductoByIdNoImage(productId, producto);
       
     } catch (error) {
       console.log('Error en confirmación de reserva');
