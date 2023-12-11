@@ -116,17 +116,11 @@ const ProductCard = ({ product }) => {
   };
 
   const urlProducto = `https://alquicancha-d6d01.web.app/product/${id}`;
-  const texto = `¡Echa un vistazo a este increíble producto!${titulo}`;
+  const texto = `¡Echa un vistazo a este increíble producto, ${titulo}!`;
 
-  const URL = `https://api.whatsapp.com/send?phone=541165492709&text=${urlProducto}`;
+  const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=&text=${texto} ${urlProducto}`;
   
-  // URL base de Instagram para compartir publicaciones
-  const urlInstagram = 'https://www.instagram.com/share?url=';
-  const urlCompleta = encodeURIComponent(urlProducto);
-  const textoCompartir = encodeURIComponent(texto);
-  // Generar el enlace completo para compartir en Instagram
-  const enlaceInstagram = `${urlInstagram}${urlCompleta}&caption=${textoCompartir}`;
-
+  const enlaceInstagram = `https://www.instagram.com/share?url=${encodeURIComponent(urlProducto)}&text=${encodeURIComponent(texto)}`;
   return (
     <CardContainer>
       <div
@@ -189,11 +183,11 @@ const ProductCard = ({ product }) => {
           Comparte esta publicación en tu red Favorita
         </h3>
         <SocialMedia>
-          <a href= {URL + id} >
+          <a href= {enlaceWhatsApp} target="_blank">
             <img src={whatsapp} alt="whatsapp logo" />
           </a>
 
-          <a href= {enlaceInstagram}>
+          <a href= {enlaceInstagram} target="_blank">
             <img src={instagram} alt="instagram logo" />
           </a>
           
