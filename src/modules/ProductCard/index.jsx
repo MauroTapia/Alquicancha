@@ -12,19 +12,7 @@ import {
 } from "./productCard.style";
 
 import {
-  FacebookShareCount,
-  PinterestShareCount,
-  RedditShareCount,
-  TwitterIcon,
-} from "react-share";
-import {
-  EmailShareButton,
   FacebookShareButton,
-  InstapaperShareButton,
-  LinkedinShareButton,
-  PinterestShareButton,
-  RedditShareButton,
-  TelegramShareButton,
   TwitterShareButton
 } from "react-share";
 

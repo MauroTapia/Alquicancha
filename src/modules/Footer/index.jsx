@@ -1,5 +1,5 @@
 import React from "react";
-import { FooterWrapper, SocialMedia, TeamDiv } from "./footer.style";
+import { FooterWrapper, SocialMedia, TeamDiv, Politicas } from "./footer.style";
 import logoTeam from "../../assets/logoTeam.svg";
 import x from "../../assets/square-x-twitter.svg";
 import whatsapp from "../../assets/square-whatsapp.svg";
@@ -17,8 +17,9 @@ const Footer = () => {
 
       <>
         <Link to={"/politicas"} style={{textDecoration:'none', color:'white', fontWeight:200}}>
-          <p style={{ textAlign: "center" }}>Politicas de reservas</p>
+          <Politicas>Politicas de reservas</Politicas>
         </Link>
+
         <SocialMedia>
           <a
             href="https://api.whatsapp.com/send?phone=541165492709&text=Hola,%20me%20gustaría%20contactar%20contigo"
