@@ -30,7 +30,6 @@ import {
 
 import ReactDOM from "react-dom";
 import { Modal } from "react-responsive-modal";
-
 import x from "../../assets/square-x-twitter.svg";
 import whatsapp from "../../assets/square-whatsapp.svg";
 import instagram from "../../assets/square-instagram.svg";
@@ -121,6 +120,7 @@ const ProductCard = ({ product }) => {
   const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=&text=${texto} ${urlProducto}`;
   
   const enlaceInstagram = `https://www.instagram.com/share?url=${encodeURIComponent(urlProducto)}&text=${encodeURIComponent(texto)}`;
+
   return (
     <CardContainer>
       <div
@@ -200,8 +200,6 @@ const ProductCard = ({ product }) => {
           </TwitterShareButton>
 
         </SocialMedia>
-
-       
       </Modal>
     </CardContainer>
   );
