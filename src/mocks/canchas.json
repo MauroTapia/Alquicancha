@@ -1,0 +1,545 @@
+[
+  {
+    "id": 1,
+    "title": "Cancha Futbol 7 Cesped",
+    "images": [
+      {
+        "img": "/canchas/cancha7.webp",
+        "alt": "Cancha 7 cesped"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha 7 cesped"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha 7 cesped"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha 7 cesped"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha 7 cesped"
+      }
+  ],
+    "description": "Cancha de futbol 7 exterior, pasto natural, totalmente cercada",
+    "dayPrice" : 20000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
+      },
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Cancha Futbol 7 sintetico",
+    "images": [
+      {
+        "img": "/canchas/cancha7Sintetico.jpeg",
+        "alt": "Cancha 7 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha 7 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha 7 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha 7 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha 7 sintetico"
+      }
+    ],
+    "description": "Cancha de futbol 7 exterior, pasto sintetico, totalmente cercada",
+    "dayPrice" : 18000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Cancha Futbol 7 techada",
+    "images":[
+      {
+        "img": "/canchas/cancha7Techada.jpeg",
+        "alt": "Cancha 7 techada"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha 7 techada"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha 7 techada"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha 7 techada"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha 7 techada"
+      }
+    ],
+    "description": "Cancha de futbol 7 techada, pasto sintetico",
+    "dayPrice" : 28000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
+      },
+      {
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Cancha Futbol 11 exterior",
+    "images":[
+      {
+        "img": "/canchas/cancha11.jpeg",
+        "alt": "Cancha 11 exterior"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha 11 exterior"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha 11 exterior"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha 11 exterior"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha 11 exterior"
+      }
+    ],
+    "description": "Cancha de futbol 11, exterior, pasto natural, totalmente iluminada",
+    "dayPrice" : 38000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Alcanzapelotas",
+        "icon": "/icons/pelota.png"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Cancha Futbol 11 Sintetico",
+    "images":[
+      {
+        "img": "/canchas/cancha11Sintetico.jpeg",
+        "alt": "Cancha 11 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha 11 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha 11 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha 11 sintetico"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha 11 sintetico"
+      }
+    ],
+    "description": "Cancha de futbol 11, exterior, pasto sintetico, totalmente iluminada y cercada, cuenta con tribuna para 100 personas",
+    "dayPrice" : 43000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
+      },
+      {
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Cancha Futbol 11 Techada",
+    "images":[
+      {
+        "img": "/canchas/cancha11Techada.jpg",
+        "alt": "Cancha 11 techada"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha 11 techada"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha 11 techada"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha 11 techada"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha 11 techada"
+      }
+    ], 
+    "description": "Cancha de futbol 11, techada, pasto sintetico",
+    "dayPrice" : 46000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Cancha Basketball Exterior",
+    "images":[
+      {
+        "img": "/canchas/canchaBasketExterior.jpeg",
+        "alt": "Cancha basket exterior"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha basket exterior"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha basket exterior"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha basket exterior"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha basket exterior"
+      }
+    ],
+    "description": "Cancha de basketball exterior, cercada e iluminación",
+    "dayPrice" : 36000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[ ]
+  },
+  {
+    "id": 8,
+    "title": "Cancha Basketball Techada c/palcos",
+    "images":[
+      {
+        "img": "/canchas/canchaBasketTechadaPalcos.jpeg",
+        "alt": "Cancha basket techada"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha basket techada"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha basket techada"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha basket techada"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha basket techada"
+      }
+    ],
+    "description": "Cancha de basketball techada, palcos para 300 personas",
+    "dayPrice" : 56000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png" 
+      },
+      {
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
+      },
+      {
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Cancha Voley Exterior",
+    "images":[
+      {
+        "img": "/canchas/canchaBoleyExterior.jpeg",
+        "alt": "Cancha boley exterior"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha boley exterior"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha boley exterior"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha boley exterior"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha boley exterior"
+      }
+    ],
+    "description": "Cancha de voley exterior",
+    "dayPrice" : 23000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Cancha Voley Playa",
+    "images":[
+      {
+        "img": "/canchas/canchaBoleyPlaya.jpeg",
+        "alt": "Cancha boley playa"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha boley playa"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha boley playa"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha boley playa"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha boley playa"
+      }
+    ],
+    "description": "Cancha de Voley playa, arena 100% natural",
+    "dayPrice" : 36000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
+      },
+      {
+        "name": "Grabacion del partido",
+        "icon": "/icons/grabacion.png"
+      },
+      {
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Cancha Voley Techada",
+    "images":[
+      {
+        "img": "/canchas/canchaBoleyTechada.jpeg",
+        "alt": "Cancha boley techada"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha boley techada"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha boley techada"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha boley techada"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha boley techada"
+      }
+    ],
+    "description": "Cancha de voley techada, palco para 500 personas. Ideal competencias internacionales",
+    "dayPrice" : 66000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Redes",
+        "icon": "/icons/redes.png"
+      },
+      {
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
+      },
+      {
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Cancha Multihuso Techada",
+    "images":[
+      {
+        "img": "/canchas/canchaMultihusoTechada.png",
+        "alt": "Cancha multihuso"
+      },
+      {
+        "img": "/canchas/dummy-image1.png",
+        "alt": "Cancha multihuso"
+      },
+      {
+        "img": "/canchas/dummy-image2.png",
+        "alt": "Cancha multihuso"
+      },
+      {
+        "img": "/canchas/dummy-image3.png",
+        "alt": "Cancha multihuso"
+      },
+      {
+        "img": "/canchas/dummy-image4.png",
+        "alt": "Cancha multihuso"
+      }
+    ],
+    "description": "Cancha de multihuso",
+    "dayPrice" : 49000,
+    "availability":{
+      "isAbalible": true,
+      "dateStart": "",
+      "dateEnd": ""
+    },
+    "category": "Canchas",
+    "details":[
+      {
+        "name": "Iluminación",
+        "icon": "/icons/iluminacion.png"
+      },
+      {
+        "name": "Alcanzapelota",
+        "icon": "/icons/pelota.png"
+      }
+    ]
+  }
+]
