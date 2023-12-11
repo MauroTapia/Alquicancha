@@ -191,11 +191,15 @@ const ProductCard = ({ product }) => {
             <img src={instagram} alt="instagram logo" />
           </a>
           
-          <FacebookShareButton url= {urlProducto}>
-          <img src={facebook} alt="facebook logo" />
+          <FacebookShareButton 
+            url= {urlProducto} 
+            quote= {texto}>
+            <img src={facebook} alt="facebook logo" />
           </FacebookShareButton>
 
-          <TwitterShareButton url= {urlProducto}>
+          <TwitterShareButton 
+            url= {urlProducto} 
+            title= {texto}>
             <img src={x} alt="X logo" />
           </TwitterShareButton>
 
