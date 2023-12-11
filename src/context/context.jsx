@@ -74,6 +74,7 @@ export const ContextProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("user");
+    setUser(null);
     setLogged(false);
   };
 

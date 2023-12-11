@@ -115,11 +115,13 @@ const ProductCard = ({ product }) => {
   };
 
   const urlProducto = `https://alquicancha-d6d01.web.app/product/${id}`;
+
   const texto = `¡Echa un vistazo a este increíble producto, ${titulo}!`;
 
   const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=&text=${texto} ${urlProducto}`;
   
-  const enlaceInstagram = `https://www.instagram.com/share?url=${encodeURIComponent(urlProducto)}&text=${encodeURIComponent(texto)}`;
+  const enlaceInstagram = `https://www.instagram.com/direct/inbox/?followUp=${encodeURIComponent(urlProducto)}&text=${encodeURIComponent(texto)}`;
+
 
   return (
     <CardContainer>
@@ -191,11 +193,11 @@ const ProductCard = ({ product }) => {
             <img src={instagram} alt="instagram logo" />
           </a>
           
-          <FacebookShareButton url= {urlProducto}>
-          <img src={facebook} alt="facebook logo" />
+          <FacebookShareButton url={urlProducto} quote={texto}>
+            <img src={facebook} alt="facebook logo" />
           </FacebookShareButton>
 
-          <TwitterShareButton url= {urlProducto}>
+          <TwitterShareButton url= {urlProducto} title= {texto}>
             <img src={x} alt="X logo" />
           </TwitterShareButton>
 
