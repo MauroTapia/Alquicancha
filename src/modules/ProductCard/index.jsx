@@ -15,6 +15,7 @@ import {
   FacebookShareCount,
   PinterestShareCount,
   RedditShareCount,
+  TwitterIcon,
 } from "react-share";
 import {
   EmailShareButton,
@@ -29,6 +30,12 @@ import {
 
 import ReactDOM from "react-dom";
 import { Modal } from "react-responsive-modal";
+
+import x from "../../assets/square-x-twitter.svg";
+import whatsapp from "../../assets/square-whatsapp.svg";
+import instagram from "../../assets/square-instagram.svg";
+import facebook from "../../assets/square-facebook.svg";  
+import { SocialMedia } from "../Footer/footer.style";
 
 // Import Swiper styles
 import "swiper/css";
@@ -108,6 +115,18 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const urlProducto = `https://alquicancha-d6d01.web.app/product/${id}`;
+  const texto = `¡Echa un vistazo a este increíble producto!${titulo}`;
+
+  const URL = `https://api.whatsapp.com/send?phone=541165492709&text=${urlProducto}`;
+  
+  // URL base de Instagram para compartir publicaciones
+  const urlInstagram = 'https://www.instagram.com/share?url=';
+  const urlCompleta = encodeURIComponent(urlProducto);
+  const textoCompartir = encodeURIComponent(texto);
+  // Generar el enlace completo para compartir en Instagram
+  const enlaceInstagram = `${urlInstagram}${urlCompleta}&caption=${textoCompartir}`;
+
   return (
     <CardContainer>
       <div
@@ -169,6 +188,26 @@ const ProductCard = ({ product }) => {
         <h3 style={{ marginTop: 20 }}>
           Comparte esta publicación en tu red Favorita
         </h3>
+        <SocialMedia>
+          <a href= {URL + id} >
+            <img src={whatsapp} alt="whatsapp logo" />
+          </a>
+
+          <a href= {enlaceInstagram}>
+            <img src={instagram} alt="instagram logo" />
+          </a>
+          
+          <FacebookShareButton url= {urlProducto}>
+          <img src={facebook} alt="facebook logo" />
+          </FacebookShareButton>
+
+          <TwitterShareButton url= {urlProducto}>
+            <img src={x} alt="X logo" />
+          </TwitterShareButton>
+
+        </SocialMedia>
+
+       
       </Modal>
     </CardContainer>
   );
