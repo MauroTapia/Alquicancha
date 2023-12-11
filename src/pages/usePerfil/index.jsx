@@ -9,6 +9,7 @@ import {
   InputCheckBox,
   ErrorMsg,
 } from "./usePerfil.style";
+import maleUser from "../../assets/MaleUser.png"
 import { editUser } from "../../services/users";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -111,7 +112,7 @@ const UserPerfil = () => {
     <form onSubmit={handleSubmit}>
         <LoginWrapper>
           <ImagenPerfil>
-            <img src="/src/assets/Male User.png" alt="user" />
+            <img src={maleUser} alt="user" />
           </ImagenPerfil>
 
           <Label>Edita tu nombre</Label>

@@ -11,6 +11,7 @@ import {
 } from "./register.style";
 import { newUser, getUserByEmail } from "../../services/users";
 import Swal from "sweetalert2";
+import user from "../../assets/MaleUser.png"
 import { useNavigate } from "react-router-dom";
 import Footer from "../../modules/Footer/index";
 import {
@@ -176,7 +177,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <LoginWrapper>
           <ImagenPerfil>
-            <img src="/src/assets/Male User.png" alt="user" />
+            <img src={user} alt="user" />
           </ImagenPerfil>
 
           <Label>Nombre</Label>

@@ -11,6 +11,7 @@ import {
   ErrorMsg,
   ButtonsContainer,
 } from "./login.style";
+import maleUser from "../../assets/MaleUser.png"
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ContextGlobal } from "../../context/context";
@@ -128,7 +129,7 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <LoginWrapper>
           <ImagenPerfil>
-            <img src="/src/assets/Male User.png" alt="user" />
+            <img src={maleUser} alt="user" />
           </ImagenPerfil>
 
           <Label>Email</Label>
