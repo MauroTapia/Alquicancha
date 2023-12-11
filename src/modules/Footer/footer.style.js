@@ -55,9 +55,30 @@ export const SocialMedia = styled.div`
 
   }
 
-  @media(max-width: 500px){
+  @media(max-width: 550px){
     img{
-      width: 25px;
+      width: 20px;
     }
+  }
+`;
+
+export const Politicas = styled.div`
+  display: flex;
+  justify-content: center;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  transition: ease .5s;
+  cursor: hand;
+  width: auto;
+    
+  &:hover{
+      filter: brightness(.9)
+      transition: ease .5s;
+      transform: scale(1.2);
+  }
+
+  @media(max-width: 550px){
+    font-size: 12px;
   }
 `;
