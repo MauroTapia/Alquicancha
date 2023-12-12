@@ -36,11 +36,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Pagination, Navigation } from "swiper/modules";
 import { ContextGlobal } from "../../context/context";
+import { editUser } from "../../services/users";
+import { editarUsuarioById } from "../../services/users/userFirebase";
 
 
 const ProductCard = ({ product }) => {
   const { imagenes, titulo, precio, id } = product;
-  const { user,  } = useContext(ContextGlobal).contextValue;
+  const { user  } = useContext(ContextGlobal).contextValue;
 
   const navigate = useNavigate();
 
@@ -58,36 +60,51 @@ const ProductCard = ({ product }) => {
 
   useEffect(() => {
     if(usuario && usuario.favoritos){
-      setEsFavorito(usuario.favoritos.includes(id));
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      setEsFavorito(storedUser.favoritos.includes(id));
     }
-  },[]);
-   
+  },[esFavorito]);
 
   const addToFav = () => {
     if (usuario !== null) {
-      setUsuario((prevObjeto) => {
-        // Verificar si ya hay una lista de favoritos
-        if (prevObjeto.favoritos) {
-          // Verificar si el nuevo favorito ya está en la lista
-          if (!prevObjeto.favoritos.includes(id)) {
-            return {
-              ...prevObjeto,
-              favoritos: [...prevObjeto.favoritos, id],
-            };
-          } else {
-            console.log("El favorito ya existe en la lista.");
-            return prevObjeto; // No se realiza ningún cambio
-          }
+      // Verificar si ya existe la clave 'favoritos' en el objeto usuario
+      if (usuario.hasOwnProperty('favoritos')) {
+        // Verificar si el nuevo favorito ya está en la lista
+        if (!usuario.favoritos.includes(id)) {
+          usuario.favoritos.push(id);
         } else {
-          // Si aún no hay favoritos, crear la propiedad favoritos
-          return {
-            ...prevObjeto,
-            favoritos: [id],
-          };
+        // Quitar el id del producto de la lista de favoritos
+        const nuevosFavoritos = usuario.favoritos.filter(favId => favId !== id);
+        usuario.favoritos = nuevosFavoritos;
+        setEsFavorito(false);
+        localStorage.setItem("user", JSON.stringify(usuario));
+        editarUsuarioById(usuario.id, usuario);
+        return;
         }
-      });
+      } else {
+        // Si no existe la clave 'favoritos', crearla con el valor de la variable id
+        usuario.favoritos = [id];
+      }
+      // Actualizar el estado del usuario
+      setUsuario({ ...usuario });
+  
+      // Guardar en localStorage
       localStorage.setItem("user", JSON.stringify(usuario));
+      editarUsuarioById(usuario.id, usuario);
+  
+      // Actualizar el estado de esFavorito
+      setEsFavorito(true);
+  
+      // Notificar al usuario
+      Swal.fire({
+        title: "¡Añadido a favoritos!",
+        text: `Este producto se ha añadido a tus favoritos.`,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
     } else {
+      // Mostrar mensaje de inicio de sesión
       Swal.fire({
         title: "Login necesario!",
         text: `Debes estar logueado para añadir a favoritos!`,
@@ -101,6 +118,7 @@ const ProductCard = ({ product }) => {
       });
     }
   };
+  
 
   const urlProducto = `https://alquicancha-d6d01.web.app/product/${id}`;
 
@@ -172,7 +190,7 @@ const ProductCard = ({ product }) => {
         <h3 style={{ marginTop: 20 }}>
           Comparte esta publicación en tu red Favorita
         </h3>
-        <SocialMedia>
+        <SocialMedia style={{display:'flex', justifyContent:'space-between', marginTop:20}}>
           <a href= {enlaceWhatsApp} target="_blank">
             <img src={whatsapp} alt="whatsapp logo" />
           </a>

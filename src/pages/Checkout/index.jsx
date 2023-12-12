@@ -11,7 +11,7 @@ import {
 import { ContextGlobal } from "../../context/context";
 import Footer from "../../modules/Footer";
 import { editarUsuarioById } from "../../services/users/userFirebase";
-import { editarProductoById, productoById } from "../../services/product/productFirebase";
+import { editarProductoById, editarProductoByIdNoImage, productoById } from "../../services/product/productFirebase";
 import { crearReserva } from "../../services/reservas/reservasFirebase";
 import emailjs from '@emailjs/browser';
 import Swal from "sweetalert2";
@@ -117,7 +117,7 @@ const Checkout = () => {
       await editarProductoByIdNoImage(productId, producto);
       
     } catch (error) {
-      console.log('Error en confirmación de reserva');
+      console.log('Error en confirmación de reserva', error);
     }
     
     localStorage.removeItem('Checkout');
