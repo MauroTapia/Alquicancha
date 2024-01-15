@@ -39,7 +39,7 @@ function NavBarUser({open}) {
 
       <Link to={"/userPerfil"}>Editar perfil</Link>
       <Link to={"/favoritos"}>Mis favoritos</Link>
-      <Link to={"/reservas"}>Hostorial de reservas</Link>
+      <Link to={"/reservas"}>Historial de reservas</Link>
       <Link open={open} onClick={handleExit}>Cerrar Sesión</Link>
     </NavBarWrapper>
   );
